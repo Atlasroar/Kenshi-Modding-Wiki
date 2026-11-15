@@ -2,11 +2,7 @@
   {
     "title": "FCS",
     "slug": "fcs/index",
-    "guides": [
-      "modding/fcs/complete-guide",
-      "modding/fcs/tech-overhaul-notes",
-      "modding/world/fast-healing-beds"
-    ]
+    "guides": ["modding/fcs/complete-guide"]
   },
   {
     "title": "World Editor",

@@ -2,6 +2,18 @@
   "sourceCollection": "Kenshi Modding Wiki",
   "scope": "The 17 owner-cleared modding guides, not the larger reference library",
   "imagePolicy": "The initial placeholder audit is preserved. Approved image reuse is recorded per guide without replacing original source fingerprints or image-position records.",
+  "retiredGuides": [
+    {
+      "slug": "modding/fcs/tech-overhaul-notes",
+      "reason": "Removed as a misplaced file at the owner's request; no redirect.",
+      "retiredOn": "2026-11-15"
+    },
+    {
+      "slug": "modding/world/fast-healing-beds",
+      "reason": "Removed as a misplaced file at the owner's request; no redirect.",
+      "retiredOn": "2026-11-15"
+    }
+  ],
   "adaptations": [
     {
       "source": "Using the FCS",
