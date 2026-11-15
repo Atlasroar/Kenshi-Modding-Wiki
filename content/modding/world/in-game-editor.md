@@ -20,7 +20,7 @@ source_categories: []
 [[modding/index|Modding guides]]
 [[modding/fcs/complete-guide|The FCS - A Complete Guide]]
 
-https://lost-blog.com/in-game-editor/
+Original source: [[credits#guide-credits|Credits]].
 
 Primarily, in-game editor is used to design towns and building interiors. You can access it any time by pressing Shift + F12. By and large, the three buttons you’ll need for mods are town placement, buildings, and items.
 

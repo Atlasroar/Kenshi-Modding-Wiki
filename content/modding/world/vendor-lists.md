@@ -113,7 +113,7 @@ goods, if you want to be certain that shop has that item (type) exactly.
 ## In detail:
 
 The following instructions are from timor1234 on the Steam forum post:
-<https://steamcommunity.com/app/233860/discussions/3/1739980540120440391/>
+[[credits#guide-credits|Credits contains the original Steam post]],
 with additions by Cattrina (me). -Frankiewuzhere added some extra info.
 
 #### **Creating a vendor list**

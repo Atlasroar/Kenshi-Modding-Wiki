@@ -308,6 +308,90 @@ test("the sidebar presents the twelve requested sections and preserves guide mem
   )
 })
 
+test("Credits is a standalone navigation item and credits every published guide", async () => {
+  const index = JSON.parse(await readFile(join(output, "static", "contentIndex.json"), "utf8"))
+  assert.ok(index.credits, "Credits must be searchable")
+  const article = elementsFor("credits.html").find((node) => node.tagName === "article")
+  assert.ok(article, "Credits must contain an article")
+  const rows = []
+  visit(article, "element", (node) => {
+    if (node.tagName === "tr") {
+      const elements = []
+      let text = ""
+      visit(node, "element", (child) => {
+        elements.push(child)
+      })
+      visit(node, "text", (child) => {
+        text += child.value
+      })
+      rows.push({ elements, text })
+    }
+  })
+  for (const slug of navigation.flatMap((section) => section.guides)) {
+    assert.ok(
+      rows.some((row) => linksTo(row.elements, slug, "credits")),
+      `Missing guide credit entry: ${slug}`,
+    )
+  }
+  for (const [slug, names] of [
+    ["modding/dialogue/find-specific-dialogue", ["Tablesalt", "Cattrina", "Shidan"]],
+    ["modding/world/vendor-lists", ["timor1234", "Cattrina", "Frankiewuzhere"]],
+    ["modding/world/building-collision-navmesh", ["Boron"]],
+    ["modding/world/kill-npcs-at-game-start", ["Cattrina"]],
+    ["modding/characters/name-databases", ["Shidan"]],
+  ]) {
+    const row = rows.find((entry) => linksTo(entry.elements, slug, "credits"))
+    for (const name of names)
+      assert.ok(row?.text.includes(name), `Missing credit: ${slug}: ${name}`)
+  }
+  for (const [page, { elements }] of documents) {
+    const body = elements.find((node) => node.tagName === "body")
+    if (!body?.properties.dataSlug || page === "404.html") continue
+    const sidebar = elements.find(
+      (node) => node.tagName === "nav" && node.properties.className?.includes("guide-navigation"),
+    )
+    const links = []
+    visit(sidebar, "element", (node, _index, parent) => {
+      if (node.tagName === "a" && node.properties.className?.includes("guide-credits")) {
+        assert.ok(
+          parent?.properties.className?.includes("guide-menu"),
+          "Credits must be a standalone link, not an expandable guide section",
+        )
+        links.push(node)
+      }
+    })
+    assert.equal(links.length, 1, `Missing standalone Credits item: ${page}`)
+    assert.ok(linksTo(links, "credits", page.replace(/\.html$/, "")))
+    assert.equal(links[0].properties.ariaCurrent, page === "credits.html" ? "page" : undefined)
+  }
+})
+
+test("external website links appear only on Credits, never on guide pages or their footer", () => {
+  for (const [page, { elements }] of documents) {
+    const body = elements.find((node) => node.tagName === "body")
+    if (!body?.properties.dataSlug || page === "credits.html") continue
+    for (const node of elements) {
+      if (node.tagName !== "a" || typeof node.properties.href !== "string") continue
+      const target = new URL(node.properties.href, new URL(page, site))
+      if (target.protocol !== "http:" && target.protocol !== "https:") continue
+      assert.equal(target.origin, site.origin, `External link outside Credits: ${page}: ${target}`)
+    }
+  }
+  const credits = elementsFor("credits.html")
+  for (const source of [
+    "https://kenshi.fandom.com/wiki/Using_the_FCS",
+    "https://lost-blog.com/fcs-interface/",
+    "https://lost-blog.com/in-game-editor/",
+    "https://regexr.com/",
+    "https://www.reddit.com/r/Kenshi/comments/upmm4q/modular_fortresses_for_lita_done/",
+  ]) {
+    assert.ok(
+      credits.some((node) => node.tagName === "a" && node.properties.href === source),
+      `Source reference must be preserved on Credits: ${source}`,
+    )
+  }
+})
+
 test("maintainer documents stay out of site search and old URLs redirect to the Wiki", async () => {
   const index = JSON.parse(await readFile(join(output, "static", "contentIndex.json"), "utf8"))
   for (const [slug, page] of Object.entries({
@@ -336,7 +420,7 @@ test("maintainer documents stay out of site search and old URLs redirect to the 
     assert.match(documents.get(slug + ".html").html, /window\.location\.hash/)
   }
   assert.ok(
-    elementsFor("index.html").some(
+    elementsFor("credits.html").some(
       (node) =>
         node.tagName === "a" &&
         node.properties.href === "https://github.com/Atlasroar/Kenshi-Modding-Wiki/wiki",

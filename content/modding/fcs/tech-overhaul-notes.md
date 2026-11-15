@@ -25,7 +25,7 @@ source_categories: []
 > [!note] Development notes
 > These are concise research and tech-overhaul notes, not a complete tutorial.
 
-Clipping source: [original Guilded document](https://www.guilded.gg/Genesis/groups/dQGnZ5P3/channels/a2429d5e-d929-47a9-bf26-b1377175f9de/docs/398229).
+Clipping source: [[credits#guide-credits|Credits lists the original Guilded document]].
 
 Do not Delete Default Start
 

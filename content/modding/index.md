@@ -116,4 +116,6 @@ compatibility, and troubleshooting guides. No dedicated guide has been added yet
 The larger source reference collection and separate Genesis collection are not
 part of this import. Existing guide URLs remain stable across these sections.
 
+See [[credits|Credits]] for guide contributors and original source references.
+
 Return to the [[index|field manual homepage]].

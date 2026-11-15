@@ -150,9 +150,8 @@ crash-prone meshes. The two ways of doing it are:
     path into by choosing the "snaps to" option in a building and
     aligning the meshes and colliders in Blender before exporting.
 
-[Here's a
-link](https://www.reddit.com/r/Kenshi/comments/upmm4q/modular_fortresses_for_lita_done/)
-to an older Reddit post with some of the complex navmesh stuff.
+[[credits#guide-credits|Credits links to an older Reddit post]] with examples
+of complex navmesh work.
 
 ---
 

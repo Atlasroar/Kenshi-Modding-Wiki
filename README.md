@@ -15,6 +15,10 @@ The [GitHub Wiki](https://github.com/Atlasroar/Kenshi-Modding-Wiki/wiki) is the
 website's knowledge base: setup, CSS, JSON/configuration, contribution guidelines,
 deployment, and technical decisions. The public website contains modding guides.
 
+External website links belong on the public Credits page. Guide pages,
+navigation, and the footer link internally so readers can follow a workflow
+without leaving the site.
+
 The Wiki preserves the
 [implementation plan](https://github.com/Atlasroar/Kenshi-Modding-Wiki/wiki/Implementation-Plan)
 and [content audit](https://github.com/Atlasroar/Kenshi-Modding-Wiki/wiki/Content-Audit).
