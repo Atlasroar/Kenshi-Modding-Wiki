@@ -13,6 +13,8 @@ const root = resolve(import.meta.dirname, "..")
 const output = join(root, "public")
 const config = yaml.load(await readFile(join(root, "quartz.config.yaml"), "utf8"))
 const imports = JSON.parse(await readFile(join(root, "docs", "modding-imports.json"), "utf8"))
+const retiredSlugs = new Set(imports.retiredGuides.map((guide) => guide.slug))
+const activeImports = imports.guides.filter((guide) => !retiredSlugs.has(guide.slug))
 const navigation = JSON.parse(await readFile(join(root, "site", "navigation.json"), "utf8"))
 const site = new URL(`https://${config.configuration.baseUrl}/`)
 const documents = new Map()
@@ -153,7 +155,7 @@ test("all approved guides are reachable, searchable, and retain source notices a
   const landing = elementsFor("modding/index.html")
   assert.ok(index["modding/index"], "The modding landing page must enter search")
   assert.equal(imports.guides.length, 17)
-  for (const { slug } of imports.guides) {
+  for (const { slug } of activeImports) {
     assert.ok(index[slug], `The imported guide must enter search: ${slug}`)
     const nodes = elementsFor(slug + ".html")
     assert.ok(
@@ -193,7 +195,6 @@ test("all approved guides are reachable, searchable, and retain source notices a
   assert.ok(
     elementsFor("modding/assets/armor-color-maps.html").some((node) => node.tagName === "table"),
   )
-  assert.match(documents.get("modding/fcs/tech-overhaul-notes.html").html, /Development notes/)
 })
 
 test("source image locations and unimported references remain explicit without broken media", () => {
@@ -206,7 +207,7 @@ test("source image locations and unimported references remain explicit without b
     pendingReferences,
     restoredImages = [],
     additionalImages = [],
-  } of imports.guides) {
+  } of activeImports) {
     const article = elementsFor(slug + ".html").find((node) => node.tagName === "article")
     assert.ok(article, `Missing article body: ${slug}`)
     const nodes = []
@@ -281,7 +282,7 @@ test("source image locations and unimported references remain explicit without b
   assert.equal(references, 8, "Every out-of-batch article reference must remain explicit")
 })
 
-test("the complete guide preserves consolidated content without the four retired pages", async () => {
+test("the complete guide preserves consolidated content without retired pages", async () => {
   const article = elementsFor("modding/fcs/complete-guide.html").find(
     (node) => node.tagName === "article",
   )
@@ -348,6 +349,7 @@ test("the complete guide preserves consolidated content without the four retired
     "modding/fcs/searching-and-editing-data",
     "modding/fcs/managing-mods",
     "modding/fcs/checking-mod-errors",
+    ...retiredSlugs,
   ]) {
     await assert.rejects(access(join(root, "content", slug + ".md")), { code: "ENOENT" })
     assert.ok(!documents.has(slug + ".html"), `Retired page or redirect still emitted: ${slug}`)
@@ -365,6 +367,15 @@ test("the FCS adaptation preserves source coverage, attribution, and all restore
   const index = JSON.parse(await readFile(join(output, "static", "contentIndex.json"), "utf8"))
   const assigned = navigation.flatMap((section) => section.guides)
   const credits = elementsFor("credits.html")
+  assert.ok(
+    credits.some(
+      (node) =>
+        node.tagName === "a" &&
+        node.properties.href ===
+          "https://github.com/Atlasroar/Kenshi-Modding-Wiki/blob/main/docs/modding-imports.json",
+    ),
+    "Detailed original image provenance must remain accessible from Credits",
+  )
   let images = 0
   for (const source of imports.adaptations) {
     assert.ok(
@@ -409,9 +420,10 @@ test("the FCS adaptation preserves source coverage, attribution, and all restore
           record.height,
           "Original image height must be retained",
         )
-        assert.ok(
-          credits.some((node) => node.tagName === "a" && node.properties.href === record.filePage),
-          `Missing original file credit: ${record.sourceFile}`,
+        assert.match(
+          record.filePage,
+          /^https:\/\/kenshi\.fandom\.com\/wiki\/File:/,
+          `Missing original file provenance: ${record.sourceFile}`,
         )
       }
       images += restored.length
@@ -501,7 +513,7 @@ test("the sidebar presents the twelve requested sections and preserves guide mem
     assigned.length,
     "A guide must not appear in multiple sections",
   )
-  for (const { slug } of imports.guides)
+  for (const { slug } of activeImports)
     assert.ok(assigned.includes(slug), `Unassigned guide: ${slug}`)
   for (const section of navigation) {
     const nodes = elementsFor(section.slug + ".html")
@@ -534,14 +546,15 @@ test("the sidebar presents the twelve requested sections and preserves guide mem
   )
 })
 
-test("Credits is a standalone navigation item and credits every published guide", async () => {
+test("Credits uses source summaries with guide backlinks, not contributor tables", async () => {
   const index = JSON.parse(await readFile(join(output, "static", "contentIndex.json"), "utf8"))
   assert.ok(index.credits, "Credits must be searchable")
   const article = elementsFor("credits.html").find((node) => node.tagName === "article")
   assert.ok(article, "Credits must contain an article")
-  const rows = []
+  const paragraphs = []
   visit(article, "element", (node) => {
-    if (node.tagName === "tr") {
+    assert.notEqual(node.tagName, "table", "Credits must not contain tables")
+    if (node.tagName === "p") {
       const elements = []
       let text = ""
       visit(node, "element", (child) => {
@@ -550,26 +563,52 @@ test("Credits is a standalone navigation item and credits every published guide"
       visit(node, "text", (child) => {
         text += child.value
       })
-      rows.push({ elements, text })
+      paragraphs.push({ elements, text })
     }
   })
   for (const slug of navigation.flatMap((section) => section.guides)) {
     assert.ok(
-      rows.some((row) => linksTo(row.elements, slug, "credits")),
-      `Missing guide credit entry: ${slug}`,
+      paragraphs.some(
+        (paragraph) =>
+          linksTo(paragraph.elements, slug, "credits") && paragraph.text.trim().length > 0,
+      ),
+      `Missing source description and guide backlink: ${slug}`,
     )
   }
-  for (const [slug, names] of [
-    ["modding/dialogue/find-specific-dialogue", ["Tablesalt", "Cattrina", "Shidan"]],
-    ["modding/world/vendor-lists", ["timor1234", "Cattrina", "Frankiewuzhere"]],
-    ["modding/world/building-collision-navmesh", ["Boron"]],
-    ["modding/world/kill-npcs-at-game-start", ["Cattrina"]],
-    ["modding/characters/name-databases", ["Shidan"]],
+  for (const [slug, source] of [
+    ["modding/fcs/complete-guide", "https://kenshi.fandom.com/wiki/Using_the_FCS"],
+    ["modding/world/in-game-editor", "https://lost-blog.com/in-game-editor/"],
+    [
+      "modding/world/vendor-lists",
+      "https://steamcommunity.com/app/233860/discussions/3/1739980540120440391/",
+    ],
+    [
+      "modding/save-editing/claim-town-ownership",
+      "https://steamcommunity.com/sharedfiles/filedetails/?id=1370334383",
+    ],
+    [
+      "modding/world/building-collision-navmesh",
+      "https://www.reddit.com/r/Kenshi/comments/upmm4q/modular_fortresses_for_lita_done/",
+    ],
   ]) {
-    const row = rows.find((entry) => linksTo(entry.elements, slug, "credits"))
-    for (const name of names)
-      assert.ok(row?.text.includes(name), `Missing credit: ${slug}: ${name}`)
+    assert.ok(
+      paragraphs.some(
+        (paragraph) =>
+          linksTo(paragraph.elements, slug, "credits") &&
+          paragraph.elements.some(
+            (node) => node.tagName === "a" && node.properties.href === source,
+          ),
+      ),
+      `Source must appear alongside its guide backlink: ${slug}`,
+    )
   }
+  let text = ""
+  visit(article, "text", (node) => {
+    text += node.value
+  })
+  assert.match(text, /No public\s+source URL was recorded/)
+  assert.match(text, /Wiki-team reuse permission/)
+  assert.doesNotMatch(text, /Recorded uploader|Recorded credits and sources/)
   for (const [page, { elements }] of documents) {
     const body = elements.find((node) => node.tagName === "body")
     if (!body?.properties.dataSlug || page === "404.html") continue

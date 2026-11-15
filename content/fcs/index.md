@@ -17,13 +17,6 @@ The guide includes 30 source screenshots and retains its original migration
 notices. Source attribution and the Wiki-derived text license are on
 [[credits#using-the-fcs-text-license|Credits]].
 
-## Focused workflows
-
-- [[modding/world/fast-healing-beds|Fast Healing Beds]] is a short example of
-  changing a bed's production multiplier.
-- [[modding/fcs/tech-overhaul-notes|Tech Overhaul Notes]] preserves development
-  notes about research templates. It is not a complete tutorial.
-
 ## Coverage to expand
 
 This section will grow into in-depth FCS feature guides and reviewed add-on tool
