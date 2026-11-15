@@ -1,0 +1,270 @@
+:root {
+  --field-panel: #faf6ef;
+  --field-rule: #b7a080;
+  --field-shadow: 0 12px 40px #332b2110;
+  --codeFont: "JetBrains Mono", Consolas, "Courier New", monospace;
+}
+
+:root[saved-theme="dark"] {
+  --field-panel: #252e2a;
+  --field-rule: #7d8b78;
+  --field-shadow: 0 12px 40px #00000018;
+}
+
+body {
+  background-image: linear-gradient(90deg, var(--lightgray) 1px, transparent 1px);
+  background-size: 4rem 100%;
+}
+
+::selection {
+  background: var(--textHighlight);
+  color: var(--dark);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--secondary);
+  outline-offset: 4px;
+}
+
+.page > #quartz-body {
+  .sidebar.left {
+    gap: 1.5rem;
+  }
+
+  .center {
+    box-sizing: border-box;
+    min-width: 0;
+    background: var(--field-panel);
+    padding: 2rem;
+    border: 1px solid var(--lightgray);
+    border-top: 4px solid var(--secondary);
+    box-shadow: var(--field-shadow);
+    margin-top: 4rem;
+
+    .page-header {
+      margin-top: 0;
+    }
+  }
+}
+
+.page-title {
+  font-family: var(--codeFont);
+  font-size: 1.35rem;
+  line-height: 1.35;
+  letter-spacing: -0.04em;
+
+  a {
+    color: var(--dark);
+  }
+
+  &::before {
+    content: "FIELD MANUAL / 01";
+    display: block;
+    margin-bottom: 0.8rem;
+    color: var(--secondary);
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+  }
+}
+
+.article-title {
+  color: var(--dark);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+article {
+  font-size: 1rem;
+  line-height: 1.75;
+  display: flow-root;
+
+  h2 {
+    margin-top: 2.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--lightgray);
+    letter-spacing: -0.025em;
+  }
+
+  a:not(:has(img)) {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+
+  a.internal {
+    background: none;
+    padding: 0;
+    border-radius: 0;
+    line-height: inherit;
+  }
+
+  .eyebrow {
+    color: var(--secondary);
+    font-family: var(--codeFont);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .lead {
+    color: var(--dark);
+    font-size: 1.25rem;
+    line-height: 1.6;
+  }
+
+  .table-container {
+    clear: both;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
+  th {
+    color: var(--dark);
+    background: var(--highlight);
+  }
+
+  th,
+  td {
+    padding: 0.7rem;
+    border-color: var(--lightgray);
+    text-align: left;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.callout[data-callout] {
+  --color: var(--secondary);
+  --border: var(--lightgray);
+  --bg: var(--highlight);
+
+  border-radius: 2px;
+}
+
+.callout[data-callout="multi-column"] {
+  border: 0;
+  padding: 0;
+  background: none;
+  overflow: visible;
+
+  > .callout-title {
+    display: none;
+  }
+
+  > .callout-content {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    overflow: visible;
+
+    > .callout {
+      min-width: 0;
+      margin: 0;
+    }
+  }
+}
+
+.callout[data-callout="paper_gradient_1"] {
+  background: linear-gradient(135deg, var(--highlight), var(--field-panel));
+
+  .callout-icon {
+    display: none;
+  }
+}
+
+.callout[data-callout="infobox"] {
+  width: min(17rem, 45%);
+  float: right;
+  clear: right;
+  margin: 0 0 1.25rem 1.5rem;
+  border-top: 3px solid var(--secondary);
+
+  .callout-icon {
+    display: none;
+  }
+
+  dl {
+    margin-top: 0;
+    font-size: 0.9rem;
+  }
+
+  dt {
+    color: var(--dark);
+    font-weight: 700;
+  }
+
+  dd {
+    margin: 0 0 0.75rem;
+  }
+}
+
+.search-button {
+  border-radius: 2px;
+}
+
+article .image-placeholder {
+  display: block;
+  margin: 1rem 0;
+  padding: 0.85rem 1rem;
+  border: 1px dashed var(--secondary);
+  background: var(--highlight);
+  color: var(--darkgray);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+article .pending-reference {
+  font-style: italic;
+}
+
+footer {
+  padding-top: 1rem;
+  border-top: 1px solid var(--lightgray);
+  font-size: 0.85rem;
+  opacity: 1;
+}
+
+@media (max-width: 800px) {
+  .page > #quartz-body {
+    .center {
+      margin-top: 0;
+      padding: 1.25rem;
+    }
+  }
+
+  .callout[data-callout="multi-column"] > .callout-content {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .callout[data-callout="infobox"] {
+    width: 100%;
+    float: none;
+    margin: 1rem 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0s !important;
+    transition-duration: 0s !important;
+  }
+}
