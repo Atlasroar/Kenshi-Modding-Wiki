@@ -38,12 +38,13 @@ coverage.
 [[dialogue/index|Dialogue]] collects searches, conditions, effects, and
 conversation structures.
 
+- [[modding/dialogue/creating-dialogue|Creating Dialogue in the FCS]] combines
+  the two supplied Steam tutorials into one illustrated conversation workflow,
+  with an appendix on alternating NPC interjectors.
 - [[modding/dialogue/conditions-and-effects|Dialogue Condition & Effects]]
   catalogs talker enums, checks, and effects.
 - [[modding/dialogue/find-specific-dialogue|How to Find Specific Dialogue]]
   explains text searches and StringIDs. **Work in progress.**
-- [[modding/dialogue/three-person-conversations|Three Person Conversations with Player]]
-  describes alternating interjectors.
 
 ## AI Packages
 

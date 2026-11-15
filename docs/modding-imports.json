@@ -2,7 +2,164 @@
   "sourceCollection": "Kenshi Modding Wiki",
   "scope": "The 17 owner-cleared modding guides, not the larger reference library",
   "imagePolicy": "The initial placeholder audit is preserved. Approved image reuse is recorded per guide without replacing original source fingerprints or image-position records.",
+  "additionalGuides": [
+    {
+      "slug": "modding/dialogue/creating-dialogue",
+      "title": "Creating Dialogue in the FCS",
+      "changes": "Original, condensed explanation combining the supplied Steam tutorials. Screenshot-only steps are described in accessible text. The owner-cleared Three Person Conversations with Player note is consolidated into an end-of-guide section, with its source audit and warnings preserved; its standalone page is removed. The condition/effect and dialogue-search reference pages remain. General FCS setup is linked rather than duplicated; unrelated town/global-settings exercises and source roleplay are omitted. Older-version claims are qualified and no current-game validation is asserted.",
+      "sourceAcquisition": "Owner-supplied saved webpages and resource folders, read offline. Only public guide sections and selected original screenshots were used; saved HTML, scripts, styles, account data and decorative/unrelated media are not published.",
+      "fingerprintScope": "SHA-256 of JSON {title,description,sections}, using public workshopItemTitle, guideTopDescription and subSection titles/text. Text nodes are joined with spaces, script/style nodes omitted, and section whitespace collapsed. No Steam account/header content is included.",
+      "sourceImageIndexScope": "Zero-based occurrence among local image references within public subSection elements, in document order.",
+      "imagePermission": "The owner explicitly confirmed permission to republish the supplied Steam-guide screenshots.",
+      "sourceLicense": "No explicit reuse license found in the supplied Steam guides. No new license is assigned to these sources; the Wiki-derived FCS CC BY-SA terms do not apply to these Steam sources.",
+      "sources": [
+        {
+          "id": "1444279946",
+          "title": "Kenshi Modding 101: FCS and Dialogue",
+          "author": "Boron",
+          "sourceUrl": "https://steamcommunity.com/sharedfiles/filedetails/?id=1444279946",
+          "publicContentSha256": "7dda6a1ff168f6a839426b6c4b1d33a22e13c725d2abff686a75fbde0c5ab67d",
+          "coverage": "Dialogue overview/exercises and their package-properties screenshot; relevant package assignment and squad-leader context from the bar tutorial; selected condition and shared-branch explanations. Non-dialogue global-settings/building-layout tutorials are omitted.",
+          "sectionTitles": [
+            "Boron and Gorax",
+            "FCS: The Basics",
+            "FCS: User Interface",
+            "FCS: Modifying Global Stuff",
+            "Dialogue: Overview",
+            "Dialogue: Exercises",
+            "Bringing it All Together: Making a Bar",
+            "Appendix A: Assigning Squads to Buildings and Giving them Layouts",
+            "Appendix B: Exercise Answer Sheet",
+            "Appendix C: A Proper Example"
+          ]
+        },
+        {
+          "id": "804686889",
+          "title": "Simple Dialogue Modding Guide",
+          "author": "Nanogiraffe",
+          "sourceUrl": "https://steamcommunity.com/sharedfiles/filedetails/?id=804686889",
+          "publicContentSha256": "8ccc6af03d048ac43c091300f17967153b954ca390b0ce218124d03f3109d7b4",
+          "coverage": "Package/player-talk event creation, root/child speakers, text variants versus choices, word swaps, conditions, effects, monologue/repetition/locked controls, character-package assignment and saving. Selected original screenshots accompany the rewritten steps; the unrelated texture-video card is omitted.",
+          "sectionTitles": [
+            "Open the Forgotten Construction Set",
+            "Dialogues and Dialogue Packages",
+            "Writing your dialogue"
+          ]
+        }
+      ],
+      "images": [
+        {
+          "asset": "assets/dialogue/package-event.png",
+          "sourceId": "804686889",
+          "sourceFile": "804686889_preview_Screenshot (35).png",
+          "sourceImageIndex": 7,
+          "alt": "Player-talk event selected in a new dialogue package",
+          "sha256": "e03f63a821e312f5eddca2d80a0a164d7a998b337f6b0f6bfc0d01b3a4b5e515",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "asset": "assets/dialogue/root-speaker.png",
+          "sourceId": "804686889",
+          "sourceFile": "saved_resource(4)",
+          "sourceImageIndex": 10,
+          "alt": "Speaker selector on a dialogue root",
+          "sha256": "c3a82f0147ab1130e4030183652e61f1bcfd5f8451c3afbb9163f0d1d39660a4",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "asset": "assets/dialogue/dialogue-branches.png",
+          "sourceId": "804686889",
+          "sourceFile": "804686889_preview_Screenshot (50).png",
+          "sourceImageIndex": 22,
+          "alt": "NPC and player branches in a dialogue tree",
+          "sha256": "66791c9207abb4f989325ab57bb3bea0e89693f59c92e4ddd09532165a73c58f",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "asset": "assets/dialogue/text-variations.png",
+          "sourceId": "804686889",
+          "sourceFile": "804686889_preview_Screenshot (41).png",
+          "sourceImageIndex": 13,
+          "alt": "Multiple text fields providing variations for one line",
+          "sha256": "2a5cc1e67125f328fd0f33767bb208abeea1e9e7c9a9bd26113f9664d952a4cd",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "asset": "assets/dialogue/word-swap.png",
+          "sourceId": "804686889",
+          "sourceFile": "804686889_preview_Screenshot (54).png",
+          "sourceImageIndex": 26,
+          "alt": "A word swap with several replacement text values",
+          "sha256": "02967647eaa447708a371099c6f6df15566a899e17544f94c4a92b5470cf3096",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "asset": "assets/dialogue/player-money-condition.png",
+          "sourceId": "804686889",
+          "sourceFile": "saved_resource(16)",
+          "sourceImageIndex": 38,
+          "alt": "Player-money condition added to a player response",
+          "sha256": "541d54d2c5072f35939f388bf61f574ec3a3a32c1c60ab2f9710ac1055f41f1b",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "asset": "assets/dialogue/dialogue-effect.png",
+          "sourceId": "804686889",
+          "sourceFile": "804686889_preview_Screenshot (63).png",
+          "sourceImageIndex": 35,
+          "alt": "A join-squad effect selected in the dialogue editor",
+          "sha256": "f9a7ec84c9d934dd7df47f156595fd68e6474281a10b9521117349722572030f",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "asset": "assets/dialogue/repetition-limit.png",
+          "sourceId": "804686889",
+          "sourceFile": "saved_resource(17)",
+          "sourceImageIndex": 39,
+          "alt": "Repetition-limit options in the dialogue editor",
+          "sha256": "d95622d341f6b6f8fca3551cd7faf2e8d986ff21b173238de84440004dec9f0d",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "asset": "assets/dialogue/package-properties.png",
+          "sourceId": "1444279946",
+          "sourceFile": "saved_resource(6)",
+          "sourceImageIndex": 27,
+          "alt": "Dialogue-package properties used by the source exercises",
+          "sha256": "af00fd83ef784b7fd106cda1d67c87ab3b52f67e9a0ebd595d0cf6798aec86b9",
+          "width": 1355,
+          "height": 647
+        },
+        {
+          "asset": "assets/dialogue/npc-package.png",
+          "sourceId": "804686889",
+          "sourceFile": "804686889_preview_Screenshot (77).png",
+          "sourceImageIndex": 49,
+          "alt": "A custom dialogue package assigned to a character",
+          "sha256": "c86f8e8bb88e2d239516a500ece86b014672c6e99f4eb996c5937b50dbe542ef",
+          "width": 1920,
+          "height": 1080
+        }
+      ]
+    }
+  ],
   "retiredGuides": [
+    {
+      "slug": "modding/dialogue/three-person-conversations",
+      "reason": "Consolidated all guidance into the combined dialogue guide at the owner's request; standalone page removed without a redirect.",
+      "consolidatedInto": "modding/dialogue/creating-dialogue",
+      "sectionId": "three-person-conversations-with-the-player",
+      "sourceTerms": "Existing owner-cleared source-note terms retained; no new license assigned.",
+      "retiredOn": "2026-11-15"
+    },
     {
       "slug": "modding/fcs/tech-overhaul-notes",
       "reason": "Removed as a misplaced file at the owner's request; no redirect.",
