@@ -19,23 +19,6 @@ source_categories: []
 
 [[modding/index|Modding guides]]
 
-For a shorter task-based learning path, start with
-[[modding/fcs/using-the-fcs|Using the FCS]], then follow
-[[modding/fcs/searching-and-editing-data|searching and bulk editing]],
-[[modding/fcs/managing-mods|mod management]], and
-[[modding/fcs/checking-mod-errors|error checking]]. This older compilation retains
-its original source and migration notices.
-
-### Sources
-
-Original articles and contributor references are listed in
-[[credits#guide-credits|Credits]].
-
-The approved Wiki screenshots appear directly on this page.
-[[credits#fcs-screenshot-credits|Screenshot credits and permission]] identify
-their sources. Four additional illustrations from the older compilation are
-not included in the supplied Wiki article and remain labeled placeholders.
-
 ## Introduction
 
 What’s an FCS?
@@ -79,6 +62,10 @@ When first loading up FCS you’ll be greeted with a screen which will look some
 Note the location of the ACTIVE text, this is where your changes will be saved (should you decide to make any).
 
 It is highly advised that you create your own mod for testing purposes where any changes can remain isolated from any core game data.
+
+> [!warning] Check the active destination
+> Loaded dependencies are not your editing destination. Confirm **ACTIVE** before
+> changing data, and keep experimental changes isolated from core game data.
 
 Mods that are currently set to be loaded by the game will already be ticked. You should leave the mods that will be loaded after your mod ticked as you will be able to see any changes that could be overriding your mod.
 
@@ -135,6 +122,12 @@ Deprecated fields are removed. In this instance, these fields once existed but w
 
 The cleanup function when you right click on items in the Game World window runs the ‘Remove deprecated fields’ task on the selected items
 
+> [!warning] Missing is not necessarily unwanted
+> Before removing references, check whether a required dependency is unloaded.
+> Review deletions and conflicts rather than treating Cleanup as an automatic fix.
+> Use the [[modding/fcs/complete-guide#types-of-errors|error reference]] to
+> investigate the cause first.
+
 ### To Do List
 
 The to do list can be useful for organising your tasks.
@@ -147,7 +140,9 @@ i personally use the guilded to do list as it manages easier and can support dis
 
 ### Errors
 
-The errors list shows all potential problems the FCS can identify. Refer to the PDF tutorial in your Kenshi folder because I can’t be bothered to write them here yet.
+The errors list shows potential problems the FCS can identify. See the
+[[modding/fcs/complete-guide#types-of-errors|error reference]] below for all
+17 documented error types.
 
 ### Open Any
 
@@ -165,6 +160,9 @@ Useful For Save editing though: Save Editing Guide
 ## Artifacts
 
 Artifacts are rare items that spawn randomly across the game world in high qualities. The artefacts list is used to limit the total number of them that are spawned, and is found at the header bar in the FCS:
+
+These unique items are non-respawnable; the toolbar's Artifact settings controls
+them separately from Global game settings.
 
 <span class="image-placeholder" role="note" data-image-index="7">Place relevant image here: The FCS - A Complete Guide screenshot 7</span>
 
@@ -325,6 +323,8 @@ NOTE: Searching by value IS case sensitive for the property and is NOT case sens
 - Operator =
 - Gives an exact match on a property
 
+For example, `can block = true` finds weapons whose `can block` property is true.
+
 ![exact property-value search](assets/fcs/equal-to.png)
 
 - Not Equal to
@@ -348,6 +348,8 @@ NOTE: Searching by value IS case sensitive for the property and is NOT case sens
 
 - Showing all squads with more than 1 reference in the faction list
 
+The filter is `faction > 1`.
+
 ![faction reference-list count search](assets/fcs/greaterless-than2.png)
 
 - Contains
@@ -359,6 +361,9 @@ NOTE: Searching by value IS case sensitive for the property and is NOT case sens
 ![dialogue text containing Hello](assets/fcs/contains.png)
 
 For indexed fields such as dialogue lines where you have text0, text1, etc, you can search specifically by text0, or search all of them by omitting the number.
+
+For example, `text0 : Hello` searches one indexed field, while `text : Hello`
+searches across the indexed text fields.
 
 - Does not contain
 
@@ -380,6 +385,8 @@ For indexed fields such as dialogue lines where you have text0, text1, etc, you 
 - Combining multiple search terms
 
 The semi-colon operator can be used to use multiple search terms. In the example below, we’re searching for Buildings with “outpost” in the name and need over 100 building materials to complete construction.
+
+The combined filter is `outpost; build materials > 100`.
 
 ![combined name and construction-cost filters](assets/fcs/combined-search.png)
 
@@ -405,9 +412,13 @@ Properties of objects referenced by list items can also be searched for using th
 
 In the example below, we search for the list of characters for those part of a faction which are anti slavery.
 
+The filter is `faction.anti slavery = true`.
+
 ![searching characters through faction properties](assets/fcs/recursive.png)
 
 This method is fully recursive. Below is another example demonstrating this. The search is for all interior buildings with a functionality reference object that consumes items with a value of over 500 cats.
+
+The filter is `functionality.consumes.value > 500`.
 
 ![searching through several reference lists](assets/fcs/recursive2.png)
 
@@ -422,6 +433,10 @@ As well as setting the value for multiple items at once, numerical fields can al
 There’s also support for adding and modifying reference values in bulk
 
 ![bulk reference-value editing](assets/fcs/set-field-2.png)
+
+> [!warning] Review the selection
+> Bulk operations affect the selected items, not just the object you inspected.
+> Confirm the active mod, field, and selection before applying a change.
 
 - Find and Replace
 
@@ -454,6 +469,9 @@ Currently these dictionaries are only set up to support english. For other langu
 ## Managing your mod
 
 ### Item colour key
+
+These colors describe the Changes/merge window, not the
+[[modding/fcs/complete-guide#colour-coding-of-items|Game World and object-property color key]].
 
 - Green - New item
 - Blue - Modified existing item
@@ -520,9 +538,26 @@ If a mod contains level data, that can also be merged with the merge level data 
 Launch the FCS through Steam in online mode for Workshop connectivity.
 The standalone executable does not provide the Steam connection needed for
 uploading. Cattrina contributed this guidance and annotated screenshot to the
-Wiki article; see the
-[[modding/fcs/managing-mods#annotated-upload-checklist|upload checklist]]
-for the image's instructions in accessible text.
+Wiki article.
+
+#### Annotated upload checklist
+
+Cattrina's screenshot adds the following guidance:
+
+- Include the mod's file name in its Workshop title and enter your Steam name
+  as the author. Increase the version on every update, including small changes.
+- If the mod is a patch, check that its original mod appears under
+  **Dependencies**. Choose the appropriate tags.
+- Use a square `.jpg` thumbnail below **1 MB**. The source recommends
+  power-of-two dimensions, such as **512 x 512** or **1024 x 1024**, and warns
+  that PNG thumbnails may not display correctly.
+- Start with **private** visibility so you can finish the description and add
+  images on the Workshop page. Use concise change notes for updates.
+- The refresh control can load the description from Steam. If the dialog says
+  **Not connected to Steam**, close the FCS and reopen it through Steam.
+
+These are the source screenshot's recommendations, not independently retested
+requirements for a newer FCS or Steam release.
 
 ![Steam upload controls](assets/fcs/uploadmodtosteam.png)
 
@@ -543,79 +578,38 @@ Right clicking will show some options to resolve the error:
 
 By default only errors associated with the current mod are displayed. You can show all errors with the show from all mods option. Some errors do not know which mod caused the problem so will always be shown.
 
-If you open an item and get the ‘Dialogue line is not associated with any dialogue’ message, the item is an orphaned dialogue object and can just be deleted.
+If you open an item and get the ‘Dialogue line is not associated with any dialogue’
+message, inspect its links and confirm it is orphaned before deleting it or
+using Cleanup.
 
 The errors list is only updated when a mod is loaded. The scan button can rescan the active mod for any new errors.
 
+> [!warning] Check dependencies before deleting
+> An undefined reference or missing modified item can mean a dependency was not
+> loaded. Removing the reference or clearing changes is destructive, not a
+> substitute for loading the required data.
+
 ### Types of Errors
 
-- Undefined reference -
-
-- The item contains references to items that do not exist. This could be from a mod dependency that is not loaded. If not you can clear them with the ‘Remove Invalid references’ option.
-
-- Reference to deleted item -
-
-- The item contains a reference to an item that has been deleted by the active mod. You should delete this reference or restore the deleted item.
-
-- Reference to incorrect item type -
-
-- The definition file has probably changed or the mod is corrupt. You should delete these invalid references from the item.
-
-- No closing decorator tag. They must be closed with </> -
-
-- Incorrect dialogue formatting. Double clicking the error will highlight the line in question.
-
-- Word swap not terminated -
-
-- Word swaps must be /SWAP/. This could be a false positive if ‘/’ is used in another context.
-
-- Empty word swap -
-
-- A dialogue line contains ‘//’ for some reason
-
-- Missing word swap -
-
-- Dialogue contains a word swap that does not exist in the word swaps list
-
-- Multiple primary references to dialogue line -
-
-- This can only happen if dialogue links have been messed up. This was caused by a bug that should have been fixed. It can be resolved by manually editing the link tags.
-
-- No primary reference to dialogue line -
-
-- Similar link corruption as the above multiple primary references error.
-
-- Orphaned dialogue object -
-
-- Dialogue lines or conditions not attached to any dialogue - just delete it or run cleanup.
-
-- Reference list contains too many items -
-
-- Reference lists can have a limit to the number of referenced items. You should delete the extra references.
-
-- Item has changed type -
-
-- Possible data corruption or mod conflict. Somehow a mod has changed the type of an item.
-
-- Value was the wrong type and has been converted -
-
-- The definition file has probably changed. A value has been converted to a new type. You should check if it is correct.
-
-- Value is the wrong type and could not be converted. -
-
-- The definition file has probably changed. The value has been reset to its default. You may need to update this value.
-
-- Modified item undefined. -
-
-- This mod has changes in an item that does not exist. A mod dependency may not be loaded or the item has been deleted from a mod dependency. The item will likely show up missing most of its values. To resolve it, you can use the clear changes option.
-
-- Item with id has already been defined by mod -
-
-- This item conflicts with one from another loaded mod. This can be a false positive error if the mod has recently been merged with another. If this is the case the error will go away as it will automatically be resolved when you save.
-
-- New values have been added -
-
-- The item definition file has changed to add new properties to an item. You may want to edit them but in general just ignore this message.
+| Error                                              | Meaning and response                                                                                                                                                                                 |
+| -------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Undefined reference                                | A referenced item is missing. Check unloaded dependencies first; otherwise Remove Invalid References can remove the broken links.                                                                    |
+| Reference to deleted item                          | The active mod deleted a referenced item. Remove the reference or restore the item.                                                                                                                  |
+| Reference to incorrect item type                   | Definitions may have changed, or data may be corrupt. Remove the invalid reference after investigating.                                                                                              |
+| No closing decorator tag                           | Dialogue formatting needs a closing `</>`. Double-click to locate the line.                                                                                                                          |
+| Word swap not terminated                           | Word swaps use `/SWAP/`. A slash used for something else can cause a false positive.                                                                                                                 |
+| Empty word swap                                    | A dialogue line contains `//`. Inspect and correct it.                                                                                                                                               |
+| Missing word swap                                  | Dialogue refers to a swap absent from the word-swaps list.                                                                                                                                           |
+| Multiple primary references to dialogue line       | Corrupt dialogue links, associated with an older bug. Inspect and manually repair link tags.                                                                                                         |
+| No primary reference to dialogue line              | Related dialogue-link corruption; inspect the link tags.                                                                                                                                             |
+| Orphaned dialogue object                           | A line or condition belongs to no dialogue. Confirm it is orphaned, then delete it or use Cleanup. The "Dialogue line is not associated with any dialogue" opening warning identifies this case too. |
+| Reference list contains too many items             | The list has a reference-count limit. Remove the excess references.                                                                                                                                  |
+| Item has changed type                              | Possible corruption or mod conflict changed the item's object type. Investigate the conflicting data.                                                                                                |
+| Value was the wrong type and has been converted    | Definitions probably changed. Check that the converted value is correct.                                                                                                                             |
+| Value is the wrong type and could not be converted | The value was reset to its default after a definition change. Review and update it if necessary.                                                                                                     |
+| Modified item undefined                            | Changes target a missing item. Check unloaded or changed dependencies; if the edits are no longer valid, Clear changes removes them. The item may appear with most values missing.                   |
+| Item with id has already been defined by mod       | An ID conflicts with another loaded mod. Immediately after a merge this can be a false positive that resolves on save. Otherwise investigate the collision.                                          |
+| New values have been added                         | Definitions added properties. Review them if needed; the notice generally does not require a fix.                                                                                                    |
 
 ---
 
