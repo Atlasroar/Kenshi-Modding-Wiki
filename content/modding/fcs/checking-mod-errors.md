@@ -21,7 +21,7 @@ source_license: CC BY-SA 3.0 Unported (adapted text)
 The Errors window opens when loading a mod with detected errors, and is also
 available from the toolbar. Double-click an error to open its associated item.
 
-<span class="image-placeholder" role="note" data-image-index="1" data-image-source="Errors.PNG">Place relevant image here: the FCS Errors window (Errors.PNG)</span>
+![the FCS Errors window](assets/fcs/errors.png)
 
 By default, it shows errors associated with the current mod. **Show From All
 Mods** includes other mods; errors without an identifiable originating mod
@@ -64,5 +64,5 @@ task is appropriate, then rescan.
 
 This page's adapted text is **CC BY-SA 3.0 Unported**.
 [[credits#using-the-fcs-text-license|Credits]] identifies the original article,
-contributors, revision, license, and changes. Screenshot placeholders identify
-source files pending separate reuse permission.
+contributors, revision, license, and changes. Screenshot permissions and individual source files are listed in
+[[credits#fcs-screenshot-credits|screenshot credits]].

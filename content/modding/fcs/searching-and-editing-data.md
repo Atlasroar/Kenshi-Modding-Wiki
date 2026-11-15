@@ -22,7 +22,7 @@ Type in Game World's search box to filter the selected category by object name
 or String ID. This search is **not case-sensitive**; `dome`, for example, finds
 building names containing that word.
 
-<span class="image-placeholder" role="note" data-image-index="1" data-image-source="Search.PNG">Place relevant image here: building-name search for dome (Search.PNG)</span>
+![building-name search for dome](assets/fcs/search.png)
 
 ## Filter by a property
 
@@ -39,37 +39,39 @@ actual name from the object view.
 | `!:`        | Text not containing a value.                                   |
 | `?`         | String matching a regular expression.                          |
 
-<span class="image-placeholder" role="note" data-image-index="2" data-image-source="Equal_to.PNG">Place relevant image here: exact property-value search (Equal_to.PNG)</span>
+For example, `can block = true` finds weapons whose `can block` property is true.
 
-<span class="image-placeholder" role="note" data-image-index="3" data-image-source="GreaterLess_than.PNG">Place relevant image here: numeric comparison search (GreaterLess_than.PNG)</span>
+![exact property-value search](assets/fcs/equal-to.png)
+
+![numeric comparison search](assets/fcs/greaterless-than.png)
 
 Numeric comparisons also work on lists: `faction > 1` finds squads with more
 than one entry in their faction reference list.
 
-<span class="image-placeholder" role="note" data-image-index="4" data-image-source="GreaterLess_than2.PNG">Place relevant image here: faction reference-list count search (GreaterLess_than2.PNG)</span>
+![faction reference-list count search](assets/fcs/greaterless-than2.png)
 
 For dialogue, `text0 : Hello` searches a particular indexed text field.
 `text : Hello` searches across `text0`, `text1`, and the other indices.
 
-<span class="image-placeholder" role="note" data-image-index="5" data-image-source="Contains.PNG">Place relevant image here: dialogue text containing Hello (Contains.PNG)</span>
+![dialogue text containing Hello](assets/fcs/contains.png)
 
 Use `!:` for the inverse, such as descriptions that do not contain a word.
 The source's example finds crossbow descriptions without `quality`.
 
-<span class="image-placeholder" role="note" data-image-index="6" data-image-source="NotContains.PNG">Place relevant image here: descriptions not containing quality (NotContains.PNG)</span>
+![descriptions not containing quality](assets/fcs/notcontains.png)
 
 Use `?` for regex matching. Regex learning and testing references are listed on
 [[credits#fcs-tools-and-references|Credits]], not embedded as outbound guide links.
 
-<span class="image-placeholder" role="note" data-image-index="7" data-image-source="Regex.PNG">Place relevant image here: a regular-expression search (Regex.PNG)</span>
+![a regular-expression search](assets/fcs/regex.png)
 
 ### Combine filters
 
 Separate search terms with **`;`** to require multiple conditions. The source
 example combines a building name containing `outpost` with a construction cost
-above 100 building materials.
+above 100 building materials: `outpost; build materials > 100`.
 
-<span class="image-placeholder" role="note" data-image-index="8" data-image-source="Combined_search.PNG">Place relevant image here: combined name and construction-cost filters (Combined_search.PNG)</span>
+![combined name and construction-cost filters](assets/fcs/combined-search.png)
 
 ### Follow references
 
@@ -91,9 +93,12 @@ source illustrates searching characters through their faction's anti-slavery
 setting, and interior buildings through functionality and consumed-item values
 above 500 cats.
 
-<span class="image-placeholder" role="note" data-image-index="9" data-image-source="Recursive.PNG">Place relevant image here: searching characters through faction properties (Recursive.PNG)</span>
+The illustrated filters are `faction.anti slavery = true` and
+`functionality.consumes.value > 500`.
 
-<span class="image-placeholder" role="note" data-image-index="10" data-image-source="Recursive2.PNG">Place relevant image here: searching through several reference lists (Recursive2.PNG)</span>
+![searching characters through faction properties](assets/fcs/recursive.png)
+
+![searching through several reference lists](assets/fcs/recursive2.png)
 
 ## Set Field
 
@@ -102,9 +107,9 @@ field across the selection. Numerical fields support multiplication, division,
 addition, and subtraction as well as assignment. The tool also supports adding
 and modifying reference values in bulk.
 
-<span class="image-placeholder" role="note" data-image-index="11" data-image-source="Set_field.PNG">Place relevant image here: Set Field on selected objects (Set_field.PNG)</span>
+![Set Field on selected objects](assets/fcs/set-field.png)
 
-<span class="image-placeholder" role="note" data-image-index="12" data-image-source="Set_field_2.PNG">Place relevant image here: bulk reference-value editing (Set_field_2.PNG)</span>
+![bulk reference-value editing](assets/fcs/set-field-2.png)
 
 > [!warning] Review the selection
 > Bulk operations affect the selected items, not just the object you inspected.
@@ -122,9 +127,9 @@ The application toolbar checks **all items**; the navigation window's context
 menu checks **selected items**. Spellcheck is also available in the conversation
 editor.
 
-<span class="image-placeholder" role="note" data-image-index="13" data-image-source="Spellcheckbar.PNG">Place relevant image here: the toolbar spellcheck button (Spellcheckbar.PNG)</span>
+![the toolbar spellcheck button](assets/fcs/spellcheckbar.png)
 
-<span class="image-placeholder" role="note" data-image-index="14" data-image-source="Spellcheckcontext.PNG">Place relevant image here: spellcheck for selected items (Spellcheckcontext.PNG)</span>
+![spellcheck for selected items](assets/fcs/spellcheckcontext.png)
 
 The dictionaries are `Dictionary.txt` and `Dictionary_custom.txt`. The supplied
 dictionaries support English; for another language, amend or replace
@@ -135,5 +140,5 @@ Continue with [[modding/fcs/managing-mods|mod management]] and
 
 This page's adapted text is **CC BY-SA 3.0 Unported**.
 [[credits#using-the-fcs-text-license|Credits]] identifies the original article,
-contributors, revision, license, and changes. Screenshot placeholders identify
-source files pending separate reuse permission.
+contributors, revision, license, and changes. Screenshot permissions and individual source files are listed in
+[[credits#fcs-screenshot-credits|screenshot credits]].

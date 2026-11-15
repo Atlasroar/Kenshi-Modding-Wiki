@@ -36,7 +36,7 @@ Mods higher in the load list load first. **Later entries take precedence** when
 mods change the same data. If `FasterBeakThings.mod` is followed by
 `SlowerBeakThings.mod`, the latter wins; reverse them if that is not intended.
 
-<span class="image-placeholder" role="note" data-image-index="1" data-image-source="Loadorder.PNG">Place relevant image here: mod load order (Loadorder.PNG)</span>
+![mod load order](assets/fcs/loadorder.png)
 
 ## Merge another mod
 
@@ -44,7 +44,7 @@ Open **Merge** from the toolbar and choose the source mod, or use **`*`** to loa
 another data file. The destination is your **active mod**. A mod already open as
 its dependency cannot be merged; a mod later in the list can.
 
-<span class="image-placeholder" role="note" data-image-index="2" data-image-source="Merge_mod.PNG">Place relevant image here: selecting data to merge into the active mod (Merge_mod.PNG)</span>
+![selecting data to merge into the active mod](assets/fcs/merge-mod.png)
 
 The checkbox has **three distinct states**:
 
@@ -54,11 +54,11 @@ The checkbox has **three distinct states**:
 | Selected   | Applies the change to the active mod.                                                                 |
 | Deselected | Skips the change and keeps it hidden in subsequent merges; **Show Skipped Changes** reveals it again. |
 
-<span class="image-placeholder" role="note" data-image-index="3" data-image-source="Ignorebox.PNG">Place relevant image here: Ignore checkbox state (Ignorebox.PNG)</span>
+![Ignore checkbox state](assets/fcs/ignorebox.png)
 
-<span class="image-placeholder" role="note" data-image-index="4" data-image-source="Selected_Box.PNG">Place relevant image here: Selected checkbox state (Selected_Box.PNG)</span>
+![Selected checkbox state](assets/fcs/selected-box.png)
 
-<span class="image-placeholder" role="note" data-image-index="5" data-image-source="Deselected_Box.PNG">Place relevant image here: Deselected checkbox state (Deselected_Box.PNG)</span>
+![Deselected checkbox state](assets/fcs/deselected-box.png)
 
 Select several items and click a checkbox to change them together, or use the
 context menu. Its recursive check/uncheck actions also include referenced items,
@@ -80,7 +80,7 @@ The toolbar's **Cleanup** acts on the active mod. Its options are not interchang
 | Remove invalid references | References to missing items.                                                                    |
 | Remove undefined items    | Items whose types are absent from `fcs.def`, except items referenced by other items.            |
 
-<span class="image-placeholder" role="note" data-image-index="6" data-image-source="Cleanup.PNG">Place relevant image here: active-mod cleanup tasks (Cleanup.PNG)</span>
+![active-mod cleanup tasks](assets/fcs/cleanup.png)
 
 Game World's context-menu **Clean Item** only removes deprecated fields from the
 selected items; it does not run every cleanup task.
@@ -95,11 +95,30 @@ selected items; it does not run every cleanup task.
 For Steam connectivity, launch the FCS **through Steam in online mode**. Opening
 the executable directly from the game folder does not provide the Steam
 connection needed for uploading. This requirement is Cattrina's contribution
-to the source article; it is not a complete Workshop publishing tutorial.
+to the source article.
 
-<span class="image-placeholder" role="note" data-image-index="7" data-image-source="UploadModToSteam.png">Place relevant image here: Steam upload controls (UploadModToSteam.png)</span>
+### Annotated upload checklist
+
+Cattrina's screenshot adds the following guidance:
+
+- Include the mod's file name in its Workshop title and enter your Steam name
+  as the author. Increase the version on every update, including small changes.
+- If the mod is a patch, check that its original mod appears under
+  **Dependencies**. Choose the appropriate tags.
+- Use a square `.jpg` thumbnail below **1 MB**. The source recommends
+  power-of-two dimensions, such as **512 x 512** or **1024 x 1024**, and warns
+  that PNG thumbnails may not display correctly.
+- Start with **private** visibility so you can finish the description and add
+  images on the Workshop page. Use concise change notes for updates.
+- The refresh control can load the description from Steam. If the dialog says
+  **Not connected to Steam**, close the FCS and reopen it through Steam.
+
+These are the source screenshot's recommendations, not independently retested
+requirements for a newer FCS or Steam release.
+
+![Steam upload controls](assets/fcs/uploadmodtosteam.png)
 
 This page's adapted text is **CC BY-SA 3.0 Unported**.
 [[credits#using-the-fcs-text-license|Credits]] identifies the original article,
-contributors, revision, license, and changes. Screenshot placeholders identify
-source files pending separate reuse permission.
+contributors, revision, license, and changes. Screenshot permissions and individual source files are listed in
+[[credits#fcs-screenshot-credits|screenshot credits]].

@@ -1,5 +1,6 @@
 import assert from "node:assert/strict"
 import { spawnSync } from "node:child_process"
+import { createHash } from "node:crypto"
 import { access, glob, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises"
 import { tmpdir } from "node:os"
 import { extname, join, resolve, sep } from "node:path"
@@ -234,7 +235,7 @@ test("source image locations and unimported references remain explicit without b
   assert.equal(references, 8, "Every out-of-batch article reference must remain explicit")
 })
 
-test("the FCS adaptation preserves its full source coverage, attribution, and pending image positions", async () => {
+test("the FCS adaptation preserves source coverage, attribution, and all restored original screenshots", async () => {
   const index = JSON.parse(await readFile(join(output, "static", "contentIndex.json"), "utf8"))
   const assigned = navigation.flatMap((section) => section.guides)
   const credits = elementsFor("credits.html")
@@ -244,7 +245,7 @@ test("the FCS adaptation preserves its full source coverage, attribution, and pe
       credits.some((node) => node.tagName === "a" && node.properties.href === source.licenseUrl),
       "The adaptation license must be available on Credits",
     )
-    for (const { slug, imagePlaceholders } of source.guides) {
+    for (const { slug, sourceImages } of source.guides) {
       assert.ok(index[slug], `Adapted guide must be searchable: ${slug}`)
       assert.ok(assigned.includes(slug), `Adapted guide must be in navigation: ${slug}`)
       assert.ok(
@@ -257,18 +258,36 @@ test("the FCS adaptation preserves its full source coverage, attribution, and pe
         nodes.push(node)
       })
       assert.ok(linksTo(nodes, "credits", slug), `Adapted guide must link to its credits: ${slug}`)
-      assert.deepEqual(
-        nodes
-          .filter((node) => node.properties.className?.includes("image-placeholder"))
-          .map((node) => node.properties.dataImageSource),
-        imagePlaceholders,
-        `Source screenshot positions or identities changed: ${slug}`,
+      const restored = nodes.filter((node) => node.tagName === "img")
+      assert.equal(restored.length, sourceImages.length, `Missing source screenshot: ${slug}`)
+      assert.ok(
+        !nodes.some((node) => node.properties.className?.includes("image-placeholder")),
+        `Restored guide still has an image placeholder: ${slug}`,
       )
-      assert.ok(!nodes.some((node) => node.tagName === "img"), `Unreviewed screenshot in ${slug}`)
-      images += imagePlaceholders.length
+      for (const [position, image] of restored.entries()) {
+        const record = source.media.find((entry) => entry.sourceFile === sourceImages[position])
+        assert.ok(record, `Missing image provenance: ${sourceImages[position]}`)
+        const url = new URL(image.properties.src, new URL(slug + ".html", site))
+        assert.equal(url.href, new URL(record.asset, site).href, `Wrong image position: ${slug}`)
+        assert.equal(image.properties.alt, record.alt, `Missing descriptive alt text: ${slug}`)
+        const bytes = await readFile(await findTarget(url))
+        assert.equal(createHash("sha256").update(bytes).digest("hex"), record.sha256)
+        assert.equal(createHash("sha1").update(bytes).digest("hex"), record.sourceSha1)
+        assert.equal(bytes.readUInt32BE(16), record.width, "Original image width must be retained")
+        assert.equal(
+          bytes.readUInt32BE(20),
+          record.height,
+          "Original image height must be retained",
+        )
+        assert.ok(
+          credits.some((node) => node.tagName === "a" && node.properties.href === record.filePage),
+          `Missing original file credit: ${record.sourceFile}`,
+        )
+      }
+      images += restored.length
     }
   }
-  assert.equal(images, 30, "All 30 source screenshots need explicit pending positions")
+  assert.equal(images, 30, "All 30 original source screenshots must be restored")
   const errorRows = []
   visit(
     elementsFor("modding/fcs/checking-mod-errors.html").find((node) => node.tagName === "article"),

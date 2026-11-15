@@ -8,9 +8,11 @@ All 17 guides from the owner-cleared modding collection are available here,
 alongside four focused guides adapted from Kenshi Wiki's Using the FCS article.
 Choose a topic below, or use search to find a tool, field name, or workflow.
 
-> [!info] Images are marked for later
-> Each source image location displays **Place relevant image here**, followed by
-> a screenshot label. No screenshots have been restored. Text marked
+> [!info] Source images and remaining placeholders
+> The four task-based FCS guides include 30 restored source screenshots with
+> permission and [[credits#fcs-screenshot-credits|individual credits]].
+> The initial collection's image positions still display **Place relevant image
+> here**, followed by a screenshot label. Text marked
 > **reference page not imported** points out dependencies on articles outside
 > this collection; it is not a broken link.
 

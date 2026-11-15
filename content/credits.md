@@ -55,28 +55,66 @@ Wiki-derived text and its adaptations on this website remain available under
 that license. The four task-based guides above condense and rewrite the article,
 split its interface, data-management, mod-management, and error-reference
 sections, add selection/dependency safety notes and internal navigation, and
-consolidate external references onto this page. Original screenshots are
-represented by 30 named placeholders rather than copied images.
+consolidate external references onto this page. Thirty original screenshots
+are restored in their relevant sections, with local files and meaningful alt text.
 Separately credited sources and images are not automatically relicensed.
 
-Fandom's [licensing guidance](https://community.fandom.com/wiki/Help:Licensing)
-explicitly distinguishes text from uploaded images. The article's screenshots
-need their own reuse basis; the text license alone does not establish one.
-The Wiki footer says "Community content is available under CC-BY-SA unless
-otherwise noted," but Fandom's guidance separately states that image and video
-files do not automatically fall under that license. Screenshot reuse is therefore
-unconfirmed, not represented here as a verified CC image license.
-The community's own
-[Copyrights page](https://kenshi.fandom.com/wiki/Kenshi_Wiki:Copyrights)
-also specifies **text**. The 30 screenshot file descriptions record no separate
-reuse license. Each new guide's placeholder names the original file so an image
-can be restored in the correct location when reuse permission is established.
+The screenshot reuse permission and individual source files are recorded below,
+separately from the text license.
+
+## FCS screenshot credits
+
+The 30 screenshots in the four task-based FCS guides are original files from
+the source article. The repository owner confirmed permission from the Kenshi
+Wiki team to reuse them on 2026-11-15. They are hosted locally, without altering
+their image contents. The source community's CC-BY-SA notice and the confirmed
+reuse permission are retained alongside the source attribution.
+
+Each link below identifies the original file and its history. Uploader names
+come from file metadata and are not assertions of original screenshot authorship.
+The [source article's contributors](https://kenshi.fandom.com/wiki/Using_the_FCS?action=history)
+are credited separately. Original source hashes, dimensions, and restored
+positions are recorded in the import manifest.
+
+| Original file and history                                                                  | Recorded uploader     |
+| ------------------------------------------------------------------------------------------ | --------------------- |
+| [Game_editor.PNG](https://kenshi.fandom.com/wiki/File:Game_editor.PNG)                     | Anonymous contributor |
+| [Opening_Mod.PNG](https://kenshi.fandom.com/wiki/File:Opening_Mod.PNG)                     | Anonymous contributor |
+| [Navbar.PNG](https://kenshi.fandom.com/wiki/File:Navbar.PNG)                               | Anonymous contributor |
+| [FCS_Game_World_Window.png](https://kenshi.fandom.com/wiki/File:FCS_Game_World_Window.png) | ElSlavo               |
+| [Custom_Columns.PNG](https://kenshi.fandom.com/wiki/File:Custom_Columns.PNG)               | Anonymous contributor |
+| [Add_list.PNG](https://kenshi.fandom.com/wiki/File:Add_list.PNG)                           | Anonymous contributor |
+| [Custom_columns2.PNG](https://kenshi.fandom.com/wiki/File:Custom_columns2.PNG)             | Anonymous contributor |
+| [Object_view.PNG](https://kenshi.fandom.com/wiki/File:Object_view.PNG)                     | Anonymous contributor |
+| [Search.PNG](https://kenshi.fandom.com/wiki/File:Search.PNG)                               | Anonymous contributor |
+| [Equal_to.PNG](https://kenshi.fandom.com/wiki/File:Equal_to.PNG)                           | Anonymous contributor |
+| [GreaterLess_than.PNG](https://kenshi.fandom.com/wiki/File:GreaterLess_than.PNG)           | Anonymous contributor |
+| [GreaterLess_than2.PNG](https://kenshi.fandom.com/wiki/File:GreaterLess_than2.PNG)         | Anonymous contributor |
+| [Contains.PNG](https://kenshi.fandom.com/wiki/File:Contains.PNG)                           | Anonymous contributor |
+| [NotContains.PNG](https://kenshi.fandom.com/wiki/File:NotContains.PNG)                     | Anonymous contributor |
+| [Regex.PNG](https://kenshi.fandom.com/wiki/File:Regex.PNG)                                 | Anonymous contributor |
+| [Combined_search.PNG](https://kenshi.fandom.com/wiki/File:Combined_search.PNG)             | Anonymous contributor |
+| [Recursive.PNG](https://kenshi.fandom.com/wiki/File:Recursive.PNG)                         | Anonymous contributor |
+| [Recursive2.PNG](https://kenshi.fandom.com/wiki/File:Recursive2.PNG)                       | Anonymous contributor |
+| [Set_field.PNG](https://kenshi.fandom.com/wiki/File:Set_field.PNG)                         | Anonymous contributor |
+| [Set_field_2.PNG](https://kenshi.fandom.com/wiki/File:Set_field_2.PNG)                     | Anonymous contributor |
+| [Spellcheckbar.PNG](https://kenshi.fandom.com/wiki/File:Spellcheckbar.PNG)                 | Anonymous contributor |
+| [Spellcheckcontext.PNG](https://kenshi.fandom.com/wiki/File:Spellcheckcontext.PNG)         | Anonymous contributor |
+| [Loadorder.PNG](https://kenshi.fandom.com/wiki/File:Loadorder.PNG)                         | Anonymous contributor |
+| [Merge_mod.PNG](https://kenshi.fandom.com/wiki/File:Merge_mod.PNG)                         | Anonymous contributor |
+| [Ignorebox.PNG](https://kenshi.fandom.com/wiki/File:Ignorebox.PNG)                         | Anonymous contributor |
+| [Selected_Box.PNG](https://kenshi.fandom.com/wiki/File:Selected_Box.PNG)                   | Anonymous contributor |
+| [Deselected_Box.PNG](https://kenshi.fandom.com/wiki/File:Deselected_Box.PNG)               | Anonymous contributor |
+| [Cleanup.PNG](https://kenshi.fandom.com/wiki/File:Cleanup.PNG)                             | Anonymous contributor |
+| [UploadModToSteam.png](https://kenshi.fandom.com/wiki/File:UploadModToSteam.png)           | Cattrina01            |
+| [Errors.PNG](https://kenshi.fandom.com/wiki/File:Errors.PNG)                               | Anonymous contributor |
 
 ## Source terms and corrections
 
 Credit is not a license grant. Existing source terms and individual guide notices
-still apply; this directory does not relicense text or assets. Image credits
-refer to the original material, not restored screenshots.
+still apply; this directory does not relicense text or assets. Image credits in
+the older imported guides may refer to images still represented by placeholders;
+the restored FCS screenshots are listed separately above.
 
 ## FCS tools and references
 

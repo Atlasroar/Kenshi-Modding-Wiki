@@ -28,13 +28,13 @@ Forgotten. This walkthrough covers the interface; continue with
 Open `forgotten construction set.exe` in your Kenshi installation directory,
 or launch Kenshi through Steam and choose **Launch Modding tool**.
 
-<span class="image-placeholder" role="note" data-image-index="1" data-image-source="Game_editor.PNG">Place relevant image here: Steam's Launch Modding tool option (Game_editor.PNG)</span>
+![Steam's Launch Modding tool option](assets/fcs/game-editor.png)
 
 Create a separate test mod. In the opening dialog, **ACTIVE** identifies the mod
 that will receive your saved changes. Keep later-loaded mods selected when you
 need to see changes that may override yours, then select **DONE**.
 
-<span class="image-placeholder" role="note" data-image-index="2" data-image-source="Opening_Mod.PNG">Place relevant image here: selected dependencies and active mod (Opening_Mod.PNG)</span>
+![selected dependencies and active mod](assets/fcs/opening-mod.png)
 
 > [!warning] Check the active destination
 > Loaded dependencies are not your editing destination. Confirm **ACTIVE** before
@@ -46,14 +46,14 @@ Most editable objects are in **Game World**. The toolbar separately provides
 **Global game settings** and **Artifacts settings**, the latter for unique,
 non-respawnable items scattered around the world.
 
-<span class="image-placeholder" role="note" data-image-index="3" data-image-source="Navbar.PNG">Place relevant image here: global and artifact settings in the toolbar (Navbar.PNG)</span>
+![global and artifact settings in the toolbar](assets/fcs/navbar.png)
 
 Game World contains categories, an item list, property columns, and a search box.
 Select a category, then double-click an item to edit it. Select several items and
 press **Enter** to open them together. Click column headers to sort; right-click
 them to add columns. The search box narrows the selected category's results.
 
-<span class="image-placeholder" role="note" data-image-index="4" data-image-source="FCS_Game_World_Window.png">Place relevant image here: the four areas of Game World (FCS_Game_World_Window.png)</span>
+![the four areas of Game World](assets/fcs/fcs-game-world-window.png)
 
 **A parent category does not necessarily contain all its subcategory items.**
 For example, Dialogue Package does not include every Word Swap or Dialogue.
@@ -79,19 +79,19 @@ Right-click the item-list header to show **String ID** (unique identifier),
 **State** (its color-coded state). Sort with a header, drag to reorder columns,
 and resize them as needed.
 
-<span class="image-placeholder" role="note" data-image-index="5" data-image-source="Custom_Columns.PNG">Place relevant image here: the custom-column menu (Custom_Columns.PNG)</span>
+![the custom-column menu](assets/fcs/custom-columns.png)
 
 Use **Add** for an object's property and **Add List** for reference-list data.
 In Add List, **Items** and **values** determine the displayed contents. With
 neither selected, the column shows the list's item count.
 
-<span class="image-placeholder" role="note" data-image-index="6" data-image-source="Add_list.PNG">Place relevant image here: Add List display options (Add_list.PNG)</span>
+![Add List display options](assets/fcs/add-list.png)
 
 To change a list column's options, add it again with the new settings. Toggle a
 column in the header's Columns menu to remove it; **Reset** removes all added
 columns.
 
-<span class="image-placeholder" role="note" data-image-index="7" data-image-source="Custom_columns2.PNG">Place relevant image here: list contents and values displayed as columns (Custom_columns2.PNG)</span>
+![list contents and values displayed as columns](assets/fcs/custom-columns2.png)
 
 ## Edit an object
 
@@ -100,7 +100,7 @@ reference lists linking to other objects, and help for the highlighted property.
 Available properties depend on the object type. If double-clicking opens a
 specialized editor instead, use **Alt + double-click** for this object view.
 
-<span class="image-placeholder" role="note" data-image-index="8" data-image-source="Object_view.PNG">Place relevant image here: values, references, and field help in object view (Object_view.PNG)</span>
+![values, references, and field help in object view](assets/fcs/object-view.png)
 
 The **[...]** menu provides these actions:
 
@@ -118,5 +118,5 @@ For the older, extended compilation, see
 
 This page's adapted text is **CC BY-SA 3.0 Unported**.
 [[credits#using-the-fcs-text-license|Credits]] identifies the original article,
-contributors, revision, license, and changes. Screenshot placeholders identify
-source files pending separate reuse permission.
+contributors, revision, license, and changes. Screenshot permissions and individual source files are listed in
+[[credits#fcs-screenshot-credits|screenshot credits]].
