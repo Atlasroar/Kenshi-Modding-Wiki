@@ -2,6 +2,69 @@
   "sourceCollection": "Kenshi Modding Wiki",
   "scope": "The 17 owner-cleared modding guides, not the larger reference library",
   "imagePolicy": "Visible placeholders replace every source image reference at the owner's request",
+  "adaptations": [
+    {
+      "source": "Using the FCS",
+      "sourceUrl": "https://kenshi.fandom.com/wiki/Using_the_FCS",
+      "revision": 92817,
+      "sourceSha256": "a4ae14268a402fe27e5ac5e1ae1ebcc22630c76e19b6e9aafc1c7a1f805e859a",
+      "textLicense": "CC BY-SA 3.0 Unported",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "copyrightPage": "https://kenshi.fandom.com/wiki/Kenshi_Wiki:Copyrights",
+      "changes": "Condensed and rewritten into four task guides; added safety notes and internal navigation; moved external references to Credits.",
+      "imagePolicy": "30 named placeholders preserve source positions. File descriptions contain no image reuse license; text licensing does not establish screenshot rights.",
+      "guides": [
+        {
+          "slug": "modding/fcs/using-the-fcs",
+          "imagePlaceholders": [
+            "Game_editor.PNG",
+            "Opening_Mod.PNG",
+            "Navbar.PNG",
+            "FCS_Game_World_Window.png",
+            "Custom_Columns.PNG",
+            "Add_list.PNG",
+            "Custom_columns2.PNG",
+            "Object_view.PNG"
+          ]
+        },
+        {
+          "slug": "modding/fcs/searching-and-editing-data",
+          "imagePlaceholders": [
+            "Search.PNG",
+            "Equal_to.PNG",
+            "GreaterLess_than.PNG",
+            "GreaterLess_than2.PNG",
+            "Contains.PNG",
+            "NotContains.PNG",
+            "Regex.PNG",
+            "Combined_search.PNG",
+            "Recursive.PNG",
+            "Recursive2.PNG",
+            "Set_field.PNG",
+            "Set_field_2.PNG",
+            "Spellcheckbar.PNG",
+            "Spellcheckcontext.PNG"
+          ]
+        },
+        {
+          "slug": "modding/fcs/managing-mods",
+          "imagePlaceholders": [
+            "Loadorder.PNG",
+            "Merge_mod.PNG",
+            "Ignorebox.PNG",
+            "Selected_Box.PNG",
+            "Deselected_Box.PNG",
+            "Cleanup.PNG",
+            "UploadModToSteam.png"
+          ]
+        },
+        {
+          "slug": "modding/fcs/checking-mod-errors",
+          "imagePlaceholders": ["Errors.PNG"]
+        }
+      ]
+    }
+  ],
   "guides": [
     {
       "source": "Buildings Collision & Navmesh.md",

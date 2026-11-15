@@ -234,6 +234,83 @@ test("source image locations and unimported references remain explicit without b
   assert.equal(references, 8, "Every out-of-batch article reference must remain explicit")
 })
 
+test("the FCS adaptation preserves its full source coverage, attribution, and pending image positions", async () => {
+  const index = JSON.parse(await readFile(join(output, "static", "contentIndex.json"), "utf8"))
+  const assigned = navigation.flatMap((section) => section.guides)
+  const credits = elementsFor("credits.html")
+  let images = 0
+  for (const source of imports.adaptations) {
+    assert.ok(
+      credits.some((node) => node.tagName === "a" && node.properties.href === source.licenseUrl),
+      "The adaptation license must be available on Credits",
+    )
+    for (const { slug, imagePlaceholders } of source.guides) {
+      assert.ok(index[slug], `Adapted guide must be searchable: ${slug}`)
+      assert.ok(assigned.includes(slug), `Adapted guide must be in navigation: ${slug}`)
+      assert.ok(
+        linksTo(elementsFor("modding/index.html"), slug, "modding/index"),
+        `Adapted guide must be in the complete directory: ${slug}`,
+      )
+      const article = elementsFor(slug + ".html").find((node) => node.tagName === "article")
+      const nodes = []
+      visit(article, "element", (node) => {
+        nodes.push(node)
+      })
+      assert.ok(linksTo(nodes, "credits", slug), `Adapted guide must link to its credits: ${slug}`)
+      assert.deepEqual(
+        nodes
+          .filter((node) => node.properties.className?.includes("image-placeholder"))
+          .map((node) => node.properties.dataImageSource),
+        imagePlaceholders,
+        `Source screenshot positions or identities changed: ${slug}`,
+      )
+      assert.ok(!nodes.some((node) => node.tagName === "img"), `Unreviewed screenshot in ${slug}`)
+      images += imagePlaceholders.length
+    }
+  }
+  assert.equal(images, 30, "All 30 source screenshots need explicit pending positions")
+  const errorRows = []
+  visit(
+    elementsFor("modding/fcs/checking-mod-errors.html").find((node) => node.tagName === "article"),
+    "element",
+    (node) => {
+      if (node.tagName === "tr") {
+        const label = node.children.find((child) => child.tagName === "td")
+        if (label) {
+          let text = ""
+          visit(label, "text", (child) => {
+            text += child.value
+          })
+          errorRows.push(text)
+        }
+      }
+    },
+  )
+  assert.deepEqual(
+    errorRows,
+    [
+      "Undefined reference",
+      "Reference to deleted item",
+      "Reference to incorrect item type",
+      "No closing decorator tag",
+      "Word swap not terminated",
+      "Empty word swap",
+      "Missing word swap",
+      "Multiple primary references to dialogue line",
+      "No primary reference to dialogue line",
+      "Orphaned dialogue object",
+      "Reference list contains too many items",
+      "Item has changed type",
+      "Value was the wrong type and has been converted",
+      "Value is the wrong type and could not be converted",
+      "Modified item undefined",
+      "Item with id has already been defined by mod",
+      "New values have been added",
+    ],
+    "All 17 source error types must remain in the adapted reference",
+  )
+})
+
 test("the sidebar presents the twelve requested sections and preserves guide membership", async () => {
   const expected = [
     "FCS",

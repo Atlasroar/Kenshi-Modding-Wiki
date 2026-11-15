@@ -4,7 +4,8 @@ description: Browse the modding guides through twelve focused topics.
 publish: true
 ---
 
-All 17 guides from the owner-cleared modding collection are available here.
+All 17 guides from the owner-cleared modding collection are available here,
+alongside four focused guides adapted from Kenshi Wiki's Using the FCS article.
 Choose a topic below, or use search to find a tool, field name, or workflow.
 
 > [!info] Images are marked for later
@@ -18,8 +19,16 @@ Choose a topic below, or use search to find a tool, field name, or workflow.
 [[fcs/index|Start with the FCS section]] for the editor introduction and feature
 coverage.
 
-- [[modding/fcs/complete-guide|The FCS - A Complete Guide]] covers the interface,
-  data management, searches, and mod loading.
+- [[modding/fcs/using-the-fcs|Using the FCS]] introduces launching the editor,
+  choosing the active mod, and working with objects and columns.
+- [[modding/fcs/searching-and-editing-data|FCS Searches and Bulk Editing]] covers
+  filters, recursive references, bulk changes, and spellcheck.
+- [[modding/fcs/managing-mods|FCS Mod Management]] explains load order, merging,
+  cleanup, and the Steam connection requirement.
+- [[modding/fcs/checking-mod-errors|FCS Error Checking]] covers inspection,
+  rescanning, and the source's 17 documented error types.
+- [[modding/fcs/complete-guide|The FCS - A Complete Guide]] retains the older
+  extended compilation and its original migration notices.
 - [[modding/fcs/tech-overhaul-notes|Tech Overhaul Notes]] contains **development
   notes**, not a complete tutorial.
 - [[modding/world/fast-healing-beds|Fast Healing Beds]] is a short FCS example.

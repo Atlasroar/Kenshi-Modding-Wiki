@@ -19,6 +19,13 @@ source_categories: []
 
 [[modding/index|Modding guides]]
 
+For a shorter task-based learning path, start with
+[[modding/fcs/using-the-fcs|Using the FCS]], then follow
+[[modding/fcs/searching-and-editing-data|searching and bulk editing]],
+[[modding/fcs/managing-mods|mod management]], and
+[[modding/fcs/checking-mod-errors|error checking]]. This older compilation retains
+its original source and migration notices.
+
 ### Sources
 
 Original articles and contributor references are listed in

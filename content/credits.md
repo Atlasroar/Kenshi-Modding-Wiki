@@ -18,6 +18,10 @@ to this website or its maintainers.
 
 | Guide                                                                                   | Recorded credits and sources                                                                                                                                                                                                                                              |
 | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [[modding/fcs/using-the-fcs\|Using the FCS]]                                            | Adapted from Kenshi Wiki contributors' [Using the FCS](https://kenshi.fandom.com/wiki/Using_the_FCS?oldid=92817), interface and launch sections. See the text license and changes below.                                                                                  |
+| [[modding/fcs/searching-and-editing-data\|FCS Searches and Bulk Editing]]               | Adapted from the same Kenshi Wiki article's data-management sections. Wiki contributors are credited through its history, not assigned guessed individual authorship.                                                                                                     |
+| [[modding/fcs/managing-mods\|FCS Mod Management]]                                       | Adapted from the same article's mod-management sections. Cattrina is explicitly credited for the Steam-upload note.                                                                                                                                                       |
+| [[modding/fcs/checking-mod-errors\|FCS Error Checking]]                                 | Adapted from the same article's Errors section, including its 17 error types. Wiki contributors are credited through its history.                                                                                                                                         |
 | [[modding/fcs/complete-guide\|The FCS - A Complete Guide]]                              | Sources: [Using the FCS](https://kenshi.fandom.com/wiki/Using_the_FCS) and the [FCS interface article](https://lost-blog.com/fcs-interface/). Individual authors are not recorded. Shidan and Boron are named for recommended guides, not as authors of this compilation. |
 | [[modding/fcs/tech-overhaul-notes\|Tech Overhaul Notes]]                                | Source: the [original Genesis Guilded document](https://www.guilded.gg/Genesis/groups/dQGnZ5P3/channels/a2429d5e-d929-47a9-bf26-b1377175f9de/docs/398229). Author not recorded; clipping metadata was not treated as authorship evidence.                                 |
 | [[modding/world/fast-healing-beds\|Fast Healing Beds]]                                  | Author not recorded in the imported note.                                                                                                                                                                                                                                 |
@@ -48,13 +52,25 @@ as its underlying manual.
 The Wiki text is available under
 [Creative Commons Attribution-ShareAlike 3.0 Unported](https://creativecommons.org/licenses/by-sa/3.0/).
 Wiki-derived text and its adaptations on this website remain available under
-that license. Website changes include formatting, internal navigation, and
-consolidation of external references onto this page. Separately credited
-sources and images are not automatically relicensed.
+that license. The four task-based guides above condense and rewrite the article,
+split its interface, data-management, mod-management, and error-reference
+sections, add selection/dependency safety notes and internal navigation, and
+consolidate external references onto this page. Original screenshots are
+represented by 30 named placeholders rather than copied images.
+Separately credited sources and images are not automatically relicensed.
 
 Fandom's [licensing guidance](https://community.fandom.com/wiki/Help:Licensing)
 explicitly distinguishes text from uploaded images. The article's screenshots
 need their own reuse basis; the text license alone does not establish one.
+The Wiki footer says "Community content is available under CC-BY-SA unless
+otherwise noted," but Fandom's guidance separately states that image and video
+files do not automatically fall under that license. Screenshot reuse is therefore
+unconfirmed, not represented here as a verified CC image license.
+The community's own
+[Copyrights page](https://kenshi.fandom.com/wiki/Kenshi_Wiki:Copyrights)
+also specifies **text**. The 30 screenshot file descriptions record no separate
+reuse license. Each new guide's placeholder names the original file so an image
+can be restored in the correct location when reuse permission is established.
 
 ## Source terms and corrections
 
@@ -64,6 +80,11 @@ refer to the original material, not restored screenshots.
 
 ## FCS tools and references
 
+- The source article recommends [Shidan's Save Editing 101](https://steamcommunity.com/sharedfiles/filedetails/?id=1370334383),
+  [Shidan's game/FCS mechanics notes](https://steamcommunity.com/sharedfiles/filedetails/?id=2570870493),
+  [Boron's FCS and Dialogue guide](https://steamcommunity.com/sharedfiles/filedetails/?id=1444279946),
+  and [Canin's How to Find and Edit Mods](https://steamcommunity.com/sharedfiles/filedetails/?id=1608980474).
+  These are recommended references, not authorship credits for the Wiki article.
 - The FCS guide references [Regexr](https://regexr.com/) as a regular-expression
   reference and tester. This is a tool reference, not an author credit.
 - The building collision guide references a
