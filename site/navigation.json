@@ -3,6 +3,10 @@
     "title": "FCS",
     "slug": "fcs/index",
     "guides": [
+      "modding/fcs/using-the-fcs",
+      "modding/fcs/searching-and-editing-data",
+      "modding/fcs/managing-mods",
+      "modding/fcs/checking-mod-errors",
       "modding/fcs/complete-guide",
       "modding/fcs/tech-overhaul-notes",
       "modding/world/fast-healing-beds"
