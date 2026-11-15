@@ -123,14 +123,7 @@ plugins:
       position: right
       priority: 20
   - source: "@quartz-community/footer"
-    enabled: true
-    options:
-      links:
-        Website wiki: https://github.com/Atlasroar/Kenshi-Modding-Wiki/wiki
-        Source: https://github.com/Atlasroar/Kenshi-Modding-Wiki
-    layout:
-      position: footer
-      priority: 50
+    enabled: false
 layout:
   groups:
     toolbar:

@@ -21,8 +21,8 @@ source_categories: []
 
 ### Sources
 
-https://kenshi.fandom.com/wiki/Using_the_FCS
-https://lost-blog.com/fcs-interface/
+Original articles and contributor references are listed in
+[[credits#guide-credits|Credits]].
 
 ## Introduction
 
@@ -360,7 +360,8 @@ For indexed fields such as dialogue lines where you have text0, text1, etc, you 
 
 - Operator ?
 - Matches a string field to the provided regex
-- Refer to https://regexr.com/ for how to use this and proper syntax.
+- A regular-expression reference and tester is listed in
+  [[credits#fcs-tools-and-references|Credits]].
 
 <span class="image-placeholder" role="note" data-image-index="20">Place relevant image here: The FCS - A Complete Guide screenshot 20</span>
 

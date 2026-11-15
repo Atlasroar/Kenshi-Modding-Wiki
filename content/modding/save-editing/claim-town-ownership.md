@@ -48,7 +48,9 @@ Do note, that if the town marker change is not saved to a mod, it is
 very likely next time you import the town ownership goes back to
 original owner. Best used in unison with Option 3.
 
-### Option 3: FCS or save editing: [Save Editing 101 By Shidan](https://steamcommunity.com/sharedfiles/filedetails/?id=1370334383)
+### Option 3: FCS or save editing: Save Editing 101 By Shidan
+
+The original reference is linked from [[credits#guide-credits|Credits]].
 
 1.  Open FCS and create a new mod.
 2.  Find the town you wish to own (in "Towns") and open its file.

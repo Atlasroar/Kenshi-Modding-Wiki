@@ -258,6 +258,14 @@ article {
     font-size: 0.85rem;
     color: var(--darkgray);
   }
+
+  .guide-credits {
+    display: block;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--lightgray);
+    font-weight: 700;
+  }
 }
 
 article .image-placeholder {

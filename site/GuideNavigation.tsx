@@ -11,6 +11,7 @@ const GuideNavigation: QuartzComponent = ({ allFiles, fileData }) => {
   }
   const current = fileData.slug
   if (!current) throw new Error("Guide navigation requires a page slug")
+  const credits = pages.get("credits")
 
   return (
     <nav aria-label="Modding guide sections" class="guide-navigation">
@@ -59,6 +60,15 @@ const GuideNavigation: QuartzComponent = ({ allFiles, fileData }) => {
             )
           })}
         </ul>
+        {credits?.slug && (
+          <a
+            class="internal guide-credits"
+            href={resolveRelative(current, credits.slug)}
+            aria-current={current === credits.slug ? "page" : undefined}
+          >
+            Credits
+          </a>
+        )}
       </details>
     </nav>
   )
