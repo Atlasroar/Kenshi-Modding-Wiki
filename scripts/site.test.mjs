@@ -281,7 +281,7 @@ test("source image locations and unimported references remain explicit without b
   assert.equal(references, 8, "Every out-of-batch article reference must remain explicit")
 })
 
-test("the existing complete-guide URL displays all 30 approved Wiki screenshots", () => {
+test("the complete guide preserves consolidated content without the four retired pages", async () => {
   const article = elementsFor("modding/fcs/complete-guide.html").find(
     (node) => node.tagName === "article",
   )
@@ -304,6 +304,61 @@ test("the existing complete-guide URL displays all 30 approved Wiki screenshots"
     [5, 6, 7, 8],
     "Only the four unmatched legacy illustrations should remain pending",
   )
+  let text = ""
+  visit(article, "text", (node) => {
+    text += node.value
+  })
+  assert.doesNotMatch(text, /For a shorter task-based learning path/)
+  assert.ok(
+    !article.children.some((node) => node.tagName === "h3" && node.properties.id === "sources"),
+    "The removed introductory Sources section must not return",
+  )
+  for (const detail of [
+    "Check the active destination",
+    "Missing is not necessarily unwanted",
+    "Review the selection",
+    "Check dependencies before deleting",
+    "can block = true",
+    "faction > 1",
+    "text0 : Hello",
+    "text : Hello",
+    "outpost; build materials > 100",
+    "faction.anti slavery = true",
+    "functionality.consumes.value > 500",
+    "Steam name",
+    "Increase the version on every update",
+    "Dependencies",
+    "appropriate tags",
+    "square .jpg thumbnail below 1 MB",
+    "512 x 512",
+    "1024 x 1024",
+    "PNG thumbnails may not display correctly",
+    "private visibility",
+    "concise change notes",
+    "refresh control can load the description from Steam",
+    "Not connected to Steam",
+    "reopen it through Steam",
+    "not independently retested",
+  ]) {
+    assert.ok(text.includes(detail), `Consolidation lost guidance: ${detail}`)
+  }
+  const index = JSON.parse(await readFile(join(output, "static", "contentIndex.json"), "utf8"))
+  for (const slug of [
+    "modding/fcs/using-the-fcs",
+    "modding/fcs/searching-and-editing-data",
+    "modding/fcs/managing-mods",
+    "modding/fcs/checking-mod-errors",
+  ]) {
+    await assert.rejects(access(join(root, "content", slug + ".md")), { code: "ENOENT" })
+    assert.ok(!documents.has(slug + ".html"), `Retired page or redirect still emitted: ${slug}`)
+    assert.ok(!index[slug], `Retired page still searchable: ${slug}`)
+    for (const [page, { elements }] of documents) {
+      assert.ok(
+        !linksTo(elements, slug, page.replace(/\.html$/, "")),
+        `Link to retired page in ${page}: ${slug}`,
+      )
+    }
+  }
 })
 
 test("the FCS adaptation preserves source coverage, attribution, and all restored original screenshots", async () => {
@@ -331,13 +386,17 @@ test("the FCS adaptation preserves source coverage, attribution, and all restore
       assert.ok(linksTo(nodes, "credits", slug), `Adapted guide must link to its credits: ${slug}`)
       const restored = nodes.filter((node) => node.tagName === "img")
       assert.equal(restored.length, sourceImages.length, `Missing source screenshot: ${slug}`)
-      assert.ok(
-        !nodes.some((node) => node.properties.className?.includes("image-placeholder")),
-        `Restored guide still has an image placeholder: ${slug}`,
+      const imported = imports.guides.find((guide) => guide.slug === slug)
+      assert.equal(
+        nodes.filter((node) => node.properties.className?.includes("image-placeholder")).length,
+        (imported?.imagePlaceholders.length ?? 0) - (imported?.restoredImages?.length ?? 0),
+        `Unaccounted image placeholder: ${slug}`,
       )
       for (const [position, image] of restored.entries()) {
         const record = source.media.find((entry) => entry.sourceFile === sourceImages[position])
         assert.ok(record, `Missing image provenance: ${sourceImages[position]}`)
+        assert.equal(record.guide, slug, `Outdated media destination: ${record.sourceFile}`)
+        assert.equal(record.position, position + 1, `Outdated media position: ${record.sourceFile}`)
         const url = new URL(image.properties.src, new URL(slug + ".html", site))
         assert.equal(url.href, new URL(record.asset, site).href, `Wrong image position: ${slug}`)
         assert.equal(image.properties.alt, record.alt, `Missing descriptive alt text: ${slug}`)
@@ -361,7 +420,7 @@ test("the FCS adaptation preserves source coverage, attribution, and all restore
   assert.equal(images, 30, "All 30 original source screenshots must be restored")
   const errorRows = []
   visit(
-    elementsFor("modding/fcs/checking-mod-errors.html").find((node) => node.tagName === "article"),
+    elementsFor("modding/fcs/complete-guide.html").find((node) => node.tagName === "article"),
     "element",
     (node) => {
       if (node.tagName === "tr") {
