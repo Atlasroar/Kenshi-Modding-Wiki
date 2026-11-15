@@ -11,10 +11,13 @@ imported. GitHub Actions checks pull requests and publishes approved changes on
 
 **Site:** <https://atlasroar.github.io/Kenshi-Modding-Wiki/>
 
-Read the [detailed implementation plan](docs/implementation-plan.md) for the
-milestones, content-review boundaries, and acceptance criteria.
-The [first-batch content audit](docs/content-audit.md) records the 17 guides'
-destinations, media dependencies, owner decisions, and migration history.
+The [GitHub Wiki](https://github.com/Atlasroar/Kenshi-Modding-Wiki/wiki) is the
+website's knowledge base: setup, CSS, JSON/configuration, contribution guidelines,
+deployment, and technical decisions. The public website contains modding guides.
+
+The Wiki preserves the
+[implementation plan](https://github.com/Atlasroar/Kenshi-Modding-Wiki/wiki/Implementation-Plan)
+and [content audit](https://github.com/Atlasroar/Kenshi-Modding-Wiki/wiki/Content-Audit).
 The [import manifest](docs/modding-imports.json) records all source fingerprints,
 image-placeholder locations, and out-of-batch references.
 
@@ -41,14 +44,15 @@ files; upstream Quartz sources are excluded except the custom stylesheet.
 
 ## Project layout
 
-| Path                          | Purpose                                                      |
-| ----------------------------- | ------------------------------------------------------------ |
-| `content/`                    | Reviewed, publishable Markdown and referenced assets         |
-| `quartz.config.yaml`          | Quartz 5 site, plugin, navigation, and palette configuration |
-| `quartz/styles/custom.scss`   | Original Kenshi-inspired website styling                     |
-| `docs/implementation-plan.md` | Detailed migration plan and progress                         |
-| `scripts/site.test.mjs`       | Focused generated-site checks                                |
-| `quartz/`                     | Pinned upstream Quartz engine                                |
+| Path                        | Purpose                                                      |
+| --------------------------- | ------------------------------------------------------------ |
+| `content/`                  | Reviewed, publishable Markdown and referenced assets         |
+| `quartz.config.yaml`        | Quartz 5 site, plugin, navigation, and palette configuration |
+| `quartz/styles/custom.scss` | Original Kenshi-inspired website styling                     |
+| `site/`                     | Ordered guide navigation and documentation redirects         |
+| `docs/modding-imports.json` | Versioned source fingerprints and media/reference ledger     |
+| `scripts/site.test.mjs`     | Focused generated-site checks                                |
+| `quartz/`                   | Pinned upstream Quartz engine                                |
 
 Pages must have `publish: true` to enter the site build. This is a second layer of
 protection, not permission to commit private notes. Only explicitly reviewed
@@ -64,8 +68,14 @@ The [site workflow](.github/workflows/site.yml) verifies pull requests without
 deploying them. After a reviewed merge, the `main` build publishes `public/`
 through GitHub Pages. Failed checks block that deployment.
 
-See [publishing and rollback](docs/publishing.md) for repository settings,
+See [publishing and rollback](https://github.com/Atlasroar/Kenshi-Modding-Wiki/wiki/Publishing-and-Rollback) for repository settings,
 manual releases, and recovery. The Pages build source must be **GitHub Actions**.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for links to the Wiki's contribution,
+article-writing, and CSS documentation. Do not add maintainer documentation to
+the public guide website.
 
 ## Licensing
 
