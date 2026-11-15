@@ -9,10 +9,11 @@ alongside four focused guides adapted from Kenshi Wiki's Using the FCS article.
 Choose a topic below, or use search to find a tool, field name, or workflow.
 
 > [!info] Source images and remaining placeholders
-> The four task-based FCS guides include 30 restored source screenshots with
-> permission and [[credits#fcs-screenshot-credits|individual credits]].
-> The initial collection's image positions still display **Place relevant image
-> here**, followed by a screenshot label. Text marked
+> The four task-based FCS guides and the existing complete guide include 30
+> restored source screenshots with permission and
+> [[credits#fcs-screenshot-credits|individual credits]].
+> Unavailable illustrations still display **Place relevant image here**, followed
+> by a screenshot label. Text marked
 > **reference page not imported** points out dependencies on articles outside
 > this collection; it is not a broken link.
 

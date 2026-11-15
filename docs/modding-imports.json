@@ -1,7 +1,7 @@
 {
   "sourceCollection": "Kenshi Modding Wiki",
   "scope": "The 17 owner-cleared modding guides, not the larger reference library",
-  "imagePolicy": "Visible placeholders replace every source image reference at the owner's request",
+  "imagePolicy": "The initial placeholder audit is preserved. Approved image reuse is recorded per guide without replacing original source fingerprints or image-position records.",
   "adaptations": [
     {
       "source": "Using the FCS",
@@ -717,6 +717,39 @@
       "source": "The FCS - A Complete Guide.md",
       "slug": "modding/fcs/complete-guide",
       "sourceSha256": "35e93f87d560e167f5ba3149221fde891ce600e6cc577b159115ee2fa10213df",
+      "imageRestorationNote": "Approved Using the FCS screenshots illustrate matching sections. Four additional illustrations are absent from the supplied article and remain placeholders.",
+      "restoredImages": [
+        { "index": 1, "sourceFile": "Game_editor.PNG" },
+        { "index": 2, "sourceFile": "Opening_Mod.PNG" },
+        { "index": 3, "sourceFile": "Navbar.PNG" },
+        { "index": 4, "sourceFile": "Cleanup.PNG" },
+        { "index": 9, "sourceFile": "FCS_Game_World_Window.png" },
+        { "index": 10, "sourceFile": "Custom_Columns.PNG" },
+        { "index": 11, "sourceFile": "Add_list.PNG" },
+        { "index": 12, "sourceFile": "Custom_columns2.PNG" },
+        { "index": 13, "sourceFile": "Object_view.PNG" },
+        { "index": 14, "sourceFile": "Search.PNG" },
+        { "index": 15, "sourceFile": "Equal_to.PNG" },
+        { "index": 16, "sourceFile": "GreaterLess_than.PNG" },
+        { "index": 17, "sourceFile": "GreaterLess_than2.PNG" },
+        { "index": 18, "sourceFile": "Contains.PNG" },
+        { "index": 19, "sourceFile": "NotContains.PNG" },
+        { "index": 20, "sourceFile": "Regex.PNG" },
+        { "index": 21, "sourceFile": "Combined_search.PNG" },
+        { "index": 22, "sourceFile": "Recursive.PNG" },
+        { "index": 23, "sourceFile": "Recursive2.PNG" },
+        { "index": 24, "sourceFile": "Set_field.PNG" },
+        { "index": 25, "sourceFile": "Set_field_2.PNG" },
+        { "index": 26, "sourceFile": "Spellcheckbar.PNG" },
+        { "index": 27, "sourceFile": "Spellcheckcontext.PNG" },
+        { "index": 28, "sourceFile": "Loadorder.PNG" },
+        { "index": 29, "sourceFile": "Merge_mod.PNG" },
+        { "index": 30, "sourceFile": "Ignorebox.PNG" },
+        { "index": 31, "sourceFile": "Selected_Box.PNG" },
+        { "index": 32, "sourceFile": "Deselected_Box.PNG" },
+        { "index": 33, "sourceFile": "Errors.PNG" }
+      ],
+      "additionalImages": ["UploadModToSteam.png"],
       "imagePlaceholders": [
         {
           "index": 1,

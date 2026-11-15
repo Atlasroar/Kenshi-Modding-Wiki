@@ -8,7 +8,7 @@ cssclasses:
   - page-kenshi
   - center-images
 title: The FCS - A Complete Guide
-description: An FCS interface and data-management guide with screenshot placeholders.
+description: An extended FCS interface and data-management guide with source screenshots.
 publish: true
 source_collection: Kenshi Modding Wiki
 source_note: The FCS - A Complete Guide.md
@@ -31,6 +31,11 @@ its original source and migration notices.
 Original articles and contributor references are listed in
 [[credits#guide-credits|Credits]].
 
+The approved Wiki screenshots appear directly on this page.
+[[credits#fcs-screenshot-credits|Screenshot credits and permission]] identify
+their sources. Four additional illustrations from the older compilation are
+not included in the supplied Wiki article and remain labeled placeholders.
+
 ## Introduction
 
 What’s an FCS?
@@ -43,7 +48,7 @@ Where can I find the FCS?
 
 FCS can also be opened through steam. When launching the game, select the Launch Modding tool option.
 
-<span class="image-placeholder" role="note" data-image-index="1">Place relevant image here: The FCS - A Complete Guide screenshot 1</span>
+![Steam's Launch Modding tool option](assets/fcs/game-editor.png)
 
 When Selecting Play On Steam You can select the modding tool Here
 
@@ -69,7 +74,7 @@ Kenshi Modding 101: FCS and Dialogue By Boron
 
 When first loading up FCS you’ll be greeted with a screen which will look something like this:
 
-<span class="image-placeholder" role="note" data-image-index="2">Place relevant image here: The FCS - A Complete Guide screenshot 2</span>
+![selected dependencies and active mod](assets/fcs/opening-mod.png)
 
 Note the location of the ACTIVE text, this is where your changes will be saved (should you decide to make any).
 
@@ -83,7 +88,7 @@ When ready, click DONE to open a mod
 
 The toolbar at the top is used to access various functions.
 
-<span class="image-placeholder" role="note" data-image-index="3">Place relevant image here: The FCS - A Complete Guide screenshot 3</span>
+![global and artifact settings in the toolbar](assets/fcs/navbar.png)
 
 - Global settings modifies the game’s constants
 - Artifact settings brings up a lost of global artefacts that spawn on a new game start
@@ -102,7 +107,7 @@ The toolbar at the top is used to access various functions.
 
 The cleanup function removes redundant information across all files added or modified by your mod and incorrect data left over in vanilla kenshi as of 1.0.64.
 
-<span class="image-placeholder" role="note" data-image-index="4">Place relevant image here: The FCS - A Complete Guide screenshot 4</span>
+![active-mod cleanup tasks](assets/fcs/cleanup.png)
 
 - Remove deprecated fields
 
@@ -203,7 +208,7 @@ When rebalancing global constants for any purpose, it’s worth spending enough 
 
 ### The Game World Window
 
-<span class="image-placeholder" role="note" data-image-index="9">Place relevant image here: The FCS - A Complete Guide screenshot 9</span>
+![the four areas of Game World](assets/fcs/fcs-game-world-window.png)
 
 1. Object categories and subcategories
 
@@ -237,7 +242,7 @@ The colour of the items in the list dictate the state of the item. This colour c
 
 ### Custom Columns
 
-<span class="image-placeholder" role="note" data-image-index="10">Place relevant image here: The FCS - A Complete Guide screenshot 10</span>
+![the custom-column menu](assets/fcs/custom-columns.png)
 
 You can add additional columns to the item list to display any item property from the right click menu.
 
@@ -254,7 +259,7 @@ The Add/Add List options allow users to add columns for any property an item may
 
 The ‘Add List’ option will open the dialog window seen below and allows you to view reference data at a glance.
 
-<span class="image-placeholder" role="note" data-image-index="11">Place relevant image here: The FCS - A Complete Guide screenshot 11</span>
+![Add List display options](assets/fcs/add-list.png)
 
 The Items and values options determine what to display (see image below for example).
 
@@ -262,7 +267,7 @@ If neither are checked the column will display the number of items in that list.
 
 If you want to change these options after adding the column, just add the list again with the new options.
 
-<span class="image-placeholder" role="note" data-image-index="12">Place relevant image here: The FCS - A Complete Guide screenshot 12</span>
+![list contents and values displayed as columns](assets/fcs/custom-columns2.png)
 
 To remove any column, right click the header bar, go to columns and select the column you’d like to add or remove. The ‘Reset’ option will remove all additional columns.
 
@@ -270,7 +275,7 @@ To remove any column, right click the header bar, go to columns and select the c
 
 Double clicking on an item in the game world list will open up the object and give a view which will look something like this;
 
-<span class="image-placeholder" role="note" data-image-index="13">Place relevant image here: The FCS - A Complete Guide screenshot 13</span>
+![values, references, and field help in object view](assets/fcs/object-view.png)
 
 NOTE: If an object does not open this window by default, using ALT + Double click will open the item with this menu.
 
@@ -307,7 +312,7 @@ The default behaviour for text in this box. In the below example you can see eve
 
 NOTE: This search is NOT case sensitive
 
-<span class="image-placeholder" role="note" data-image-index="14">Place relevant image here: The FCS - A Complete Guide screenshot 14</span>
+![building-name search for dome](assets/fcs/search.png)
 
 ### Search by value
 
@@ -320,7 +325,7 @@ NOTE: Searching by value IS case sensitive for the property and is NOT case sens
 - Operator =
 - Gives an exact match on a property
 
-<span class="image-placeholder" role="note" data-image-index="15">Place relevant image here: The FCS - A Complete Guide screenshot 15</span>
+![exact property-value search](assets/fcs/equal-to.png)
 
 - Not Equal to
 
@@ -337,13 +342,13 @@ NOTE: Searching by value IS case sensitive for the property and is NOT case sens
 - Less than or equal
 - For comparing numeric values
 
-<span class="image-placeholder" role="note" data-image-index="16">Place relevant image here: The FCS - A Complete Guide screenshot 16</span>
+![numeric comparison search](assets/fcs/greaterless-than.png)
 
 - Can also be used for list sizes, such as the example below.
 
 - Showing all squads with more than 1 reference in the faction list
 
-<span class="image-placeholder" role="note" data-image-index="17">Place relevant image here: The FCS - A Complete Guide screenshot 17</span>
+![faction reference-list count search](assets/fcs/greaterless-than2.png)
 
 - Contains
 
@@ -351,7 +356,7 @@ NOTE: Searching by value IS case sensitive for the property and is NOT case sens
 - For showing items with properties containing the given value
 - E.g. below, all lines of dialogue which contain the word “Hello”
 
-<span class="image-placeholder" role="note" data-image-index="18">Place relevant image here: The FCS - A Complete Guide screenshot 18</span>
+![dialogue text containing Hello](assets/fcs/contains.png)
 
 For indexed fields such as dialogue lines where you have text0, text1, etc, you can search specifically by text0, or search all of them by omitting the number.
 
@@ -361,7 +366,7 @@ For indexed fields such as dialogue lines where you have text0, text1, etc, you 
 - Provides the opposite result of the Contains operator mentioned above
 - E.g. below, all crossbows with descriptions that don’t include “quality”
 
-<span class="image-placeholder" role="note" data-image-index="19">Place relevant image here: The FCS - A Complete Guide screenshot 19</span>
+![descriptions not containing quality](assets/fcs/notcontains.png)
 
 - Regex
 
@@ -370,13 +375,13 @@ For indexed fields such as dialogue lines where you have text0, text1, etc, you 
 - A regular-expression reference and tester is listed in
   [[credits#fcs-tools-and-references|Credits]].
 
-<span class="image-placeholder" role="note" data-image-index="20">Place relevant image here: The FCS - A Complete Guide screenshot 20</span>
+![a regular-expression search](assets/fcs/regex.png)
 
 - Combining multiple search terms
 
 The semi-colon operator can be used to use multiple search terms. In the example below, we’re searching for Buildings with “outpost” in the name and need over 100 building materials to complete construction.
 
-<span class="image-placeholder" role="note" data-image-index="21">Place relevant image here: The FCS - A Complete Guide screenshot 21</span>
+![combined name and construction-cost filters](assets/fcs/combined-search.png)
 
 - Special properties
 
@@ -400,23 +405,23 @@ Properties of objects referenced by list items can also be searched for using th
 
 In the example below, we search for the list of characters for those part of a faction which are anti slavery.
 
-<span class="image-placeholder" role="note" data-image-index="22">Place relevant image here: The FCS - A Complete Guide screenshot 22</span>
+![searching characters through faction properties](assets/fcs/recursive.png)
 
 This method is fully recursive. Below is another example demonstrating this. The search is for all interior buildings with a functionality reference object that consumes items with a value of over 500 cats.
 
-<span class="image-placeholder" role="note" data-image-index="23">Place relevant image here: The FCS - A Complete Guide screenshot 23</span>
+![searching through several reference lists](assets/fcs/recursive2.png)
 
 - Set Field
 
 Another useful function that allows setting a specific value in all selected items. This is found in the right click menu.
 
-<span class="image-placeholder" role="note" data-image-index="24">Place relevant image here: The FCS - A Complete Guide screenshot 24</span>
+![Set Field on selected objects](assets/fcs/set-field.png)
 
 As well as setting the value for multiple items at once, numerical fields can also be modified through multiplication, division, addition and subtraction.
 
 There’s also support for adding and modifying reference values in bulk
 
-<span class="image-placeholder" role="note" data-image-index="25">Place relevant image here: The FCS - A Complete Guide screenshot 25</span>
+![bulk reference-value editing](assets/fcs/set-field-2.png)
 
 - Find and Replace
 
@@ -430,7 +435,7 @@ It has the option to use regular expression searches.
 
 The spell check option can be found in the top toolbar of the application, the conversation editor window and in the right click context menu of the navigation window.
 
-<span class="image-placeholder" role="note" data-image-index="26">Place relevant image here: The FCS - A Complete Guide screenshot 26</span>
+![the toolbar spellcheck button](assets/fcs/spellcheckbar.png)
 
 - Spellcheckbar
 
@@ -440,7 +445,7 @@ The toolbar button will run the spell check operation for all items.
 
 The right click context menu option will run the spell check operation for all selected items.
 
-<span class="image-placeholder" role="note" data-image-index="27">Place relevant image here: The FCS - A Complete Guide screenshot 27</span>
+![spellcheck for selected items](assets/fcs/spellcheckcontext.png)
 
 Spelling checks are done against the two dictionary files Dictionary.txt and Dictionary_custom.txt.
 
@@ -468,7 +473,7 @@ Currently these dictionaries are only set up to support english. For other langu
 
 ### Loading your mod in game
 
-<span class="image-placeholder" role="note" data-image-index="28">Place relevant image here: The FCS - A Complete Guide screenshot 28</span>
+![mod load order](assets/fcs/loadorder.png)
 
 Order is very important in this file. Entries at the top will be loaded before entries lower down.
 
@@ -484,7 +489,7 @@ The SlowerBeakThings.mod will take precedence over the FasterBeakThings.mod. If 
 
 You can merge data from another mod file using the merge tool from the top bar
 
-<span class="image-placeholder" role="note" data-image-index="29">Place relevant image here: The FCS - A Complete Guide screenshot 29</span>
+![selecting data to merge into the active mod](assets/fcs/merge-mod.png)
 
 First select a mod to merge with the active file. You can either select a mod from the list, or load any data file with the ‘*’ button.
 
@@ -492,15 +497,15 @@ You will not be able to merge a mod that is open as a dependency of the active m
 
 The check boxes have three states:
 
-<span class="image-placeholder" role="note" data-image-index="30">Place relevant image here: The FCS - A Complete Guide screenshot 30</span>
+![Ignore checkbox state](assets/fcs/ignorebox.png)
 
 Ignorebox : Ignore - these changes will not be merged or discarded. This is the default.
 
-<span class="image-placeholder" role="note" data-image-index="31">Place relevant image here: The FCS - A Complete Guide screenshot 31</span>
+![Selected checkbox state](assets/fcs/selected-box.png)
 
 Selected Box : Selected - these changes will be applied to to the active mod
 
-<span class="image-placeholder" role="note" data-image-index="32">Place relevant image here: The FCS - A Complete Guide screenshot 32</span>
+![Deselected checkbox state](assets/fcs/deselected-box.png)
 
 Deselected Box : Deselected - these changes will be skipped and will not show up again next time you merge this mod. The Show Skipped Changes button will display changes that were previously skipped.
 
@@ -510,11 +515,22 @@ The fix references command will ensure that any new items will also be merged if
 
 If a mod contains level data, that can also be merged with the merge level data checkbox. It will be disabled if there is no level data to merge.
 
+### Uploading your mod to Steam
+
+Launch the FCS through Steam in online mode for Workshop connectivity.
+The standalone executable does not provide the Steam connection needed for
+uploading. Cattrina contributed this guidance and annotated screenshot to the
+Wiki article; see the
+[[modding/fcs/managing-mods#annotated-upload-checklist|upload checklist]]
+for the image's instructions in accessible text.
+
+![Steam upload controls](assets/fcs/uploadmodtosteam.png)
+
 ### Errors
 
 If any errors are detected, the error window will display when you load your mod. This window is also available from the tool strip.
 
-<span class="image-placeholder" role="note" data-image-index="33">Place relevant image here: The FCS - A Complete Guide screenshot 33</span>
+![the FCS Errors window](assets/fcs/errors.png)
 
 Double clicking on an error will open the associated item.
 
@@ -604,6 +620,6 @@ The errors list is only updated when a mod is loaded. The scan button can rescan
 ---
 
 > [!info] Source and migration status
-> Imported from `The FCS - A Complete Guide.md` in the owner's Kenshi Modding Wiki collection, with republication clearance confirmed by the repository owner. Existing credits, source terms, and notices are retained. This migration does not assign a new license or imply independent verification of the game instructions. Source image locations use explicit placeholders rather than broken image links.
+> Imported from `The FCS - A Complete Guide.md` in the owner's Kenshi Modding Wiki collection, with republication clearance confirmed by the repository owner. Existing credits, source terms, and notices are retained. This migration does not assign a new license or imply independent verification of the game instructions. Approved Wiki screenshots illustrate the matching sections; four additional legacy illustrations remain explicit placeholders. The original source-image audit is preserved.
 
 Return to the [[modding/index|modding guides]].
