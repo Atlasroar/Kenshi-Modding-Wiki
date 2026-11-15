@@ -64,8 +64,9 @@ separately from the text license.
 
 ## FCS screenshot credits
 
-The 30 screenshots in the four task-based FCS guides are original files from
-the source article. The repository owner confirmed permission from the Kenshi
+The 30 source screenshots appear in the four task-based FCS guides and
+[[modding/fcs/complete-guide|The FCS - A Complete Guide]].
+The repository owner confirmed permission from the Kenshi
 Wiki team to reuse them on 2026-11-15. They are hosted locally, without altering
 their image contents. The source community's CC-BY-SA notice and the confirmed
 reuse permission are retained alongside the source attribution.

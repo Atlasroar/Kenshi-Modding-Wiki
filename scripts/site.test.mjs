@@ -199,7 +199,14 @@ test("all approved guides are reachable, searchable, and retain source notices a
 test("source image locations and unimported references remain explicit without broken media", () => {
   let images = 0
   let references = 0
-  for (const { slug, imagePlaceholders, pendingReferences } of imports.guides) {
+  const approvedMedia = imports.adaptations.flatMap((source) => source.media)
+  for (const {
+    slug,
+    imagePlaceholders,
+    pendingReferences,
+    restoredImages = [],
+    additionalImages = [],
+  } of imports.guides) {
     const article = elementsFor(slug + ".html").find((node) => node.tagName === "article")
     assert.ok(article, `Missing article body: ${slug}`)
     const nodes = []
@@ -210,10 +217,13 @@ test("source image locations and unimported references remain explicit without b
       node.properties.className?.includes("image-placeholder"),
     )
     const pending = nodes.filter((node) => node.properties.className?.includes("pending-reference"))
-    assert.equal(placeholders.length, imagePlaceholders.length, `Image locations changed: ${slug}`)
+    assert.equal(
+      placeholders.length + restoredImages.length,
+      imagePlaceholders.length,
+      `Image locations changed: ${slug}`,
+    )
     assert.equal(pending.length, pendingReferences.length, `Reference notices changed: ${slug}`)
-    for (const [number, node] of placeholders.entries()) {
-      assert.equal(String(node.properties.dataImageIndex), String(number + 1))
+    for (const node of placeholders) {
       assert.equal(node.properties.role, "note")
       assert.ok(
         node.children.some((child) => child.value?.startsWith("Place relevant image here:")),
@@ -222,17 +232,78 @@ test("source image locations and unimported references remain explicit without b
     for (const node of pending) {
       assert.ok(node.children.some((child) => child.value?.includes("reference page not imported")))
     }
-    assert.ok(!nodes.some((node) => node.tagName === "img"), `Unreviewed image in ${slug}`)
+    const rendered = nodes.filter((node) => node.tagName === "img")
+    assert.equal(
+      rendered.length,
+      restoredImages.length + additionalImages.length,
+      `Unreviewed image in ${slug}`,
+    )
+    const positions = []
+    let restoredIndex = 0
+    const imageUrl = (node) => new URL(node.properties.src, new URL(slug + ".html", site)).href
+    const additional = additionalImages.map((file) => {
+      const record = approvedMedia.find((entry) => entry.sourceFile === file)
+      assert.ok(record, `Unapproved additional image: ${file}`)
+      assert.ok(rendered.some((node) => imageUrl(node) === new URL(record.asset, site).href))
+      return new URL(record.asset, site).href
+    })
+    for (const node of nodes) {
+      if (node.properties.className?.includes("image-placeholder")) {
+        positions.push(Number(node.properties.dataImageIndex))
+      } else if (node.tagName === "img" && !additional.includes(imageUrl(node))) {
+        const restoration = restoredImages[restoredIndex++]
+        assert.ok(restoration, `Undeclared restoration: ${slug}`)
+        const record = approvedMedia.find((entry) => entry.sourceFile === restoration.sourceFile)
+        assert.ok(record, `Unapproved restoration: ${restoration.sourceFile}`)
+        assert.equal(
+          imageUrl(node),
+          new URL(record.asset, site).href,
+          `Wrong restored position: ${slug}`,
+        )
+        assert.equal(node.properties.alt, record.alt)
+        positions.push(restoration.index)
+      }
+    }
+    assert.deepEqual(
+      positions,
+      imagePlaceholders.map((entry) => entry.index),
+      `Historical source positions changed: ${slug}`,
+    )
     assert.doesNotMatch(
       documents.get(slug + ".html").html,
       /(?:gilcdn|guildedcdn)\.com|[?&](?:amp;)?(?:Expires|Policy|Signature|Key-Pair-Id)=/i,
       `Expired signed media URL in ${slug}`,
     )
-    images += placeholders.length
+    images += placeholders.length + restoredImages.length
     references += pending.length
   }
   assert.equal(images, 46, "Every audited source image must retain its visible location")
   assert.equal(references, 8, "Every out-of-batch article reference must remain explicit")
+})
+
+test("the existing complete-guide URL displays all 30 approved Wiki screenshots", () => {
+  const article = elementsFor("modding/fcs/complete-guide.html").find(
+    (node) => node.tagName === "article",
+  )
+  const sources = []
+  const remaining = []
+  visit(article, "element", (node) => {
+    if (node.tagName === "img")
+      sources.push(
+        new URL(node.properties.src, new URL("modding/fcs/complete-guide.html", site)).href,
+      )
+    if (node.properties.className?.includes("image-placeholder"))
+      remaining.push(Number(node.properties.dataImageIndex))
+  })
+  assert.deepEqual(
+    sources.sort(),
+    imports.adaptations[0].media.map((record) => new URL(record.asset, site).href).sort(),
+  )
+  assert.deepEqual(
+    remaining,
+    [5, 6, 7, 8],
+    "Only the four unmatched legacy illustrations should remain pending",
+  )
 })
 
 test("the FCS adaptation preserves source coverage, attribution, and all restored original screenshots", async () => {
