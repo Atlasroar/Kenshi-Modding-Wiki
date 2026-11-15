@@ -9,6 +9,19 @@ where it appears. Original source terms still apply.
 
 ## Guide credits
 
+### Dialogue guide sources
+
+[Kenshi Modding 101: FCS and Dialogue](https://steamcommunity.com/sharedfiles/filedetails/?id=1444279946)
+supplied package/event concepts, availability settings, squad-leader context,
+and debugging exercises.
+[Simple Dialogue Modding Guide](https://steamcommunity.com/sharedfiles/filedetails/?id=804686889)
+supplied the illustrated root/child workflow, word swaps, conditions, effects,
+and character-package assignment.
+Used on [[modding/dialogue/creating-dialogue|Creating Dialogue in the FCS]].
+The instructions were rewritten and combined, with screenshot-only steps
+explained in text. The owner supplied the saved guides and confirmed permission
+to republish their screenshots; no new license is assigned to the Steam sources.
+
 [Using the FCS](https://kenshi.fandom.com/wiki/Using_the_FCS) supplied the editor
 interface, searches, bulk editing, load order, merging, cleanup, Steam uploads,
 17 error types, and 30 screenshots. The
@@ -45,8 +58,10 @@ Dialogue talkers, conditions, and effects are used on
 Dialogue text searches, StringIDs, and the older text-editor lookup method are
 used on [[modding/dialogue/find-specific-dialogue|How to Find Specific Dialogue]].
 
-Player replies and alternating NPC interjectors are used on
-[[modding/dialogue/three-person-conversations|Three Person Conversations with Player]].
+The owner-cleared _Three Person Conversations with Player_ note supplied the
+host/interjector structure, player-input requirements, effect-recipient warning,
+and missing-interjector limitation. Used on
+[[modding/dialogue/creating-dialogue#three-person-conversations-with-the-player|Creating Dialogue in the FCS]].
 
 Race-creation steps and warnings are used on
 [[modding/characters/creating-a-race|Creating a New Race Guide]].

@@ -201,17 +201,40 @@ test("source image locations and unimported references remain explicit without b
   let images = 0
   let references = 0
   const approvedMedia = imports.adaptations.flatMap((source) => source.media)
+  const consolidated = imports.retiredGuides.filter((guide) => guide.consolidatedInto)
+  const auditedImports = imports.guides.filter(
+    (guide) =>
+      !retiredSlugs.has(guide.slug) || consolidated.some((entry) => entry.slug === guide.slug),
+  )
   for (const {
     slug,
     imagePlaceholders,
     pendingReferences,
     restoredImages = [],
     additionalImages = [],
-  } of activeImports) {
-    const article = elementsFor(slug + ".html").find((node) => node.tagName === "article")
+  } of auditedImports) {
+    const consolidation = consolidated.find((guide) => guide.slug === slug)
+    const destination = consolidation?.consolidatedInto ?? slug
+    const article = elementsFor(destination + ".html").find((node) => node.tagName === "article")
     assert.ok(article, `Missing article body: ${slug}`)
+    let content = article
+    if (consolidation) {
+      content = undefined
+      visit(article, "element", (node, start, parent) => {
+        if (node.tagName === "h2" && node.properties.id === consolidation.sectionId) {
+          const next = parent.children.findIndex(
+            (child, position) => position > start && child.tagName === "h2",
+          )
+          content = {
+            type: "root",
+            children: parent.children.slice(start, next < 0 ? undefined : next),
+          }
+        }
+      })
+      assert.ok(content, `Missing consolidated section: ${slug}`)
+    }
     const nodes = []
-    visit(article, "element", (node) => {
+    visit(content, "element", (node) => {
       nodes.push(node)
     })
     const placeholders = nodes.filter((node) =>
@@ -271,7 +294,7 @@ test("source image locations and unimported references remain explicit without b
       `Historical source positions changed: ${slug}`,
     )
     assert.doesNotMatch(
-      documents.get(slug + ".html").html,
+      documents.get(destination + ".html").html,
       /(?:gilcdn|guildedcdn)\.com|[?&](?:amp;)?(?:Expires|Policy|Signature|Key-Pair-Id)=/i,
       `Expired signed media URL in ${slug}`,
     )
@@ -546,6 +569,88 @@ test("the sidebar presents the twelve requested sections and preserves guide mem
   )
 })
 
+test("the combined dialogue tutorial publishes its source steps and approved original screenshots", async () => {
+  const guide = imports.additionalGuides.find(
+    (entry) => entry.slug === "modding/dialogue/creating-dialogue",
+  )
+  assert.ok(guide, "Missing combined dialogue provenance")
+  const article = elementsFor(guide.slug + ".html").find((node) => node.tagName === "article")
+  const nodes = []
+  let text = ""
+  visit(article, "element", (node) => {
+    nodes.push(node)
+  })
+  visit(article, "text", (node) => {
+    text += node.value
+  })
+  for (const topic of [
+    /EV_PLAYER_TALK_TO_ME/,
+    /T_ME/,
+    /T_TARGET_IF_PLAYER/,
+    /monologue\s*=\s*False/,
+    /Variations are not separate choices/,
+    /GUIDE_GREETING/,
+    /DC_PLAYERMONEY/,
+    /20,001\s+passes/,
+    /Conditions on the root/,
+    /Add effects/,
+    /Assign the package to an NPC/,
+    /Test and troubleshoot/,
+  ])
+    assert.match(text, topic)
+  assert.ok(linksTo(nodes, "modding/fcs/complete-guide", guide.slug))
+  assert.ok(linksTo(elementsFor("dialogue/index.html"), guide.slug, "dialogue/index"))
+  const images = nodes.filter((node) => node.tagName === "img")
+  assert.equal(images.length, 10, "Publish the ten selected source screenshots")
+  assert.equal(images.length, guide.images.length)
+  for (const [position, image] of images.entries()) {
+    const record = guide.images[position]
+    const url = new URL(image.properties.src, new URL(guide.slug + ".html", site))
+    assert.equal(url.href, new URL(record.asset, site).href)
+    assert.equal(image.properties.alt, record.alt)
+    const bytes = await readFile(await findTarget(url))
+    assert.equal(createHash("sha256").update(bytes).digest("hex"), record.sha256)
+    assert.equal(bytes.readUInt32BE(16), record.width)
+    assert.equal(bytes.readUInt32BE(20), record.height)
+    assert.ok(guide.sources.some((source) => source.id === record.sourceId))
+  }
+  for (const source of guide.sources) {
+    assert.match(source.publicContentSha256, /^[a-f0-9]{64}$/)
+    assert.ok(guide.images.some((image) => image.sourceId === source.id))
+    assert.ok(
+      elementsFor("credits.html").some(
+        (node) => node.tagName === "a" && node.properties.href === source.sourceUrl,
+      ),
+    )
+  }
+  assert.match(guide.imagePermission, /explicitly confirmed permission/)
+  for (const slug of [
+    "modding/dialogue/conditions-and-effects",
+    "modding/dialogue/find-specific-dialogue",
+  ])
+    assert.ok(linksTo(nodes, slug, guide.slug), `Preserve related reference: ${slug}`)
+  for (const requirement of [
+    /cannot speak again once the speaker changes/,
+    /cannot be added as an interjector/,
+    /Alternate each interjector line with player input/,
+    /interjectors cannot talk\s+directly to each other/,
+    /\[Continue listening\]/,
+    /Include an option to leave/,
+    /is character/,
+    /another eligible NPC may be selected/,
+    /entire chain\s+breaks if a required NPC is unavailable/,
+    /all effects, including\s+Join Squad Fast, apply to the host/,
+    /Dialogue Structure Overlook/,
+    /existing source terms are retained/,
+  ])
+    assert.match(text, requirement)
+  assert.equal(
+    nodes.filter((node) => node.tagName === "h2").at(-1).properties.id,
+    "three-person-conversations-with-the-player",
+    "Keep the consolidated snippet at the end of the guide",
+  )
+})
+
 test("Credits uses source summaries with guide backlinks, not contributor tables", async () => {
   const index = JSON.parse(await readFile(join(output, "static", "contentIndex.json"), "utf8"))
   assert.ok(index.credits, "Credits must be searchable")
@@ -576,6 +681,14 @@ test("Credits uses source summaries with guide backlinks, not contributor tables
     )
   }
   for (const [slug, source] of [
+    [
+      "modding/dialogue/creating-dialogue",
+      "https://steamcommunity.com/sharedfiles/filedetails/?id=1444279946",
+    ],
+    [
+      "modding/dialogue/creating-dialogue",
+      "https://steamcommunity.com/sharedfiles/filedetails/?id=804686889",
+    ],
     ["modding/fcs/complete-guide", "https://kenshi.fandom.com/wiki/Using_the_FCS"],
     ["modding/world/in-game-editor", "https://lost-blog.com/in-game-editor/"],
     [

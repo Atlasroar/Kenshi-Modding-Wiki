@@ -13,9 +13,9 @@
     "title": "Dialogue",
     "slug": "dialogue/index",
     "guides": [
+      "modding/dialogue/creating-dialogue",
       "modding/dialogue/conditions-and-effects",
-      "modding/dialogue/find-specific-dialogue",
-      "modding/dialogue/three-person-conversations"
+      "modding/dialogue/find-specific-dialogue"
     ]
   },
   {
