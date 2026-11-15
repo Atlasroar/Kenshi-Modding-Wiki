@@ -21,34 +21,29 @@ are easy to lose between experiments.
 
 > [!multi-column]
 >
-> > [!paper_gradient_1] Explore the modding guides
-> > Browse [[modding/index|all 17 guides by topic]], from the FCS interface to
-> > dialogue conditions, town ownership, and character assets.
+> > [!paper_gradient_1] Start with the FCS
+> > Learn the [[fcs/index|Forgotten Construction Set]], then follow focused
+> > guides for dialogue, characters, towns, and assets.
 >
-> > [!paper_gradient_1] Write a useful guide
-> > Follow the [[guides/contributing|writing and contribution guide]] for
-> > article structure, source credits, and supported wiki formatting.
+> > [!paper_gradient_1] Work in the world
+> > Use [[world-editor/index|World Editor]] for in-game editing, or browse
+> > [[modding/index|all available guides by topic]].
 
 ## A library built in stages
 
-The first content batch focuses on modding: the Forgotten Construction Set,
-dialogue, buildings, characters, and save editing. The larger game-reference
-library will remain a separate collection so it does not bury the tutorials.
+Use the sidebar to explore FCS, World Editor, Dialogue, AI Packages, World States,
+Races, Characters, Faction, Town, 3D Assets, Animations, and reKenshi.
 
-We are keeping Markdown at the center of the workflow. Notes should remain easy
-to write, easy to review, and useful outside this website.
+The first 17 guides are available now. Sections without an imported tutorial
+say so clearly; their coverage plans are not presented as tested instructions.
+Images have visible placeholders, and unavailable reference pages are marked
+where the source guide mentions them.
 
-The [implementation plan](https://github.com/Atlasroar/Kenshi-Modding-Wiki/blob/main/docs/implementation-plan.md)
-tracks the website, content review, and eventual Pages deployment.
+## Work on a test mod
 
-## Before a page goes public
-
-Every imported guide needs a clear source and reviewed references. Missing
-images and unimported reference pages must be marked explicitly. Personal vault
-notes and unreviewed development material are not published automatically.
-
-Read the [[guides/contributing#Publication checklist|publication checklist]] before
-preparing a contribution.
+Keep experiments reversible and back up your saves. Existing warnings and
+work-in-progress labels are preserved; publication does not mean every source
+instruction has been independently retested in the current game version.
 
 ---
 

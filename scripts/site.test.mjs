@@ -12,6 +12,7 @@ const root = resolve(import.meta.dirname, "..")
 const output = join(root, "public")
 const config = yaml.load(await readFile(join(root, "quartz.config.yaml"), "utf8"))
 const imports = JSON.parse(await readFile(join(root, "docs", "modding-imports.json"), "utf8"))
+const navigation = JSON.parse(await readFile(join(root, "site", "navigation.json"), "utf8"))
 const site = new URL(`https://${config.configuration.baseUrl}/`)
 const documents = new Map()
 
@@ -29,6 +30,21 @@ assert.ok(documents.has("index.html"), "Run npm run build before npm run test:si
 function elementsFor(page) {
   assert.ok(documents.has(page), `Missing generated page: ${page}`)
   return documents.get(page).elements
+}
+
+function linksTo(nodes, slug, from) {
+  const normalize = (url) =>
+    url.pathname
+      .replace(/\.html$/, "")
+      .replace(/\/index$/, "")
+      .replace(/\/$/, "")
+  return nodes.some(
+    (node) =>
+      node.tagName === "a" &&
+      typeof node.properties.href === "string" &&
+      normalize(new URL(node.properties.href, new URL(from + ".html", site))) ===
+        normalize(new URL(slug, site)),
+  )
 }
 
 async function findTarget(url) {
@@ -88,25 +104,15 @@ test("internal navigation, heading links, and assets resolve under the Pages sub
   }
 })
 
-test("representative pages retain custom callouts, aliases, tables, and page classes", () => {
+test("modder pages retain themed cards, tables, page classes, and warnings", () => {
   const home = elementsFor("index.html")
-  const guide = elementsFor("guides/contributing.html")
+  const guide = elementsFor("modding/assets/armor-color-maps.html")
   assert.ok(home.some((node) => node.properties.dataCallout === "multi-column"))
   assert.equal(home.filter((node) => node.properties.dataCallout === "paper_gradient_1").length, 2)
-  assert.ok(guide.some((node) => node.properties.dataCallout === "infobox"))
   assert.ok(
-    guide.some(
-      (node) =>
-        node.properties.dataCallout === "warning" &&
-        node.children.some(
-          (child) =>
-            child.type === "element" &&
-            child.children.some(
-              (nested) => nested.type === "element" && nested.properties.dataCallout === "note",
-            ),
-        ),
+    elementsFor("modding/characters/creating-a-race.html").some(
+      (node) => node.properties.dataCallout === "warning",
     ),
-    "The warning must contain its nested note",
   )
   assert.ok(guide.some((node) => node.tagName === "table"))
   assert.ok(
@@ -114,20 +120,14 @@ test("representative pages retain custom callouts, aliases, tables, and page cla
       (node) => node.tagName === "article" && node.properties.className?.includes("page-kenshi"),
     ),
   )
-  assert.ok(documents.has("contributing.html"), "The approved alias must produce a redirect")
-  assert.ok(
-    home.some(
-      (node) =>
-        node.tagName === "a" &&
-        node.properties.href?.endsWith("contributing#publication-checklist"),
-    ),
-  )
+  assert.ok(linksTo(home, "fcs/index", "index"))
+  assert.ok(linksTo(home, "world-editor/index", "index"))
 })
 
 test("published pages enter search without remote font or analytics resources", async () => {
   const index = JSON.parse(await readFile(join(output, "static", "contentIndex.json"), "utf8"))
   assert.ok(index.index, "The homepage must enter search")
-  assert.ok(index["guides/contributing"], "The guide must enter search")
+  assert.ok(index["modding/fcs/complete-guide"], "The FCS guide must enter search")
   for (const [page, { html, elements }] of documents) {
     assert.doesNotMatch(
       html,
@@ -149,19 +149,6 @@ test("published pages enter search without remote font or analytics resources", 
 
 test("all approved guides are reachable, searchable, and retain source notices and warnings", async () => {
   const index = JSON.parse(await readFile(join(output, "static", "contentIndex.json"), "utf8"))
-  const normalize = (url) =>
-    url.pathname
-      .replace(/\.html$/, "")
-      .replace(/\/index$/, "")
-      .replace(/\/$/, "")
-  const linksTo = (nodes, slug, from) =>
-    nodes.some(
-      (node) =>
-        node.tagName === "a" &&
-        typeof node.properties.href === "string" &&
-        normalize(new URL(node.properties.href, new URL(from + ".html", site))) ===
-          normalize(new URL(slug, site)),
-    )
   const landing = elementsFor("modding/index.html")
   assert.ok(index["modding/index"], "The modding landing page must enter search")
   assert.equal(imports.guides.length, 17)
@@ -245,6 +232,116 @@ test("source image locations and unimported references remain explicit without b
   }
   assert.equal(images, 46, "Every audited source image must retain its visible location")
   assert.equal(references, 8, "Every out-of-batch article reference must remain explicit")
+})
+
+test("the sidebar presents the twelve requested sections and preserves guide membership", async () => {
+  const expected = [
+    "FCS",
+    "World Editor",
+    "Dialogue",
+    "AI Packages",
+    "World States",
+    "Races",
+    "Characters",
+    "Faction",
+    "Town",
+    "3D Assets",
+    "Animations",
+    "reKenshi",
+  ]
+  for (const [page, { elements }] of documents) {
+    const body = elements.find((node) => node.tagName === "body")
+    if (!body?.properties.dataSlug || page === "404.html") continue
+    const sidebar = elements.find(
+      (node) => node.tagName === "nav" && node.properties.className?.includes("guide-navigation"),
+    )
+    assert.ok(sidebar, `Missing modding sidebar: ${page}`)
+    const sections = []
+    visit(sidebar, "element", (node) => {
+      if (node.tagName === "details" && node.properties.className?.includes("guide-section")) {
+        sections.push(node)
+      }
+    })
+    const titles = sections.map((section) => {
+      const summary = section.children.find((node) => node.tagName === "summary")
+      const link = summary.children.find((node) => node.tagName === "a")
+      return link.children.map((node) => node.value ?? "").join("")
+    })
+    assert.deepEqual(titles, expected, `Unexpected sidebar order in ${page}`)
+  }
+  const assigned = navigation.flatMap((section) => section.guides)
+  assert.equal(
+    new Set(assigned).size,
+    assigned.length,
+    "A guide must not appear in multiple sections",
+  )
+  for (const { slug } of imports.guides)
+    assert.ok(assigned.includes(slug), `Unassigned guide: ${slug}`)
+  for (const section of navigation) {
+    const nodes = elementsFor(section.slug + ".html")
+    assert.ok(linksTo(elementsFor("modding/index.html"), section.slug, "modding/index"))
+    for (const slug of section.guides) {
+      assert.ok(linksTo(nodes, slug, section.slug), `Missing section guide link: ${slug}`)
+      const current = elementsFor(slug + ".html").filter(
+        (node) => node.tagName === "a" && node.properties.ariaCurrent === "page",
+      )
+      assert.equal(current.length, 1, `The sidebar must mark the current guide once: ${slug}`)
+    }
+  }
+  const scripts = await Promise.all(
+    elementsFor("index.html")
+      .filter((node) => node.tagName === "script" && typeof node.properties.src === "string")
+      .map(async (node) => {
+        const url = new URL(node.properties.src, site)
+        const source = await readFile(await findTarget(url), "utf8")
+        const modules = await Promise.all(
+          [...source.matchAll(/\bimport\(["'](\.{1,2}\/[^"']+)["']\)/g)].map(async ([, path]) =>
+            readFile(await findTarget(new URL(path, url)), "utf8"),
+          ),
+        )
+        return [source, ...modules].join("\n")
+      }),
+  )
+  assert.ok(
+    scripts.some((script) => script.includes("guide-menu")),
+    "The mobile navigation script must be included in the generated page resources",
+  )
+})
+
+test("maintainer documents stay out of site search and old URLs redirect to the Wiki", async () => {
+  const index = JSON.parse(await readFile(join(output, "static", "contentIndex.json"), "utf8"))
+  for (const [slug, page] of Object.entries({
+    "guides/index": "Home",
+    "guides/contributing": "Writing-Guides",
+    "guides/styling": "CSS-and-Theme",
+    contributing: "Writing-Guides",
+  })) {
+    assert.equal(index[slug], undefined, `Maintainer page leaked into site search: ${slug}`)
+    const nodes = elementsFor(slug + ".html")
+    const canonical = nodes.find(
+      (node) => node.tagName === "link" && node.properties.rel?.includes("canonical"),
+    )
+    assert.equal(
+      canonical?.properties.href,
+      `https://github.com/Atlasroar/Kenshi-Modding-Wiki/wiki/${page}`,
+    )
+    assert.ok(
+      nodes.some(
+        (node) =>
+          node.tagName === "meta" &&
+          node.properties.name === "robots" &&
+          node.properties.content === "noindex",
+      ),
+    )
+    assert.match(documents.get(slug + ".html").html, /window\.location\.hash/)
+  }
+  assert.ok(
+    elementsFor("index.html").some(
+      (node) =>
+        node.tagName === "a" &&
+        node.properties.href === "https://github.com/Atlasroar/Kenshi-Modding-Wiki/wiki",
+    ),
+  )
 })
 
 test("the production pipeline excludes unpublished notes and their assets", async () => {

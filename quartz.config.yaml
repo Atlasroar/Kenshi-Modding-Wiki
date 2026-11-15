@@ -80,10 +80,7 @@ plugins:
   - source: "@quartz-community/tag-page"
     enabled: true
   - source: "@quartz-community/explorer"
-    enabled: true
-    layout:
-      position: left
-      priority: 50
+    enabled: false
   - source: "@quartz-community/search"
     enabled: true
     layout:
@@ -129,7 +126,8 @@ plugins:
     enabled: true
     options:
       links:
-        Source & contributions: https://github.com/Atlasroar/Kenshi-Modding-Wiki
+        Website wiki: https://github.com/Atlasroar/Kenshi-Modding-Wiki/wiki
+        Source: https://github.com/Atlasroar/Kenshi-Modding-Wiki
     layout:
       position: footer
       priority: 50

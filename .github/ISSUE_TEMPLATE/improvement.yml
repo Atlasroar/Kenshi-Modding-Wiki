@@ -1,0 +1,39 @@
+name: Improve the wiki
+description: Report a guide problem or propose a documentation or website improvement.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Keep reports public-safe. Do not paste private vault notes, credentials,
+        account details, or signed attachment URLs.
+        Website setup, CSS, and contribution documentation belong in the GitHub Wiki.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Guide correction
+        - New guide
+        - Theme or CSS
+        - Navigation or search
+    validations:
+      required: true
+  - type: input
+    id: page
+    attributes:
+      label: Page or topic
+      description: Include the page URL if the issue concerns an existing article.
+  - type: textarea
+    id: improvement
+    attributes:
+      label: What should improve?
+      description: Explain the current problem and the expected result.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence or reproduction
+      description: |
+        For guide corrections, include sources and tested game/tool versions.
+        For website issues, include browser, screen size, theme, and reproduction steps.
