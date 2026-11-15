@@ -1,0 +1,153 @@
+# yaml-language-server: $schema=./quartz/plugins/quartz-plugins.schema.json
+configuration:
+  pageTitle: Kenshi Modding Wiki
+  pageTitleSuffix: " | Kenshi Modding Wiki"
+  enableSPA: true
+  enablePopovers: true
+  prefetch: hover
+  analytics: null
+  locale: en-US
+  baseUrl: atlasroar.github.io/Kenshi-Modding-Wiki
+  publishAssets: referenced
+  ignorePatterns:
+    - private
+    - templates
+    - .obsidian
+  theme:
+    fontOrigin: local
+    cdnCaching: false
+    typography:
+      header: Trebuchet MS
+      body: Segoe UI
+      code: JetBrains Mono
+    colors:
+      lightMode:
+        light: "#f4efe5"
+        lightgray: "#d8cbb8"
+        gray: "#756653"
+        darkgray: "#443c32"
+        dark: "#252b29"
+        secondary: "#813f25"
+        tertiary: "#375c50"
+        highlight: "#813f2510"
+        textHighlight: "#d8b56255"
+      darkMode:
+        light: "#1d2422"
+        lightgray: "#46504a"
+        gray: "#b5aa96"
+        darkgray: "#ded5c4"
+        dark: "#f4ecdb"
+        secondary: "#ecac82"
+        tertiary: "#a6c4ac"
+        highlight: "#ecac8218"
+        textHighlight: "#d8b56244"
+  links:
+    markdownLinkResolution: absolute
+  contentIndex:
+    enableSiteMap: true
+    enableRSS: false
+plugins:
+  - source: "@quartz-community/github-flavored-markdown"
+    enabled: true
+    order: 30
+  - source: "@quartz-community/obsidian-flavored-markdown"
+    enabled: true
+    options:
+      strictLineBreaks: true
+      enableInHtmlEmbed: false
+    order: 40
+  - source: "@quartz-community/syntax-highlighting"
+    enabled: true
+    options:
+      theme:
+        light: github-light
+        dark: github-dark
+      keepBackground: false
+    order: 20
+  - source: "@quartz-community/description"
+    enabled: true
+    order: 70
+  - source: "@quartz-community/explicit-publish"
+    enabled: true
+  - source: "@quartz-community/alias-redirects"
+    enabled: true
+  - source: "@quartz-community/favicon"
+    enabled: true
+  - source: "@quartz-community/content-page"
+    enabled: true
+  - source: "@quartz-community/folder-page"
+    enabled: true
+  - source: "@quartz-community/tag-page"
+    enabled: true
+  - source: "@quartz-community/explorer"
+    enabled: true
+    layout:
+      position: left
+      priority: 50
+  - source: "@quartz-community/search"
+    enabled: true
+    layout:
+      position: left
+      priority: 20
+      group: toolbar
+      groupOptions:
+        grow: true
+  - source: "@quartz-community/page-title"
+    enabled: true
+    layout:
+      position: left
+      priority: 10
+  - source: "@quartz-community/darkmode"
+    enabled: true
+    layout:
+      position: left
+      priority: 30
+      group: toolbar
+  - source: "@quartz-community/breadcrumbs"
+    enabled: true
+    layout:
+      position: beforeBody
+      priority: 5
+      condition: not-index
+  - source: "@quartz-community/article-title"
+    enabled: true
+    layout:
+      position: beforeBody
+      priority: 10
+  - source: "@quartz-community/table-of-contents"
+    enabled: true
+    order: 50
+    layout:
+      position: right
+      priority: 10
+  - source: "@quartz-community/backlinks"
+    enabled: true
+    layout:
+      position: right
+      priority: 20
+  - source: "@quartz-community/footer"
+    enabled: true
+    options:
+      links:
+        Source & contributions: https://github.com/Atlasroar/Kenshi-Modding-Wiki
+    layout:
+      position: footer
+      priority: 50
+layout:
+  groups:
+    toolbar:
+      priority: 35
+      direction: row
+      gap: 0.5rem
+  byPageType:
+    "404":
+      positions:
+        beforeBody: []
+        left: []
+        right: []
+    folder:
+      positions:
+        right: []
+    tag:
+      positions:
+        right: []

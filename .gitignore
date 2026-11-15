@@ -1,0 +1,10 @@
+node_modules/
+public/
+.quartz/
+.quartz-cache/
+tsconfig.tsbuildinfo
+.DS_Store
+.obsidian/
+private/
+prof/
+quartz/cli/tui/dist/

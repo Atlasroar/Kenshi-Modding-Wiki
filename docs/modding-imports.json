@@ -1,0 +1,454 @@
+{
+  "sourceCollection": "Kenshi Modding Wiki",
+  "scope": "The 17 owner-cleared modding guides, not the larger reference library",
+  "imagePolicy": "Visible placeholders replace every source image reference at the owner's request",
+  "guides": [
+    {
+      "source": "Buildings Collision & Navmesh.md",
+      "slug": "modding/world/building-collision-navmesh",
+      "sourceSha256": "10d6896246e66faced2ccfe308ee7ff9efa2ccf81ab6e652093c90bf12f68a98",
+      "imagePlaceholders": [
+        {
+          "index": 1,
+          "sourceLine": 28,
+          "kind": "local",
+          "label": "Bounding Box"
+        },
+        {
+          "index": 2,
+          "sourceLine": 71,
+          "kind": "local",
+          "label": "Plane Collider"
+        }
+      ],
+      "pendingReferences": [
+        {
+          "sourceLine": 87,
+          "target": "Building_making_tutorial.md",
+          "label": "Building making tutorial"
+        }
+      ]
+    },
+    {
+      "source": "Claim Town Ownership.md",
+      "slug": "modding/save-editing/claim-town-ownership",
+      "sourceSha256": "3c722e4fbb4fa0dd7122f7cf218f43a3ab0f869549d545546e7f85b1edaa5df1",
+      "imagePlaceholders": [],
+      "pendingReferences": [
+        {
+          "sourceLine": 19,
+          "target": "Changing_Town_Ownership.md",
+          "label": "Changing Town Ownership"
+        },
+        {
+          "sourceLine": 50,
+          "target": "Changing_Town_Ownership.md",
+          "label": "Changing Town Ownership"
+        }
+      ]
+    },
+    {
+      "source": "Color Map for Armors Guide.md",
+      "slug": "modding/assets/armor-color-maps",
+      "sourceSha256": "3a2d57d3af827b5f60e35a942effee90bc2a9b9b7a0ee6453479858a58cce0eb",
+      "imagePlaceholders": [],
+      "pendingReferences": []
+    },
+    {
+      "source": "Creating a New Race Guide.md",
+      "slug": "modding/characters/creating-a-race",
+      "sourceSha256": "3be36ec74b72bd2f9ff60a30674c00dc0cee76571d768c2adee91b98277a85b3",
+      "imagePlaceholders": [],
+      "pendingReferences": []
+    },
+    {
+      "source": "Dialogue Condition & Effects.md",
+      "slug": "modding/dialogue/conditions-and-effects",
+      "sourceSha256": "2858f23b44aac4f026bb53adea87318caf9ee2f478bbfbd8668dad714315152a",
+      "imagePlaceholders": [],
+      "pendingReferences": []
+    },
+    {
+      "source": "Fast Healing Beds.md",
+      "slug": "modding/world/fast-healing-beds",
+      "sourceSha256": "69cdae55c8ea67757760f66550ec7eb10f060e6744e5ea24d0028f9967f51cc5",
+      "imagePlaceholders": [],
+      "pendingReferences": []
+    },
+    {
+      "source": "How to Find Specific Dialogue.md",
+      "slug": "modding/dialogue/find-specific-dialogue",
+      "sourceSha256": "aa2316dcdac78cee9b7dd3d98c5d970ca4dc71a0165650e0abc745dfb880ace8",
+      "imagePlaceholders": [
+        {
+          "index": 1,
+          "sourceLine": 54,
+          "kind": "local",
+          "label": "SearchforDialogueLine1OpenWithNotepad"
+        },
+        {
+          "index": 2,
+          "sourceLine": 63,
+          "kind": "local",
+          "label": "SearchforDialogueLine"
+        },
+        {
+          "index": 3,
+          "sourceLine": 78,
+          "kind": "local",
+          "label": "SearchforDialogueLine6ColumnsStringID"
+        },
+        {
+          "index": 4,
+          "sourceLine": 85,
+          "kind": "local",
+          "label": "SearchforDialogueLine2inFCS"
+        }
+      ],
+      "pendingReferences": [
+        {
+          "sourceLine": 14,
+          "target": "Dialogue_Structure_Overlook.md#Looking for a specific line to study or replace?",
+          "label": "Dialogue Structure Overlook"
+        }
+      ]
+    },
+    {
+      "source": "In Game Editor.md",
+      "slug": "modding/world/in-game-editor",
+      "sourceSha256": "4fd47d40c6ab944f7177b3ab18e439cf55dc76cd9e6920e02b74155f641cfbca",
+      "imagePlaceholders": [
+        {
+          "index": 1,
+          "sourceLine": 17,
+          "kind": "remote",
+          "label": "In Game Editor screenshot 1"
+        },
+        {
+          "index": 2,
+          "sourceLine": 46,
+          "kind": "remote",
+          "label": "In Game Editor screenshot 2"
+        }
+      ],
+      "pendingReferences": []
+    },
+    {
+      "source": "Invisible Characters Guide.md",
+      "slug": "modding/characters/invisible-characters",
+      "sourceSha256": "cd76975901730427b497c106ce3b135d9ed35cff2a6a6650f83f7ab71a1f6a54",
+      "imagePlaceholders": [],
+      "pendingReferences": []
+    },
+    {
+      "source": "Killing Npcs at Game Start.md",
+      "slug": "modding/world/kill-npcs-at-game-start",
+      "sourceSha256": "e8d26b331f7c921b3082e62ab91810aa86b8f4cbb00ef2a60fbe5bd9e02f77cc",
+      "imagePlaceholders": [],
+      "pendingReferences": []
+    },
+    {
+      "source": "Multiuser Animation Guides.md",
+      "slug": "modding/assets/multiuser-animations",
+      "sourceSha256": "13660daa1641f3f4a4d9cc7c50cb143141d96f7b38d884a4d1ff4ad4a6c7837d",
+      "imagePlaceholders": [],
+      "pendingReferences": []
+    },
+    {
+      "source": "Name Database Guide.md",
+      "slug": "modding/characters/name-databases",
+      "sourceSha256": "5f5a5361c0514412608cdf88876a094cf0f8cecd32b35c5a70665fe071b767d5",
+      "imagePlaceholders": [
+        {
+          "index": 1,
+          "sourceLine": 79,
+          "kind": "local",
+          "label": "DroidNameRandomizer"
+        },
+        {
+          "index": 2,
+          "sourceLine": 81,
+          "kind": "local",
+          "label": "INITIAL1"
+        },
+        {
+          "index": 3,
+          "sourceLine": 86,
+          "kind": "local",
+          "label": "WordSwaps"
+        }
+      ],
+      "pendingReferences": []
+    },
+    {
+      "source": "Sleeping On Npc Beds.md",
+      "slug": "modding/world/public-npc-beds",
+      "sourceSha256": "725fc5751067a5af5ceb48daf8276ad6a20e9cb877792a08beeb33b895ea0cf4",
+      "imagePlaceholders": [],
+      "pendingReferences": []
+    },
+    {
+      "source": "Tech Overhaul Notes.md",
+      "slug": "modding/fcs/tech-overhaul-notes",
+      "sourceSha256": "729263d3113e79c81e0a8ccd90124f647199be3f2ed07e47b2ee13173211ebf4",
+      "imagePlaceholders": [],
+      "pendingReferences": []
+    },
+    {
+      "source": "The FCS - A Complete Guide.md",
+      "slug": "modding/fcs/complete-guide",
+      "sourceSha256": "35e93f87d560e167f5ba3149221fde891ce600e6cc577b159115ee2fa10213df",
+      "imagePlaceholders": [
+        {
+          "index": 1,
+          "sourceLine": 29,
+          "kind": "remote",
+          "label": "The FCS - A Complete Guide screenshot 1"
+        },
+        {
+          "index": 2,
+          "sourceLine": 55,
+          "kind": "remote",
+          "label": "The FCS - A Complete Guide screenshot 2"
+        },
+        {
+          "index": 3,
+          "sourceLine": 69,
+          "kind": "remote",
+          "label": "The FCS - A Complete Guide screenshot 3"
+        },
+        {
+          "index": 4,
+          "sourceLine": 88,
+          "kind": "remote",
+          "label": "The FCS - A Complete Guide screenshot 4"
+        },
+        {
+          "index": 5,
+          "sourceLine": 110,
+          "kind": "remote",
+          "label": "The FCS - A Complete Guide screenshot 5"
+        },
+        {
+          "index": 6,
+          "sourceLine": 122,
+          "kind": "remote",
+          "label": "The FCS - A Complete Guide screenshot 6"
+        },
+        {
+          "index": 7,
+          "sourceLine": 147,
+          "kind": "remote",
+          "label": "The FCS - A Complete Guide screenshot 7"
+        },
+        {
+          "index": 8,
+          "sourceLine": 160,
+          "kind": "remote",
+          "label": "The FCS - A Complete Guide screenshot 8"
+        },
+        {
+          "index": 9,
+          "sourceLine": 189,
+          "kind": "remote",
+          "label": "The FCS - A Complete Guide screenshot 9"
+        },
+        {
+          "index": 10,
+          "sourceLine": 223,
+          "kind": "remote",
+          "label": "The FCS - A Complete Guide screenshot 10"
+        },
+        {
+          "index": 11,
+          "sourceLine": 240,
+          "kind": "remote",
+          "label": "The FCS - A Complete Guide screenshot 11"
+        },
+        {
+          "index": 12,
+          "sourceLine": 248,
+          "kind": "remote",
+          "label": "The FCS - A Complete Guide screenshot 12"
+        },
+        {
+          "index": 13,
+          "sourceLine": 256,
+          "kind": "remote",
+          "label": "The FCS - A Complete Guide screenshot 13"
+        },
+        {
+          "index": 14,
+          "sourceLine": 293,
+          "kind": "remote",
+          "label": "The FCS - A Complete Guide screenshot 14"
+        },
+        {
+          "index": 15,
+          "sourceLine": 306,
+          "kind": "remote",
+          "label": "The FCS - A Complete Guide screenshot 15"
+        },
+        {
+          "index": 16,
+          "sourceLine": 323,
+          "kind": "remote",
+          "label": "The FCS - A Complete Guide screenshot 16"
+        },
+        {
+          "index": 17,
+          "sourceLine": 329,
+          "kind": "remote",
+          "label": "The FCS - A Complete Guide screenshot 17"
+        },
+        {
+          "index": 18,
+          "sourceLine": 337,
+          "kind": "remote",
+          "label": "The FCS - A Complete Guide screenshot 18"
+        },
+        {
+          "index": 19,
+          "sourceLine": 347,
+          "kind": "remote",
+          "label": "The FCS - A Complete Guide screenshot 19"
+        },
+        {
+          "index": 20,
+          "sourceLine": 355,
+          "kind": "remote",
+          "label": "The FCS - A Complete Guide screenshot 20"
+        },
+        {
+          "index": 21,
+          "sourceLine": 361,
+          "kind": "remote",
+          "label": "The FCS - A Complete Guide screenshot 21"
+        },
+        {
+          "index": 22,
+          "sourceLine": 385,
+          "kind": "remote",
+          "label": "The FCS - A Complete Guide screenshot 22"
+        },
+        {
+          "index": 23,
+          "sourceLine": 389,
+          "kind": "remote",
+          "label": "The FCS - A Complete Guide screenshot 23"
+        },
+        {
+          "index": 24,
+          "sourceLine": 395,
+          "kind": "remote",
+          "label": "The FCS - A Complete Guide screenshot 24"
+        },
+        {
+          "index": 25,
+          "sourceLine": 401,
+          "kind": "remote",
+          "label": "The FCS - A Complete Guide screenshot 25"
+        },
+        {
+          "index": 26,
+          "sourceLine": 415,
+          "kind": "remote",
+          "label": "The FCS - A Complete Guide screenshot 26"
+        },
+        {
+          "index": 27,
+          "sourceLine": 425,
+          "kind": "remote",
+          "label": "The FCS - A Complete Guide screenshot 27"
+        },
+        {
+          "index": 28,
+          "sourceLine": 453,
+          "kind": "remote",
+          "label": "The FCS - A Complete Guide screenshot 28"
+        },
+        {
+          "index": 29,
+          "sourceLine": 469,
+          "kind": "remote",
+          "label": "The FCS - A Complete Guide screenshot 29"
+        },
+        {
+          "index": 30,
+          "sourceLine": 477,
+          "kind": "remote",
+          "label": "The FCS - A Complete Guide screenshot 30"
+        },
+        {
+          "index": 31,
+          "sourceLine": 481,
+          "kind": "remote",
+          "label": "The FCS - A Complete Guide screenshot 31"
+        },
+        {
+          "index": 32,
+          "sourceLine": 485,
+          "kind": "remote",
+          "label": "The FCS - A Complete Guide screenshot 32"
+        },
+        {
+          "index": 33,
+          "sourceLine": 499,
+          "kind": "remote",
+          "label": "The FCS - A Complete Guide screenshot 33"
+        }
+      ],
+      "pendingReferences": []
+    },
+    {
+      "source": "Three Person Conversations with Player.md",
+      "slug": "modding/dialogue/three-person-conversations",
+      "sourceSha256": "596b975de043bc90c0faa775f64bb29450dac2d932a43270fc5396cd7d55ac50",
+      "imagePlaceholders": [
+        {
+          "index": 1,
+          "sourceLine": 13,
+          "kind": "local",
+          "label": "Three speaker flow chart pic"
+        }
+      ],
+      "pendingReferences": [
+        {
+          "sourceLine": 35,
+          "target": "Dialogue_Structure_Overlook.md",
+          "label": "Dialogue Structure Overlook"
+        }
+      ]
+    },
+    {
+      "source": "Vendor Lists.md",
+      "slug": "modding/world/vendor-lists",
+      "sourceSha256": "3e5d3a1f7e7dee3bdbb1b4f823b5d36431aae1d42c416528acc64dc027c9945c",
+      "imagePlaceholders": [
+        {
+          "index": 1,
+          "sourceLine": 93,
+          "kind": "local",
+          "label": "SellerVendorList"
+        }
+      ],
+      "pendingReferences": [
+        {
+          "sourceLine": 66,
+          "target": "Caravan_Trader_Boss.md",
+          "label": "Caravan Trader Boss"
+        },
+        {
+          "sourceLine": 71,
+          "target": "Creating_New_Towns.md",
+          "label": "Creating New Towns"
+        },
+        {
+          "sourceLine": 72,
+          "target": "Creating_a_Special_Placeable/Lootable_Item_for_Your_Town",
+          "label": "Creating a Special Placeable/Lootable Item for Your Town"
+        }
+      ]
+    }
+  ]
+}
