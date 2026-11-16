@@ -12,30 +12,48 @@ const GuideNavigation: QuartzComponent = ({ allFiles, fileData }) => {
   const current = fileData.slug
   if (!current) throw new Error("Guide navigation requires a page slug")
   const credits = pages.get("credits")
+  const home = pages.get("index")
 
   return (
-    <nav aria-label="Modding guide sections" class="guide-navigation">
+    <nav aria-label="Site navigation" class="guide-navigation">
       <details class="guide-menu" open>
-        <summary>Modding guides</summary>
-        <ul class="guide-sections">
-          {navigation.map((section) => {
-            const landing = pages.get(section.slug)
-            if (!landing?.slug) return null
-            const active = section.slug === current || section.guides.includes(current)
-            return (
+        <summary class="guide-menu-toggle">Navigation</summary>
+        <div class="guide-menu-content">
+          <ul class="guide-primary">
+            {home?.slug && (
               <li>
-                <details open={active} class="guide-section">
-                  <summary>
-                    <a
-                      class="internal"
-                      href={resolveRelative(current, landing.slug)}
-                      aria-current={section.slug === current ? "page" : undefined}
-                    >
-                      {section.title}
-                    </a>
-                  </summary>
-                  {section.guides.length ? (
+                <a
+                  class="internal"
+                  href={resolveRelative(current, home.slug)}
+                  aria-current={current === home.slug ? "page" : undefined}
+                >
+                  Home
+                </a>
+              </li>
+            )}
+            <li>
+              <a href="https://github.com/Atlasroar/Kenshi-Modding-Wiki/discussions">Discussions</a>
+            </li>
+          </ul>
+          <ul class="guide-sections">
+            {navigation.map((section) => {
+              const landing = pages.get(section.slug)
+              if (!landing?.slug) return null
+              const active = section.slug === current || section.guides.includes(current)
+              return (
+                <li>
+                  <details class="guide-section" open={active}>
+                    <summary>{section.title}</summary>
                     <ul>
+                      <li>
+                        <a
+                          class="internal guide-section-link"
+                          href={resolveRelative(current, landing.slug)}
+                          aria-current={section.slug === current ? "page" : undefined}
+                        >
+                          Overview
+                        </a>
+                      </li>
                       {section.guides.map((slug) => {
                         const guide = pages.get(slug)
                         if (!guide?.slug) return null
@@ -52,27 +70,26 @@ const GuideNavigation: QuartzComponent = ({ allFiles, fileData }) => {
                         )
                       })}
                     </ul>
-                  ) : (
-                    <p class="guide-coverage">Guide coverage is being prepared.</p>
-                  )}
-                </details>
-              </li>
-            )
-          })}
-        </ul>
-        {credits?.slug && (
-          <a
-            class="internal guide-credits"
-            href={resolveRelative(current, credits.slug)}
-            aria-current={current === credits.slug ? "page" : undefined}
-          >
-            Credits
-          </a>
-        )}
+                  </details>
+                </li>
+              )
+            })}
+          </ul>
+          {credits?.slug && (
+            <a
+              class="internal guide-credits"
+              href={resolveRelative(current, credits.slug)}
+              aria-current={current === credits.slug ? "page" : undefined}
+            >
+              Credits
+            </a>
+          )}
+        </div>
       </details>
     </nav>
   )
 }
 
 GuideNavigation.afterDOMLoaded = script
+
 export default GuideNavigation
