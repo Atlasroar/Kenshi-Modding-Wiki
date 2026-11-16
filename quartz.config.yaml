@@ -17,30 +17,30 @@ configuration:
     fontOrigin: local
     cdnCaching: false
     typography:
-      header: Trebuchet MS
+      header: Georgia
       body: Segoe UI
       code: JetBrains Mono
     colors:
       lightMode:
-        light: "#f4efe5"
-        lightgray: "#d8cbb8"
-        gray: "#756653"
-        darkgray: "#443c32"
-        dark: "#252b29"
-        secondary: "#813f25"
-        tertiary: "#375c50"
-        highlight: "#813f2510"
-        textHighlight: "#d8b56255"
+        light: "#e9e1d2"
+        lightgray: "#c5b69d"
+        gray: "#776750"
+        darkgray: "#483f32"
+        dark: "#292b24"
+        secondary: "#854023"
+        tertiary: "#46604a"
+        highlight: "#8540230d"
+        textHighlight: "#c89b4355"
       darkMode:
-        light: "#1d2422"
-        lightgray: "#46504a"
-        gray: "#b5aa96"
-        darkgray: "#ded5c4"
-        dark: "#f4ecdb"
-        secondary: "#ecac82"
-        tertiary: "#a6c4ac"
-        highlight: "#ecac8218"
-        textHighlight: "#d8b56244"
+        light: "#20231f"
+        lightgray: "#4b5042"
+        gray: "#b4a78e"
+        darkgray: "#ddd3bf"
+        dark: "#f3ead6"
+        secondary: "#e4ad78"
+        tertiary: "#aec19b"
+        highlight: "#e4ad7812"
+        textHighlight: "#c89b4344"
   links:
     markdownLinkResolution: absolute
   contentIndex:
@@ -100,6 +100,49 @@ plugins:
       position: left
       priority: 30
       group: toolbar
+  - source: "@quartz-community/reader-mode"
+    enabled: true
+    layout:
+      position: beforeBody
+      priority: 0
+  - source: "@quartz-community/graph"
+    enabled: true
+    options:
+      localGraph:
+        showTags: false
+        depth: 1
+      globalGraph:
+        showTags: false
+    layout:
+      position: right
+      priority: 0
+  - source: "@quartz-community/comments"
+    enabled: true
+    options:
+      provider: giscus
+      options:
+        repo: Atlasroar/Kenshi-Modding-Wiki
+        repoId: R_kgDOVvcLwA
+        category: General
+        categoryId: DIC_kwDOVvcLwM4DLMsQ
+        mapping: pathname
+        strict: true
+        reactionsEnabled: true
+        inputPosition: top
+        themeUrl: https://giscus.app/themes
+        lightTheme: light
+        darkTheme: dark_dimmed
+        lang: en
+    layout:
+      position: afterBody
+      priority: 10
+      condition: not-index
+  - source: "@quartz-community/og-image"
+    enabled: true
+    options:
+      colorScheme: darkMode
+      width: 1200
+      height: 630
   - source: "@quartz-community/breadcrumbs"
     enabled: true
     layout:
@@ -132,13 +175,6 @@ layout:
       gap: 0.5rem
   byPageType:
     "404":
+      template: default
       positions:
         beforeBody: []
-        left: []
-        right: []
-    folder:
-      positions:
-        right: []
-    tag:
-      positions:
-        right: []

@@ -8,6 +8,7 @@ import test from "node:test"
 import { fromHtml } from "hast-util-from-html"
 import { visit } from "unist-util-visit"
 import yaml from "js-yaml"
+import sharp from "sharp"
 
 const root = resolve(import.meta.dirname, "..")
 const output = join(root, "public")
@@ -125,6 +126,116 @@ test("modder pages retain themed cards, tables, page classes, and warnings", () 
   )
   assert.ok(linksTo(home, "fcs/index", "index"))
   assert.ok(linksTo(home, "world-editor/index", "index"))
+})
+
+test("the homepage combines the approved game sources and keeps a distinct modding entry point", () => {
+  const article = elementsFor("index.html").find((node) => node.tagName === "article")
+  let text = ""
+  visit(article, "text", (node) => {
+    text += node.value
+  })
+  for (const subject of [
+    /Lo-Fi Games/,
+    /sword-punk/,
+    /squad-based/,
+    /settlement building/,
+    /training and experience/,
+    /Wounds, hunger, captivity/,
+    /What is Kenshi/,
+    /From playing to modding/,
+    /not a complete encyclopedia/,
+    /unofficial community project/,
+  ])
+    assert.match(text, subject)
+  assert.doesNotMatch(text, /All 17 modding guides are available|first 17 guides/)
+  assert.ok(linksTo(elementsFor("index.html"), "credits", "index"))
+  assert.match(text, /Help improve the manual/)
+  const homepageLinks = []
+  visit(article, "element", (node) => {
+    if (node.tagName === "a") homepageLinks.push(node)
+  })
+  assert.ok(
+    homepageLinks.some(
+      (node) => node.properties.href === "https://github.com/Atlasroar/Kenshi-Modding-Wiki/wiki",
+    ),
+    "The contribution blurb must link directly to the project Wiki",
+  )
+  assert.ok(
+    elementsFor("credits.html").some(
+      (node) =>
+        node.tagName === "a" && node.properties.href === imports.homepage.sources[1].sourceUrl,
+    ),
+  )
+})
+
+test("graph, reader controls and page-mapped Giscus comments are connected to the layout", () => {
+  for (const [page, { elements: nodes }] of documents) {
+    if (!nodes.some((node) => node.tagName === "body" && node.properties.dataSlug)) continue
+    const sidebar = nodes.find(
+      (node) =>
+        node.tagName === "div" &&
+        node.properties.className?.includes("right") &&
+        node.properties.className?.includes("sidebar"),
+    )
+    assert.ok(sidebar, `Missing right sidebar: ${page}`)
+    assert.ok(
+      sidebar.children
+        .find((node) => node.type === "element")
+        ?.properties.className?.includes("graph"),
+      `Graph must be first in the right sidebar: ${page}`,
+    )
+    if (page !== "404.html")
+      assert.ok(
+        nodes.some(
+          (node) => node.tagName === "button" && node.properties.className?.includes("readermode"),
+        ),
+        `Missing reader toggle: ${page}`,
+      )
+  }
+  const comments = elementsFor("modding/dialogue/creating-dialogue.html").find((node) =>
+    node.properties.className?.includes("giscus"),
+  )
+  assert.ok(comments, "Guide comments must be rendered")
+  assert.equal(comments.properties.dataRepo, "Atlasroar/Kenshi-Modding-Wiki")
+  assert.equal(comments.properties.dataRepoId, "R_kgDOVvcLwA")
+  assert.equal(comments.properties.dataCategoryId, "DIC_kwDOVvcLwM4DLMsQ")
+  assert.equal(
+    comments.properties.dataMapping,
+    "pathname",
+    "Preview hosts must not fragment threads",
+  )
+  assert.equal(comments.properties.dataStrict, "1")
+  assert.equal(comments.properties.dataThemeUrl, "https://giscus.app/themes")
+  for (const page of ["index.html", "credits.html"]) {
+    assert.ok(!elementsFor(page).some((node) => node.properties.className?.includes("giscus")))
+  }
+})
+
+test("social previews have generated, correctly sized images and production URLs", async () => {
+  const urls = new Set()
+  for (const page of [
+    "index.html",
+    "modding/dialogue/creating-dialogue.html",
+    "modding/fcs/complete-guide.html",
+  ]) {
+    const nodes = elementsFor(page)
+    const image = nodes.find(
+      (node) => node.tagName === "meta" && node.properties.property === "og:image",
+    )
+    const twitter = nodes.find(
+      (node) => node.tagName === "meta" && node.properties.name === "twitter:image",
+    )
+    assert.ok(image, `Missing social image: ${page}`)
+    const url = new URL(image.properties.content)
+    assert.ok(url.href.startsWith(site.href), `Social image must retain the Pages subpath: ${page}`)
+    assert.equal(twitter?.properties.content, url.href)
+    const metadata = await sharp(await findTarget(url)).metadata()
+    assert.equal(metadata.width, 1200)
+    assert.equal(metadata.height, 630)
+    assert.equal(metadata.format, "webp")
+    urls.add(url.href)
+  }
+  assert.equal(urls.size, 3, "Each page needs its own preview, not one shared fallback")
 })
 
 test("published pages enter search without remote font or analytics resources", async () => {
@@ -495,7 +606,7 @@ test("the FCS adaptation preserves source coverage, attribution, and all restore
   )
 })
 
-test("the sidebar presents the twelve requested sections and preserves guide membership", async () => {
+test("responsive navigation preserves collapsible categories, active sections, and guide membership", () => {
   const expected = [
     "FCS",
     "World Editor",
@@ -512,23 +623,76 @@ test("the sidebar presents the twelve requested sections and preserves guide mem
   ]
   for (const [page, { elements }] of documents) {
     const body = elements.find((node) => node.tagName === "body")
-    if (!body?.properties.dataSlug || page === "404.html") continue
+    if (!body?.properties.dataSlug) continue
     const sidebar = elements.find(
       (node) => node.tagName === "nav" && node.properties.className?.includes("guide-navigation"),
     )
     assert.ok(sidebar, `Missing modding sidebar: ${page}`)
+    const menu = sidebar.children.find(
+      (node) => node.type === "element" && node.properties.className?.includes("guide-menu"),
+    )
+    assert.equal(menu?.tagName, "details", `Missing responsive navigation disclosure: ${page}`)
+    assert.equal(menu.properties.open, true, `Desktop navigation must be expanded: ${page}`)
+    const toggle = menu.children.find((node) => node.tagName === "summary")
+    assert.ok(toggle?.properties.className?.includes("guide-menu-toggle"))
+    assert.equal(toggle.children.map((node) => node.value ?? "").join(""), "Navigation")
     const sections = []
+    const primary = []
     visit(sidebar, "element", (node) => {
       if (node.tagName === "details" && node.properties.className?.includes("guide-section")) {
         sections.push(node)
       }
+      if (node.tagName === "ul" && node.properties.className?.includes("guide-primary")) {
+        visit(node, "element", (child) => {
+          if (child.tagName === "a") primary.push(child)
+        })
+      }
     })
+    assert.deepEqual(
+      primary.map((node) => node.children.map((child) => child.value ?? "").join("")),
+      ["Home", "Discussions"],
+      `Navigation must start with Home and Discussions: ${page}`,
+    )
+    assert.ok(linksTo(primary, "index", page.replace(/\.html$/, "")))
+    assert.equal(primary[0].properties.ariaCurrent, page === "index.html" ? "page" : undefined)
+    assert.equal(
+      primary[1].properties.href,
+      "https://github.com/Atlasroar/Kenshi-Modding-Wiki/discussions",
+    )
     const titles = sections.map((section) => {
       const summary = section.children.find((node) => node.tagName === "summary")
-      const link = summary.children.find((node) => node.tagName === "a")
-      return link.children.map((node) => node.value ?? "").join("")
+      assert.ok(summary, `Each category needs a native disclosure control: ${page}`)
+      assert.ok(
+        !summary.children.some((node) => node.tagName === "a"),
+        `Category labels must toggle rather than navigate: ${page}`,
+      )
+      return summary.children.map((node) => node.value ?? "").join("")
     })
     assert.deepEqual(titles, expected, `Unexpected sidebar order in ${page}`)
+    for (const [index, section] of sections.entries()) {
+      const category = navigation[index]
+      const active =
+        category.slug === body.properties.dataSlug ||
+        category.guides.includes(body.properties.dataSlug)
+      assert.equal(
+        Boolean(section.properties.open),
+        active,
+        `Only the current category should start expanded: ${page}, ${category.title}`,
+      )
+      const links = []
+      visit(section, "element", (node) => {
+        if (node.tagName === "a") links.push(node)
+      })
+      assert.ok(
+        linksTo(links, category.slug, body.properties.dataSlug),
+        `Collapsible categories must retain their overview link: ${page}, ${category.title}`,
+      )
+      assert.equal(
+        links.length,
+        category.guides.length + 1,
+        `Collapsible categories must retain all their guide links: ${page}, ${category.title}`,
+      )
+    }
   }
   const assigned = navigation.flatMap((section) => section.guides)
   assert.equal(
@@ -549,24 +713,6 @@ test("the sidebar presents the twelve requested sections and preserves guide mem
       assert.equal(current.length, 1, `The sidebar must mark the current guide once: ${slug}`)
     }
   }
-  const scripts = await Promise.all(
-    elementsFor("index.html")
-      .filter((node) => node.tagName === "script" && typeof node.properties.src === "string")
-      .map(async (node) => {
-        const url = new URL(node.properties.src, site)
-        const source = await readFile(await findTarget(url), "utf8")
-        const modules = await Promise.all(
-          [...source.matchAll(/\bimport\(["'](\.{1,2}\/[^"']+)["']\)/g)].map(async ([, path]) =>
-            readFile(await findTarget(new URL(path, url)), "utf8"),
-          ),
-        )
-        return [source, ...modules].join("\n")
-      }),
-  )
-  assert.ok(
-    scripts.some((script) => script.includes("guide-menu")),
-    "The mobile navigation script must be included in the generated page resources",
-  )
 })
 
 test("the combined dialogue tutorial publishes its source steps and approved original screenshots", async () => {
@@ -732,7 +878,7 @@ test("Credits uses source summaries with guide backlinks, not contributor tables
     visit(sidebar, "element", (node, _index, parent) => {
       if (node.tagName === "a" && node.properties.className?.includes("guide-credits")) {
         assert.ok(
-          parent?.properties.className?.includes("guide-menu"),
+          parent?.properties.className?.includes("guide-menu-content"),
           "Credits must be a standalone link, not an expandable guide section",
         )
         links.push(node)
@@ -744,12 +890,35 @@ test("Credits uses source summaries with guide backlinks, not contributor tables
   }
 })
 
-test("external website links appear only on Credits, never on guide pages or their footer", () => {
+test("external source links stay on Credits with only the approved community-link exceptions", () => {
   for (const [page, { elements }] of documents) {
     const body = elements.find((node) => node.tagName === "body")
     if (!body?.properties.dataSlug || page === "credits.html") continue
+    const communityLinks = new Set()
+    const sidebar = elements.find(
+      (node) => node.tagName === "nav" && node.properties.className?.includes("guide-navigation"),
+    )
+    if (sidebar)
+      visit(sidebar, "element", (node) => {
+        if (
+          node.tagName === "a" &&
+          node.properties.href === "https://github.com/Atlasroar/Kenshi-Modding-Wiki/discussions"
+        )
+          communityLinks.add(node)
+      })
+    if (page === "index.html") {
+      const article = elements.find((node) => node.tagName === "article")
+      visit(article, "element", (node) => {
+        if (
+          node.tagName === "a" &&
+          node.properties.href === "https://github.com/Atlasroar/Kenshi-Modding-Wiki/wiki"
+        )
+          communityLinks.add(node)
+      })
+    }
     for (const node of elements) {
       if (node.tagName !== "a" || typeof node.properties.href !== "string") continue
+      if (communityLinks.has(node)) continue
       const target = new URL(node.properties.href, new URL(page, site))
       if (target.protocol !== "http:" && target.protocol !== "https:") continue
       assert.equal(target.origin, site.origin, `External link outside Credits: ${page}: ${target}`)

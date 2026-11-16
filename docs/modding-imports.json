@@ -2,6 +2,29 @@
   "sourceCollection": "Kenshi Modding Wiki",
   "scope": "The 17 owner-cleared modding guides, not the larger reference library",
   "imagePolicy": "The initial placeholder audit is preserved. Approved image reuse is recorded per guide without replacing original source fingerprints or image-position records.",
+  "homepage": {
+    "slug": "index",
+    "changes": "Rewrote and combined the supplied Kenshi note's factual game overview and the Wiki introduction into a distinct modding-site homepage. Added internal topic routes and clear coverage limits. Did not copy source promotional prose, images, videos, community statistics or hardware recommendations.",
+    "sources": [
+      {
+        "source": "Kenshi.md",
+        "sourceCollection": "Owner-supplied Kenshi vault",
+        "sourceSha256": "95c13eaf5cad2418f2a468234546dde612d9854b4baede9a8d13040c29a6182d",
+        "coverage": "Squad control, skill progression, settlement building, injuries, survival and open-ended play. The note cites Lo-Fi Games and the Steam listing."
+      },
+      {
+        "source": "Kenshi Wiki",
+        "sourceUrl": "https://kenshi.fandom.com/wiki/Kenshi_Wiki",
+        "revision": 75072,
+        "revisionTimestamp": "2021-07-13T16:30:30Z",
+        "sourceSha256": "7c009be38d01176fb6f5d1a990b59361b9edfd79bc2fee22131d5fe8ca69facc",
+        "fingerprintScope": "UTF-8 wikitext returned by MediaWiki parse API for oldid 75072.",
+        "textLicense": "CC BY-SA 3.0 Unported",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "coverage": "Sword-punk game introduction, open-world/squad/city-building context and community-reference purpose. Contributor history and adaptation license are linked on Credits."
+      }
+    ]
+  },
   "additionalGuides": [
     {
       "slug": "modding/dialogue/creating-dialogue",

@@ -2,10 +2,28 @@
 title: Credits
 description: What information the guides use, where it came from, and where it appears.
 publish: true
+comments: false
 ---
 
 Each source below describes the information used and links back to the guide
 where it appears. Original source terms still apply.
+
+## Homepage sources
+
+The owner-supplied _Kenshi_ note provided the overview of squad control, skills,
+base building, injuries, survival, and open-ended play. It cites the
+[Kenshi Steam listing](https://store.steampowered.com/app/233860/Kenshi/) and
+[Lo-Fi Games](https://lofigames.com/) for its game information.
+The [Kenshi Wiki homepage](https://kenshi.fandom.com/wiki/Kenshi_Wiki)
+([revision 75072](https://kenshi.fandom.com/wiki/Kenshi_Wiki?oldid=75072),
+[contributor history](https://kenshi.fandom.com/wiki/Kenshi_Wiki?action=history))
+provided the sword-punk game introduction and community-reference context.
+Used on [[index|Kenshi. A world worth changing.]].
+The descriptions were rewritten, combined, and connected to this site's modding
+guides; source promotional prose, artwork, trailers, live statistics, and
+hardware recommendations were not copied. Wiki-derived adaptations are credited
+to the Kenshi Wiki contributors under
+[CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/).
 
 ## Guide credits
 

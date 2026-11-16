@@ -1,23 +1,35 @@
 document.addEventListener("nav", () => {
   const menu = document.querySelector<HTMLDetailsElement>(".guide-menu")
-  if (!menu) return
+  const toggle = menu?.querySelector<HTMLElement>(".guide-menu-toggle")
+  if (!menu || !toggle) return
 
   const mobile = window.matchMedia("(max-width: 800px)")
-  const update = () => {
+  const updateLayout = () => {
     menu.open = !mobile.matches
   }
+  const closeMenu = () => {
+    menu.open = false
+    toggle.focus()
+  }
   const onKeydown = (event: KeyboardEvent) => {
-    if (event.key === "Escape" && mobile.matches && menu.open) {
-      menu.open = false
-      menu.querySelector("summary")?.focus()
+    if (mobile.matches && menu.open && event.key === "Escape") {
+      event.preventDefault()
+      closeMenu()
     }
   }
-  update()
-  mobile.addEventListener("change", update)
+  const onClick = (event: MouseEvent) => {
+    if (!mobile.matches || !menu.open || !(event.target instanceof Element)) return
+    if (event.target.closest("a") || !menu.contains(event.target)) menu.open = false
+  }
+
+  updateLayout()
+  mobile.addEventListener("change", updateLayout)
   menu.addEventListener("keydown", onKeydown)
+  document.addEventListener("click", onClick)
   window.addCleanup(() => {
-    mobile.removeEventListener("change", update)
+    mobile.removeEventListener("change", updateLayout)
     menu.removeEventListener("keydown", onKeydown)
+    document.removeEventListener("click", onClick)
   })
 })
 
