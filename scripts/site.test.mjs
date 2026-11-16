@@ -17,6 +17,11 @@ const imports = JSON.parse(await readFile(join(root, "docs", "modding-imports.js
 const retiredSlugs = new Set(imports.retiredGuides.map((guide) => guide.slug))
 const activeImports = imports.guides.filter((guide) => !retiredSlugs.has(guide.slug))
 const navigation = JSON.parse(await readFile(join(root, "site", "navigation.json"), "utf8"))
+function flattenNavigation(sections) {
+  return sections.flatMap((section) => [section, ...flattenNavigation(section.children ?? [])])
+}
+const navigationSections = flattenNavigation(navigation)
+const assignedGuides = navigationSections.flatMap((section) => section.guides)
 const site = new URL(`https://${config.configuration.baseUrl}/`)
 const documents = new Map()
 
@@ -499,7 +504,7 @@ test("the complete guide preserves consolidated content without retired pages", 
 
 test("the FCS adaptation preserves source coverage, attribution, and all restored original screenshots", async () => {
   const index = JSON.parse(await readFile(join(output, "static", "contentIndex.json"), "utf8"))
-  const assigned = navigation.flatMap((section) => section.guides)
+  const assigned = assignedGuides
   const credits = elementsFor("credits.html")
   assert.ok(
     credits.some(
@@ -619,7 +624,7 @@ test("responsive navigation preserves collapsible categories, active sections, a
     "Town",
     "3D Assets",
     "Animations",
-    "reKenshi",
+    "reKenshi & KenshiLib",
   ]
   for (const [page, { elements }] of documents) {
     const body = elements.find((node) => node.tagName === "body")
@@ -636,11 +641,17 @@ test("responsive navigation preserves collapsible categories, active sections, a
     const toggle = menu.children.find((node) => node.tagName === "summary")
     assert.ok(toggle?.properties.className?.includes("guide-menu-toggle"))
     assert.equal(toggle.children.map((node) => node.value ?? "").join(""), "Navigation")
-    const sections = []
+    const rootList = elements.find(
+      (node) => node.tagName === "ul" && node.properties.className?.includes("guide-sections"),
+    )
+    const sections = rootList.children.flatMap((node) =>
+      (node.children ?? []).filter((child) => child.tagName === "details"),
+    )
+    const allSections = []
     const primary = []
     visit(sidebar, "element", (node) => {
       if (node.tagName === "details" && node.properties.className?.includes("guide-section")) {
-        sections.push(node)
+        allSections.push(node)
       }
       if (node.tagName === "ul" && node.properties.className?.includes("guide-primary")) {
         visit(node, "element", (child) => {
@@ -669,11 +680,18 @@ test("responsive navigation preserves collapsible categories, active sections, a
       return summary.children.map((node) => node.value ?? "").join("")
     })
     assert.deepEqual(titles, expected, `Unexpected sidebar order in ${page}`)
-    for (const [index, section] of sections.entries()) {
-      const category = navigation[index]
-      const active =
-        category.slug === body.properties.dataSlug ||
-        category.guides.includes(body.properties.dataSlug)
+    assert.equal(
+      allSections.length,
+      navigationSections.length,
+      `All nested categories must be rendered: ${page}`,
+    )
+    for (const [index, section] of allSections.entries()) {
+      const category = navigationSections[index]
+      const descendants = flattenNavigation([category])
+      const slugs = descendants.flatMap((entry) => [entry.slug, ...entry.guides])
+      const active = slugs.includes(body.properties.dataSlug)
+      const summary = section.children.find((node) => node.tagName === "summary")
+      assert.equal(summary.children.map((node) => node.value ?? "").join(""), category.title)
       assert.equal(
         Boolean(section.properties.open),
         active,
@@ -689,12 +707,12 @@ test("responsive navigation preserves collapsible categories, active sections, a
       )
       assert.equal(
         links.length,
-        category.guides.length + 1,
+        slugs.length,
         `Collapsible categories must retain all their guide links: ${page}, ${category.title}`,
       )
     }
   }
-  const assigned = navigation.flatMap((section) => section.guides)
+  const assigned = assignedGuides
   assert.equal(
     new Set(assigned).size,
     assigned.length,
@@ -702,7 +720,7 @@ test("responsive navigation preserves collapsible categories, active sections, a
   )
   for (const { slug } of activeImports)
     assert.ok(assigned.includes(slug), `Unassigned guide: ${slug}`)
-  for (const section of navigation) {
+  for (const section of navigationSections) {
     const nodes = elementsFor(section.slug + ".html")
     assert.ok(linksTo(elementsFor("modding/index.html"), section.slug, "modding/index"))
     for (const slug of section.guides) {
@@ -712,6 +730,71 @@ test("responsive navigation preserves collapsible categories, active sections, a
       )
       assert.equal(current.length, 1, `The sidebar must mark the current guide once: ${slug}`)
     }
+  }
+})
+
+test("project guides retain all wiki topics, valid configurations, source cautions, and original images", async () => {
+  const project = imports.projectGuides
+  const index = JSON.parse(await readFile(join(output, "static", "contentIndex.json"), "utf8"))
+  const pages = project.sources.flatMap((source) => source.pages ?? [])
+  assert.equal(pages.length, 9, "Import both overviews and all seven source topic pages")
+  const credits = elementsFor("credits.html")
+  const imageUrls = new Set()
+  for (const { slug } of pages) {
+    assert.ok(index[slug], `Project page must be searchable: ${slug}`)
+    assert.ok(linksTo(credits, slug, "credits"), `Project source needs a backlink: ${slug}`)
+    assert.ok(linksTo(elementsFor("modding/index.html"), slug, "modding/index"))
+    const article = elementsFor(slug + ".html").find((node) => node.tagName === "article")
+    visit(article, "element", (node) => {
+      if (node.tagName === "img")
+        imageUrls.add(new URL(node.properties.src, new URL(slug + ".html", site)).href)
+    })
+    const source = await readFile(join(root, "content", ...slug.split("/")) + ".md", "utf8")
+    for (const [, json] of source.matchAll(/```json\s*\n([\s\S]*?)```/g)) {
+      const config = JSON.parse(json)
+      assert.ok(config.FileRebinds || config.SoundBanks, `Unexpected mod configuration: ${slug}`)
+      if (config.FileRebinds)
+        assert.ok(
+          Object.hasOwn(config.FileRebinds, "data\\newland/land\\fullmap.tif"),
+          `Keep the source's exact mixed-separator runtime path: ${slug}`,
+        )
+    }
+  }
+  assert.equal(imageUrls.size, 26, "Publish only the selected source screenshots")
+  for (const image of project.images) {
+    const url = new URL(image.asset, site)
+    assert.ok(imageUrls.has(url.href), `Unused screenshot in provenance: ${image.asset}`)
+    const file = await readFile(await findTarget(url))
+    assert.equal(
+      createHash("sha256").update(file).digest("hex"),
+      image.sha256,
+      `Preserve original screenshot bytes: ${image.asset}`,
+    )
+    const metadata = await sharp(file).metadata()
+    assert.equal(metadata.width, image.width)
+    assert.equal(metadata.height, image.height)
+    for (const slug of image.usedOn)
+      assert.ok(
+        elementsFor(slug + ".html").some(
+          (node) =>
+            node.tagName === "img" &&
+            new URL(node.properties.src, new URL(slug + ".html", site)).href === url.href,
+        ),
+        `Missing contextual screenshot: ${slug}, ${image.asset}`,
+      )
+  }
+  for (const [slug, cautions] of [
+    ["rekenshi/features", [/0\.2\.18/, /500 MB/, /IgnoreHash/, /not.*unsupported version/s]],
+    ["rekenshi/faq", [/work in progress/i, /Crash dumps can contain identifying data/]],
+    ["rekenshi/sound-banks", [/work in progress/i, /2014\.1\.3/, /44\.1 kHz/]],
+    ["rekenshi/kenshilib/hooks", [/GetRealAddress/, /TODO/, /not currently exported/]],
+  ]) {
+    const article = elementsFor(slug + ".html").find((node) => node.tagName === "article")
+    let text = ""
+    visit(article, "text", (node) => {
+      text += node.value
+    })
+    for (const caution of cautions) assert.match(text, caution)
   }
 })
 
@@ -817,7 +900,7 @@ test("Credits uses source summaries with guide backlinks, not contributor tables
       paragraphs.push({ elements, text })
     }
   })
-  for (const slug of navigation.flatMap((section) => section.guides)) {
+  for (const slug of assignedGuides) {
     assert.ok(
       paragraphs.some(
         (paragraph) =>
