@@ -69,7 +69,7 @@ Browse [[modding/index|all available modding guides]], or follow a subject:
 - **Behavior and consequences:** [[dialogue/index|Dialogue]],
   [[ai-packages/index|AI Packages]], and [[world-states/index|World States]].
 - **Art and extended tools:** [[3d-assets/index|3D Assets]],
-  [[animations/index|Animations]], and [[rekenshi/index|reKenshi]].
+  [[animations/index|Animations]], and [[rekenshi/index|reKenshi & KenshiLib]].
 
 Some subjects are still awaiting dedicated guides. Coverage plans are clearly
 separated from instructions, and unfinished references and missing illustrations

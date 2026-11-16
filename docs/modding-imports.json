@@ -1181,5 +1181,339 @@
         }
       ]
     }
-  ]
+  ],
+  "projectGuides": {
+    "scope": "Two project overviews plus all seven topic pages requested after scope clarification; Steam facts combined into reKenshi Overview. Original factual wording, version boundaries and unfinished-source warnings retained.",
+    "sources": [
+      {
+        "id": "rekenshi-wiki",
+        "sourceUrl": "https://github.com/BFrizzleFoShizzle/RE_Kenshi/wiki",
+        "revision": "92f65c43b147936f5592ff07e0a5f2f71e000548",
+        "pages": [
+          {
+            "sourceFile": "Home.md",
+            "sourceSha256": "9d7bb52e94fedf16ae98070e6a15fdf1bc1c5885a27f1b9f3a451d6f3621c9b1",
+            "slug": "rekenshi/overview"
+          },
+          {
+            "sourceFile": "RE_Kenshi-Features.md",
+            "sourceSha256": "b54223bcb421d224a4883c29186f06d81a66b20a1a628e2b363dff6893167249",
+            "slug": "rekenshi/features"
+          },
+          {
+            "sourceFile": "FAQ--and-Common-problems-(WIP).md",
+            "sourceSha256": "c77eed5c4b52413f2f9c87f9e284466f5bb46e612a387cd877ab47657e7741bf",
+            "slug": "rekenshi/faq"
+          },
+          {
+            "sourceFile": "Using-RE_Kenshi-to-mod-hard-coded-file-paths.md",
+            "sourceSha256": "67e74fb7aad4f0fa04ccd82a26c9de99a2e7042174735cd8cd19792df5d19079",
+            "slug": "rekenshi/file-rebinding"
+          },
+          {
+            "sourceFile": "Finding-file-paths-for-rebinding.md",
+            "sourceSha256": "63e2a39a87b807532ec294fdc6748166bdc111d6ae49567eba462575fe8ab490",
+            "slug": "rekenshi/finding-file-paths"
+          },
+          {
+            "sourceFile": "Loading-the-heightmap-from-your-mods-folder.md",
+            "sourceSha256": "69cdb77189af2d3900f79a7c42260e1e0a4453aa70e7126b1b3496993205815a",
+            "slug": "rekenshi/heightmaps"
+          },
+          {
+            "sourceFile": "Using-RE_Kenshi-to-mod-sound-banks.md",
+            "sourceSha256": "01beb7013f61314896e78ffc9076ea9b1b085d6531d7db457a1321387cf6b422",
+            "slug": "rekenshi/sound-banks"
+          }
+        ]
+      },
+      {
+        "id": "kenshilib-wiki",
+        "sourceUrl": "https://github.com/BFrizzleFoShizzle/KenshiLib/wiki",
+        "revision": "ee12f0b843944ac17e54bbfeb5e6217ae6362038",
+        "pages": [
+          {
+            "sourceFile": "Home.md",
+            "sourceSha256": "85f9c4c8bf32fd018254d2e67045cd519f47b0a924fe84769e4eacf3d9a61c3a",
+            "slug": "rekenshi/kenshilib/index"
+          },
+          {
+            "sourceFile": "Hooking-functions.md",
+            "sourceSha256": "499a003b45406a032038119f88b691fd0973c70ecda2f776e8733f4944cfb80a",
+            "slug": "rekenshi/kenshilib/hooks"
+          }
+        ]
+      },
+      {
+        "id": "steam-rekenshi",
+        "sourceUrl": "https://steamcommunity.com/sharedfiles/filedetails/?id=3766654540",
+        "title": "The Ultimate Guide To RE_Kenshi / ReKenshi",
+        "sourceSha256": "482063aebe7fe7800f819222c9876bcdf2f9468184cd9f70f16a0f79dfa94b22",
+        "permission": "The owner identified this as their original guide and explicitly confirmed permission to reuse the supplied images. Existing source and collaborator terms remain applicable.",
+        "extractionScope": "Only the public guide sections were used. Saved HTML, account/header data, scripts, styles, avatars, preview cards, video embeds and decorative GPL logos are not published."
+      },
+      {
+        "id": "rekenshi-release",
+        "sourceUrl": "https://github.com/BFrizzleFoShizzle/RE_Kenshi/releases/tag/v0.3.5",
+        "checkedVersion": "0.3.5",
+        "readmeRevision": "c8dfbc9621b9263863722852f819c4c0f440475a",
+        "coverage": "Supported Steam/GOG game versions, compatible executable, installer/manual installation and removal."
+      },
+      {
+        "id": "kenshilib-reference",
+        "sourceUrl": "https://github.com/BFrizzleFoShizzle/KenshiLib/tree/1ce4a163739bbdf17254259039d7aa74fcc11cc0",
+        "revision": "1ce4a163739bbdf17254259039d7aa74fcc11cc0",
+        "sourceFiles": ["README.md", "Include/core/Functions.h"],
+        "coverage": "Compiler/dependency requirements, GPLv3 and thread safety, exact hook API signatures. No untested native binary was built."
+      }
+    ],
+    "images": [
+      {
+        "asset": "assets/rekenshi/emergency-save.png",
+        "source": "steam-rekenshi",
+        "sourceFile": "3766654540_preview_847-1683619905-39277443.png",
+        "sha256": "c1eb1f81f440b24b4298d6ba984a827383484bd3a23fd9e4fc411330d15bc0dd",
+        "width": 826,
+        "height": 546,
+        "usedOn": ["rekenshi/overview", "rekenshi/features"]
+      },
+      {
+        "asset": "assets/rekenshi/installer-download.png",
+        "source": "steam-rekenshi",
+        "sourceFile": "3766654540_preview_weq3rt4gewfads.PNG",
+        "sha256": "49cd7b55596497310bf172f303863f0d4e38af293e004e001df9a7b807d227a0",
+        "width": 1313,
+        "height": 862,
+        "usedOn": ["rekenshi/overview"]
+      },
+      {
+        "asset": "assets/rekenshi/installer-path.png",
+        "source": "steam-rekenshi",
+        "sourceFile": "3766654540_preview_243rt4grwf.PNG",
+        "sha256": "5d02c05061f61b5723f35bd2b186690a75b51939d0d21469861b887c68dc5997",
+        "width": 1143,
+        "height": 808,
+        "usedOn": ["rekenshi/overview"]
+      },
+      {
+        "asset": "assets/rekenshi/game-speed-settings.png",
+        "source": "steam-rekenshi",
+        "sourceFile": "3766654540_preview_newgamespeedcontrolsandgui.png",
+        "sha256": "7bff6a9dd7e2742be931553565a65cae1c91da54c44cbc6cd8eade0c0e767649",
+        "width": 685,
+        "height": 1080,
+        "usedOn": ["rekenshi/overview"]
+      },
+      {
+        "asset": "assets/rekenshi/game-speed-controls.png",
+        "source": "steam-rekenshi",
+        "sourceFile": "3766654540_preview_gamespeedcontrolsexplained.png",
+        "sha256": "e6052fed175291baf95205d966245d8fcaa290cb34b6d8e0a938fdd818e3eee9",
+        "width": 600,
+        "height": 360,
+        "usedOn": ["rekenshi/overview"]
+      },
+      {
+        "asset": "assets/rekenshi/support-role.png",
+        "source": "steam-rekenshi",
+        "sourceFile": "3766654540_preview_2345t5.PNG",
+        "sha256": "7a0fc210fab09586952343dc6fb05e2c895b9ebe5b40ce06997f2842897a0df2",
+        "width": 935,
+        "height": 421,
+        "usedOn": ["rekenshi/overview"]
+      },
+      {
+        "asset": "assets/rekenshi/support-channels.png",
+        "source": "steam-rekenshi",
+        "sourceFile": "3766654540_preview_2134.PNG",
+        "sha256": "f0c38ed5e9d027421bd7bef473b439f5a18c9ec32caf2f0af38eab3eab4f5182",
+        "width": 313,
+        "height": 321,
+        "usedOn": ["rekenshi/overview"]
+      },
+      {
+        "asset": "assets/rekenshi/report-bug.png",
+        "source": "steam-rekenshi",
+        "sourceFile": "3766654540_preview_reportbugrekenshi.png",
+        "sha256": "fe5ac892eaf15690b33a471a64b350cacee3710f2332415a61c08778e937d3ef",
+        "width": 1434,
+        "height": 1080,
+        "usedOn": ["rekenshi/overview"]
+      },
+      {
+        "asset": "assets/rekenshi/log-file-io.png",
+        "source": "rekenshi-wiki",
+        "sourceFile": "images/log_file_io.png",
+        "sha256": "99e5cd415946864157d5fc13b121deb78e242e5a6e0219612bbdefb0ac4f49e7",
+        "width": 614,
+        "height": 614,
+        "usedOn": ["rekenshi/finding-file-paths"]
+      },
+      {
+        "asset": "assets/rekenshi/file-io-log-folder.png",
+        "source": "rekenshi-wiki",
+        "sourceFile": "images/FileIOLog_folder.png",
+        "sha256": "7d47e04bd9a9face21f16403ddd82c92c9ab4029ba54a8ee424230257be50311",
+        "width": 711,
+        "height": 237,
+        "usedOn": ["rekenshi/finding-file-paths"]
+      },
+      {
+        "asset": "assets/rekenshi/file-io-log-heightmap.png",
+        "source": "rekenshi-wiki",
+        "sourceFile": "images/FileIOLog_fullmap.png",
+        "sha256": "9a17975711d0b1e9beeefafce1d20372ed5f055f73f2f8e3d5cc052c63016175",
+        "width": 946,
+        "height": 576,
+        "usedOn": ["rekenshi/finding-file-paths"]
+      },
+      {
+        "asset": "assets/rekenshi/fcs-heightmap-mod.png",
+        "source": "rekenshi-wiki",
+        "sourceFile": "images/fcs_heightmap_mod.png",
+        "sha256": "ea9ce12344e50c36f411e25d78ab9ae52d03e6f91fb7a041e7b2d827ea8fd91a",
+        "width": 225,
+        "height": 125,
+        "usedOn": ["rekenshi/heightmaps"]
+      },
+      {
+        "asset": "assets/rekenshi/heightmap-config-folder.png",
+        "source": "rekenshi-wiki",
+        "sourceFile": "images/RE_Kenshi_json_folder.png",
+        "sha256": "8660fc44b8bf785ee6aebd66d68d40857087c4adacbad2012f5e12ebe325321b",
+        "width": 410,
+        "height": 200,
+        "usedOn": ["rekenshi/heightmaps"]
+      },
+      {
+        "asset": "assets/rekenshi/heightmap-source-folder.png",
+        "source": "rekenshi-wiki",
+        "sourceFile": "images/fullmap_folder.png",
+        "sha256": "995d34d4d5d10ebf40bb1ab93f1d069cbf57199e223f1567f83a9609d376c957",
+        "width": 417,
+        "height": 191,
+        "usedOn": ["rekenshi/heightmaps"]
+      },
+      {
+        "asset": "assets/rekenshi/audio-logging.png",
+        "source": "rekenshi-wiki",
+        "sourceFile": "Using-RE_Kenshi-to-mod-sound-banks.md",
+        "sourceUrl": "https://github.com/BFrizzleFoShizzle/RE_Kenshi/assets/3278884/827dde05-cdf5-4305-ab40-c874d0a2d680",
+        "sha256": "ee151db9bee9453c7f31f97c5e2f78bd1e55fa0aefa0bb44d32e0f09dd6ac760",
+        "width": 606,
+        "height": 597,
+        "usedOn": ["rekenshi/sound-banks"]
+      },
+      {
+        "asset": "assets/rekenshi/audio-events.png",
+        "source": "rekenshi-wiki",
+        "sourceFile": "Using-RE_Kenshi-to-mod-sound-banks.md",
+        "sourceUrl": "https://github.com/BFrizzleFoShizzle/RE_Kenshi/assets/3278884/69f9f4cf-6ccf-4e6a-a5ba-8c55178eb6d3",
+        "sha256": "ce2691be92fb89b3333e1cf1d103b60bf903fecfbb231d6b5e6a4dcb08b6a7ae",
+        "width": 600,
+        "height": 590,
+        "usedOn": ["rekenshi/sound-banks"]
+      },
+      {
+        "asset": "assets/rekenshi/wwise-project.png",
+        "source": "rekenshi-wiki",
+        "sourceFile": "Using-RE_Kenshi-to-mod-sound-banks.md",
+        "sourceUrl": "https://user-images.githubusercontent.com/3278884/172032510-7f6249b9-2f51-4cbe-ab42-63c5355de6ba.png",
+        "sha256": "887f0f0e05c6cc9d39d76a02e951b79ec840a41a8b59b631bd5eaee52ea4f8a1",
+        "width": 1093,
+        "height": 661,
+        "usedOn": ["rekenshi/sound-banks"]
+      },
+      {
+        "asset": "assets/rekenshi/wwise-import.png",
+        "source": "rekenshi-wiki",
+        "sourceFile": "Using-RE_Kenshi-to-mod-sound-banks.md",
+        "sourceUrl": "https://user-images.githubusercontent.com/3278884/172032646-36d60608-fc35-4e84-ace5-78208cefae9a.png",
+        "sha256": "3f2f6f0515f61470dfdedebdc086371957c210bac07407adb196054fd3915514",
+        "width": 1011,
+        "height": 688,
+        "usedOn": ["rekenshi/sound-banks"]
+      },
+      {
+        "asset": "assets/rekenshi/wwise-event.png",
+        "source": "rekenshi-wiki",
+        "sourceFile": "Using-RE_Kenshi-to-mod-sound-banks.md",
+        "sourceUrl": "https://user-images.githubusercontent.com/3278884/172032664-d50440a5-f275-452d-b081-cbb826a49989.png",
+        "sha256": "5f56179bfbeee5dcece2646bf765d8cea857f53fca7f38cda00d1cfef9c928ec",
+        "width": 786,
+        "height": 352,
+        "usedOn": ["rekenshi/sound-banks"]
+      },
+      {
+        "asset": "assets/rekenshi/wwise-event-name.png",
+        "source": "rekenshi-wiki",
+        "sourceFile": "Using-RE_Kenshi-to-mod-sound-banks.md",
+        "sourceUrl": "https://user-images.githubusercontent.com/3278884/172032771-bf615e64-8607-4b6d-8f47-e6be8ab8f2ae.png",
+        "sha256": "6d1d3d5c4ab4bdad1df9f3f236b4d6c0b2cead64f2d6487e3d3287d01cc340f0",
+        "width": 721,
+        "height": 444,
+        "usedOn": ["rekenshi/sound-banks"]
+      },
+      {
+        "asset": "assets/rekenshi/wwise-event-sound.png",
+        "source": "rekenshi-wiki",
+        "sourceFile": "Using-RE_Kenshi-to-mod-sound-banks.md",
+        "sourceUrl": "https://user-images.githubusercontent.com/3278884/172032823-a9264d90-c001-4ef8-8705-7276cb8e4a6c.png",
+        "sha256": "cdb25a7b0ea1067656c256604e08250c37a69b6547734eaa5743361f4193d720",
+        "width": 970,
+        "height": 454,
+        "usedOn": ["rekenshi/sound-banks"]
+      },
+      {
+        "asset": "assets/rekenshi/wwise-bank.png",
+        "source": "rekenshi-wiki",
+        "sourceFile": "Using-RE_Kenshi-to-mod-sound-banks.md",
+        "sourceUrl": "https://user-images.githubusercontent.com/3278884/172032842-2a146425-d0ac-42f3-b829-b080f03bdc1a.png",
+        "sha256": "aaf82089c5cb25bb2b723cda2eb63d4418df7d24a1428eb1a98f188926e90642",
+        "width": 738,
+        "height": 718,
+        "usedOn": ["rekenshi/sound-banks"]
+      },
+      {
+        "asset": "assets/rekenshi/wwise-bank-editor.png",
+        "source": "rekenshi-wiki",
+        "sourceFile": "Using-RE_Kenshi-to-mod-sound-banks.md",
+        "sourceUrl": "https://user-images.githubusercontent.com/3278884/172032859-e663ffe6-69e9-4cf7-91b3-97a6e840d031.png",
+        "sha256": "6289759008601f0e9cc9dd6f63a32faf5795f1ecc7e58a2aa11f0757c3c4b8a9",
+        "width": 834,
+        "height": 506,
+        "usedOn": ["rekenshi/sound-banks"]
+      },
+      {
+        "asset": "assets/rekenshi/wwise-bank-event.png",
+        "source": "rekenshi-wiki",
+        "sourceFile": "Using-RE_Kenshi-to-mod-sound-banks.md",
+        "sourceUrl": "https://user-images.githubusercontent.com/3278884/172032861-53d69590-2705-4f9a-b405-5d17b71a41d6.png",
+        "sha256": "04a07708df5bb6dce7150011d21551ab538547fb2a23645a1c36ae849b593f8c",
+        "width": 752,
+        "height": 445,
+        "usedOn": ["rekenshi/sound-banks"]
+      },
+      {
+        "asset": "assets/rekenshi/wwise-generate.png",
+        "source": "rekenshi-wiki",
+        "sourceFile": "Using-RE_Kenshi-to-mod-sound-banks.md",
+        "sourceUrl": "https://user-images.githubusercontent.com/3278884/172032908-b66364a5-742a-4e6c-8699-41a6f8bd0521.png",
+        "sha256": "14d6363bd6b358f7deb660a362ad1f2d115ee27c798273a8cb4f1abc1acbd04e",
+        "width": 612,
+        "height": 518,
+        "usedOn": ["rekenshi/sound-banks"]
+      },
+      {
+        "asset": "assets/rekenshi/sound-bank-config.png",
+        "source": "rekenshi-wiki",
+        "sourceFile": "Using-RE_Kenshi-to-mod-sound-banks.md",
+        "sourceUrl": "https://user-images.githubusercontent.com/3278884/237029286-39e661b6-5e03-4ca0-a951-0f1a722c3c48.png",
+        "sha256": "0d661488cbb03a6b0967187c702ff318f45d9dfc1f228cee1e50345ac844e91b",
+        "width": 593,
+        "height": 344,
+        "usedOn": ["rekenshi/sound-banks"]
+      }
+    ]
+  }
 }

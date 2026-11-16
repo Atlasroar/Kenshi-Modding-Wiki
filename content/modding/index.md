@@ -4,7 +4,7 @@ description: Browse the modding guides through twelve focused topics.
 publish: true
 ---
 
-Browse the remaining guides from the owner-cleared modding collection.
+Browse guides from the owner-cleared modding collection and reviewed sources.
 The complete FCS guide also includes material adapted from Kenshi Wiki's Using
 the FCS article.
 Choose a topic below, or use search to find a tool, field name, or workflow.
@@ -105,10 +105,24 @@ faction-creation guide has been imported yet.
 - [[modding/assets/multiuser-animations|Multiuser Animation Guides]] discusses
   multi-character seating and animations, including untested ideas.
 
-## reKenshi
+## reKenshi & KenshiLib
 
-[[rekenshi/index|reKenshi]] is ready for future setup, configuration,
-compatibility, and troubleshooting guides. No dedicated guide has been added yet.
+[[rekenshi/index|reKenshi & KenshiLib]] groups player setup and native-plugin
+development without mixing them into ordinary FCS instructions.
+
+- [[rekenshi/overview|reKenshi Overview]] combines installation, settings,
+  Workshop plugins, and the supplied Steam guide.
+- [[rekenshi/features|Features & Settings]] covers documented options and tradeoffs.
+- [[rekenshi/faq|FAQ & Common Problems]] covers versions, DLLs, recruits,
+  Proton troubleshooting, and reporting privacy.
+- [[rekenshi/file-rebinding|File Rebinding]] explains `RE_Kenshi.json` mappings.
+- [[rekenshi/finding-file-paths|Finding File Paths]] covers exact-path logging.
+- [[rekenshi/heightmaps|Loading a Modded Heightmap]] applies rebinding to terrain.
+- [[rekenshi/sound-banks|Sound Banks]] retains the Wwise workflow's **work-in-progress** status.
+- [[rekenshi/kenshilib/index|KenshiLib Overview]] covers the library, dependencies,
+  development precautions, and licensing.
+- [[rekenshi/kenshilib/hooks|Function Hooks]] covers forwarding stubs, compatible
+  hook chains, calling conventions, and unfinished ABI details.
 
 > [!note] About these imports
 > The repository owner has confirmed republication clearance for the collection,

@@ -67,8 +67,27 @@
     "guides": ["modding/assets/multiuser-animations"]
   },
   {
-    "title": "reKenshi",
+    "title": "reKenshi & KenshiLib",
     "slug": "rekenshi/index",
-    "guides": []
+    "guides": [],
+    "children": [
+      {
+        "title": "reKenshi",
+        "slug": "rekenshi/overview",
+        "guides": [
+          "rekenshi/features",
+          "rekenshi/faq",
+          "rekenshi/file-rebinding",
+          "rekenshi/finding-file-paths",
+          "rekenshi/heightmaps",
+          "rekenshi/sound-banks"
+        ]
+      },
+      {
+        "title": "KenshiLib",
+        "slug": "rekenshi/kenshilib/index",
+        "guides": ["rekenshi/kenshilib/hooks"]
+      }
+    ]
   }
 ]
