@@ -116,27 +116,6 @@ plugins:
     layout:
       position: right
       priority: 0
-  - source: "@quartz-community/comments"
-    enabled: true
-    options:
-      provider: giscus
-      options:
-        repo: Atlasroar/Kenshi-Modding-Wiki
-        repoId: R_kgDOVvcLwA
-        category: General
-        categoryId: DIC_kwDOVvcLwM4DLMsQ
-        mapping: pathname
-        strict: true
-        reactionsEnabled: true
-        inputPosition: top
-        themeUrl: https://giscus.app/themes
-        lightTheme: light
-        darkTheme: dark_dimmed
-        lang: en
-    layout:
-      position: afterBody
-      priority: 10
-      condition: not-index
   - source: "@quartz-community/og-image"
     enabled: true
     options:

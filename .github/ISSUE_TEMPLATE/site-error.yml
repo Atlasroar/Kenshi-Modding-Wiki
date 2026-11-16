@@ -1,0 +1,80 @@
+name: Site error
+description: Report broken pages, links, search, layout, accessibility, comments, or publishing.
+title: "[Site error] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Report problems with the guide website, GitHub Wiki, or website build here.
+        For inaccurate modding instructions, use the Correction form instead.
+        Game or plugin bugs should go to the relevant project's support channels.
+
+        Reports are public. Redact personal information, credentials, private paths,
+        and tokens from screenshots and logs. Do not share signed/private URLs.
+  - type: dropdown
+    id: error-types
+    attributes:
+      label: What is affected?
+      multiple: true
+      options:
+        - Page loading, 404, or redirect
+        - Link or heading anchor
+        - Navigation or mobile menu
+        - Search or missing search results
+        - Layout, theme, or readability
+        - Keyboard, screen reader, or accessibility
+        - Image, video, or other media display
+        - Graph view or reader mode
+        - Comments or Discussions integration
+        - Social preview image or metadata
+        - Performance or slow loading
+        - GitHub Wiki access or display
+        - Build or deployment failure
+        - Another site error
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: Affected page or workflow
+      description: Include the public page URL, page name, or failing GitHub Actions run URL.
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: What happened?
+      description: Describe the problem and include the exact error text, if available.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What should have happened?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Include the starting page and actions taken. Say if it is intermittent or cannot be reproduced.
+      placeholder: |
+        1. Open ...
+        2. Select ...
+        3. Observe ...
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Browser and environment
+      description: |
+        If relevant, include browser/version, device/OS, approximate screen size,
+        light/dark theme, and whether reader mode is on. For comments, say whether
+        you were signed in or out without sharing account details.
+        For build failures, identify the workflow instead; browser details are not needed.
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Screenshots or redacted logs
+      description: Attach supporting evidence if useful. Remove private data before uploading.

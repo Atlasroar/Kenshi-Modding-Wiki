@@ -2,6 +2,7 @@ import { loadQuartzConfig, loadQuartzLayout } from "./quartz/plugins/loader/conf
 import { External } from "./quartz/components/external"
 import Flex from "./quartz/components/Flex"
 import GuideNavigation from "./site/GuideNavigation"
+import GuideComments from "./site/GuideComments"
 import SiteFooter from "./site/SiteFooter"
 import { DocumentationRedirects } from "./site/documentationRedirects"
 
@@ -11,6 +12,7 @@ export default config
 export const layout = await loadQuartzLayout({
   defaults: {
     footer: [SiteFooter],
+    afterBody: [GuideComments],
     left: [
       External("PageTitle"),
       Flex({

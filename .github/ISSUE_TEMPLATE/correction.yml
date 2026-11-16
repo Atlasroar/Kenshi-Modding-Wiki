@@ -1,0 +1,57 @@
+name: Correction
+description: Correct inaccurate instructions, examples, wording, version information, or source credits.
+title: "[Correction] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this for guide content and technical Wiki corrections.
+        For a broken website feature, use Site error. For replacement images,
+        use Media submission and link the related correction if needed.
+
+        Reports are public. Do not paste private notes, credentials, personal data,
+        private permission correspondence, or signed/private URLs.
+  - type: dropdown
+    id: correction-types
+    attributes:
+      label: What needs correcting?
+      multiple: true
+      options:
+        - Inaccurate or incomplete modding instructions
+        - Outdated game, tool, or plugin information
+        - Incorrect code or configuration example
+        - Missing warning, prerequisite, or limitation
+        - Typo, wording, or formatting
+        - Source attribution, permission, or license notice
+        - Technical Wiki instructions
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: Page and section
+      description: Include the public page URL or page title and heading.
+    validations:
+      required: true
+  - type: textarea
+    id: current-content
+    attributes:
+      label: What is wrong?
+      description: Identify the specific claim, step, example, or missing information.
+    validations:
+      required: true
+  - type: textarea
+    id: proposed-correction
+    attributes:
+      label: Proposed correction
+      description: Suggest accurate wording or explain what should change. Say if the correct answer is not yet known.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Sources, tested versions, and evidence
+      description: |
+        For factual corrections, include source URLs, relevant game/tool versions,
+        and reproduction or test results. Distinguish tested facts from assumptions.
+        If untested, say so. Simple typos do not need game testing.

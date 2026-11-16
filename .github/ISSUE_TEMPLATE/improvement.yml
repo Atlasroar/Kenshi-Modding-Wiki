@@ -1,21 +1,29 @@
-name: Improve the wiki
-description: Report a guide problem or propose a documentation or website improvement.
+name: Feature or site improvement
+description: Suggest website features, navigation, accessibility, or maintenance improvements.
+title: "[Improvement] "
 body:
   - type: markdown
     attributes:
       value: |
-        Keep reports public-safe. Do not paste private vault notes, credentials,
-        account details, or signed attachment URLs.
-        Website setup, CSS, and contribution documentation belong in the GitHub Wiki.
+        Use the dedicated forms for Site error, Correction, New page submission or
+        request, and Media submission. General modding questions belong in Discussions.
+
+        Keep reports public-safe. Do not paste private notes, credentials,
+        personal data, or signed/private URLs. Website setup, CSS, and contribution
+        documentation belong in the GitHub Wiki, not public guide pages.
   - type: dropdown
     id: area
     attributes:
       label: Area
       options:
-        - Guide correction
-        - New guide
-        - Theme or CSS
+        - Website feature or integration
         - Navigation or search
+        - Theme, layout, or readability
+        - Accessibility or keyboard use
+        - Contribution or review workflow
+        - Build, deployment, or repository maintenance
+        - Technical Wiki organization
+        - Another improvement
     validations:
       required: true
   - type: input
@@ -26,14 +34,19 @@ body:
   - type: textarea
     id: improvement
     attributes:
-      label: What should improve?
-      description: Explain the current problem and the expected result.
+      label: Problem or unmet need
+      description: Explain who is affected and why the current behavior or workflow is insufficient.
     validations:
       required: true
   - type: textarea
-    id: evidence
+    id: proposal
     attributes:
-      label: Evidence or reproduction
-      description: |
-        For guide corrections, include sources and tested game/tool versions.
-        For website issues, include browser, screen size, theme, and reproduction steps.
+      label: Proposed improvement
+      description: Describe the desired outcome and how a maintainer could tell it is working.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives, examples, and tradeoffs
+      description: Include useful examples, simpler alternatives, or likely maintenance and accessibility costs.
