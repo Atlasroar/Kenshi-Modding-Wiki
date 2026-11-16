@@ -2,12 +2,14 @@
   {
     "title": "FCS",
     "slug": "fcs/index",
-    "guides": ["modding/fcs/complete-guide"]
+    "guides": ["modding/fcs/complete-guide"],
+    "discussion": { "name": "1 - FCS", "id": "DIC_kwDOVvcLwM4DLRZz" }
   },
   {
     "title": "World Editor",
     "slug": "world-editor/index",
-    "guides": ["modding/world/in-game-editor"]
+    "guides": ["modding/world/in-game-editor"],
+    "discussion": { "name": "2 - World Editor", "id": "DIC_kwDOVvcLwM4DLRZ6" }
   },
   {
     "title": "Dialogue",
@@ -16,22 +18,26 @@
       "modding/dialogue/creating-dialogue",
       "modding/dialogue/conditions-and-effects",
       "modding/dialogue/find-specific-dialogue"
-    ]
+    ],
+    "discussion": { "name": "3 - Dialogue", "id": "DIC_kwDOVvcLwM4DLRaN" }
   },
   {
     "title": "AI Packages",
     "slug": "ai-packages/index",
-    "guides": []
+    "guides": [],
+    "discussion": { "name": "4 - AI Packages", "id": "DIC_kwDOVvcLwM4DLRam" }
   },
   {
     "title": "World States",
     "slug": "world-states/index",
-    "guides": []
+    "guides": [],
+    "discussion": { "name": "5 - World States", "id": "DIC_kwDOVvcLwM4DLRbd" }
   },
   {
     "title": "Races",
     "slug": "races/index",
-    "guides": ["modding/characters/creating-a-race"]
+    "guides": ["modding/characters/creating-a-race"],
+    "discussion": { "name": "6 - Races", "id": "DIC_kwDOVvcLwM4DLRbq" }
   },
   {
     "title": "Characters",
@@ -40,12 +46,14 @@
       "modding/characters/name-databases",
       "modding/characters/invisible-characters",
       "modding/world/kill-npcs-at-game-start"
-    ]
+    ],
+    "discussion": { "name": "7 - Characters", "id": "DIC_kwDOVvcLwM4DLRbx" }
   },
   {
     "title": "Faction",
     "slug": "faction/index",
-    "guides": []
+    "guides": [],
+    "discussion": { "name": "8 - Faction", "id": "DIC_kwDOVvcLwM4DLRby" }
   },
   {
     "title": "Town",
@@ -54,22 +62,26 @@
       "modding/world/vendor-lists",
       "modding/world/public-npc-beds",
       "modding/save-editing/claim-town-ownership"
-    ]
+    ],
+    "discussion": { "name": "9 - Town", "id": "DIC_kwDOVvcLwM4DLRb_" }
   },
   {
     "title": "3D Assets",
     "slug": "3d-assets/index",
-    "guides": ["modding/assets/armor-color-maps", "modding/world/building-collision-navmesh"]
+    "guides": ["modding/assets/armor-color-maps", "modding/world/building-collision-navmesh"],
+    "discussion": { "name": "10 - 3D Assets", "id": "DIC_kwDOVvcLwM4DLRcA" }
   },
   {
     "title": "Animations",
     "slug": "animations/index",
-    "guides": ["modding/assets/multiuser-animations"]
+    "guides": ["modding/assets/multiuser-animations"],
+    "discussion": { "name": "11 - Animations", "id": "DIC_kwDOVvcLwM4DLRcB" }
   },
   {
     "title": "reKenshi & KenshiLib",
     "slug": "rekenshi/index",
     "guides": [],
+    "discussion": { "name": "12 - reKenshi & KenshiLib", "id": "DIC_kwDOVvcLwM4DLRcI" },
     "children": [
       {
         "title": "reKenshi",

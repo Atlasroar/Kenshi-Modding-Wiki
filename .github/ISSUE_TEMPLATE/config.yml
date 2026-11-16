@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Modding questions and discussion
+    url: https://github.com/Atlasroar/Kenshi-Modding-Wiki/discussions
+    about: Ask general Kenshi modding questions and discuss ideas with the community.
+  - name: Contribution guidelines
+    url: https://github.com/Atlasroar/Kenshi-Modding-Wiki/wiki/Contributing
+    about: Read the guide-writing, source-permission, and website contribution guidance.

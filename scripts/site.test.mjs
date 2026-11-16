@@ -203,7 +203,8 @@ test("graph, reader controls and page-mapped Giscus comments are connected to th
   assert.ok(comments, "Guide comments must be rendered")
   assert.equal(comments.properties.dataRepo, "Atlasroar/Kenshi-Modding-Wiki")
   assert.equal(comments.properties.dataRepoId, "R_kgDOVvcLwA")
-  assert.equal(comments.properties.dataCategoryId, "DIC_kwDOVvcLwM4DLMsQ")
+  assert.equal(comments.properties.dataCategory, "3 - Dialogue")
+  assert.equal(comments.properties.dataCategoryId, "DIC_kwDOVvcLwM4DLRaN")
   assert.equal(
     comments.properties.dataMapping,
     "pathname",
@@ -213,6 +214,30 @@ test("graph, reader controls and page-mapped Giscus comments are connected to th
   assert.equal(comments.properties.dataThemeUrl, "https://giscus.app/themes")
   for (const page of ["index.html", "credits.html"]) {
     assert.ok(!elementsFor(page).some((node) => node.properties.className?.includes("giscus")))
+  }
+})
+
+test("guide comments inherit their navigation category without falling back to another channel", () => {
+  for (const section of navigation) {
+    for (const entry of flattenNavigation([section])) {
+      for (const slug of [entry.slug, ...entry.guides]) {
+        const widgets = elementsFor(slug + ".html").filter((node) =>
+          node.properties.className?.includes("giscus"),
+        )
+        assert.equal(widgets.length, 1, `Exactly one comment widget: ${slug}`)
+        const props = widgets[0].properties
+        assert.equal(props.dataCategory, section.discussion.name, `Wrong channel: ${slug}`)
+        assert.equal(props.dataCategoryId, section.discussion.id, `Wrong category ID: ${slug}`)
+        assert.equal(props.dataMapping, "pathname", `Keep a distinct discussion per page: ${slug}`)
+        assert.equal(props.dataStrict, "1")
+      }
+    }
+  }
+  for (const page of ["index.html", "credits.html", "modding/index.html", "404.html"]) {
+    assert.ok(
+      !elementsFor(page).some((node) => node.properties.className?.includes("giscus")),
+      `Pages outside guide sections must not post into an arbitrary category: ${page}`,
+    )
   }
 })
 

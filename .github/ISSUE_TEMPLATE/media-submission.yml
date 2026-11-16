@@ -1,0 +1,75 @@
+name: Media submission
+description: Propose screenshots, diagrams, or other media for a specific guide or Wiki page.
+title: "[Media] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Media submissions require source and reuse-rights review before publication.
+        The repository's code license does not automatically cover third-party media.
+        Existing missing-image audit records are retained when approved media is restored.
+
+        Do not upload material you lack permission to share. Link its public source
+        for review instead. Remove personal data, private paths, credentials, and
+        tokens from files before sharing. Do not include private permission emails
+        or signed/private URLs.
+  - type: input
+    id: target-page
+    attributes:
+      label: Target page and section
+      description: Include the page URL and heading, or link the proposed page's issue.
+    validations:
+      required: true
+  - type: dropdown
+    id: purpose
+    attributes:
+      label: Purpose
+      options:
+        - Add a new illustration
+        - Restore a missing-image placeholder
+        - Replace outdated or incorrect media
+        - Improve clarity or accessibility
+    validations:
+      required: true
+  - type: textarea
+    id: media
+    attributes:
+      label: Media files or public source links
+      description: |
+        Attach cleared files or link their public source. Include format, dimensions
+        or duration, and approximate file size if known. Prefer original-resolution
+        images rather than thumbnails; leave any unedited original available for review.
+        A source link alone is sufficient when permission is still being checked.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Description, caption, and accessibility text
+      description: |
+        Explain what the media demonstrates and suggest alt text or a descriptive
+        caption. Include game/tool versions visible in screenshots. Identify the
+        exact placeholder or existing image if replacing one. For audio/video,
+        describe captions, a transcript, or an equivalent text explanation.
+    validations:
+      required: true
+  - type: textarea
+    id: sources-rights
+    attributes:
+      label: Original source and reuse rights
+      description: |
+        Give the original source URL, license or permission basis, and any required
+        notices. For original media, state that you created it. If approval is
+        pending, say so and provide only a source link. Accepted external sources
+        and their consuming guide pages are recorded on Credits.
+    validations:
+      required: true
+  - type: checkboxes
+    id: review
+    attributes:
+      label: Media review
+      options:
+        - label: I own or have permission to share uploaded media; otherwise I have provided only source links for review.
+          required: true
+        - label: I have checked shared files and links for private or sensitive information.
+          required: true

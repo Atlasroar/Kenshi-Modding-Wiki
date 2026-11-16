@@ -1,0 +1,81 @@
+name: New page submission or request
+description: Submit a modding guide or technical Wiki draft, or request missing coverage.
+title: "[New page] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Modding guides belong on the public website. Website setup, CSS, JSON,
+        maintenance, and contribution documentation belong in the GitHub Wiki.
+        Drafts and requests are both welcome; publication requires maintainer review.
+
+        Submit only text you created or have permission to share. If reuse rights are
+        unclear, link the source and describe the proposal instead of copying it.
+        Keep private notes, credentials, personal paths, and signed/private URLs out.
+  - type: dropdown
+    id: submission-type
+    attributes:
+      label: Submission or request?
+      options:
+        - I have a draft to submit
+        - I am requesting a page without a draft
+    validations:
+      required: true
+  - type: dropdown
+    id: destination
+    attributes:
+      label: Intended destination
+      options:
+        - Modding guide website
+        - Technical GitHub Wiki
+        - Unsure; please help place it
+    validations:
+      required: true
+  - type: input
+    id: page-title
+    attributes:
+      label: Proposed page title
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Topic, audience, and intended outcome
+      description: Explain what readers should learn and how this differs from existing coverage.
+    validations:
+      required: true
+  - type: input
+    id: placement
+    attributes:
+      label: Suggested category or parent page
+      description: Include an existing page URL if this should be a child page or extend a project section.
+  - type: textarea
+    id: draft
+    attributes:
+      label: Draft, outline, or pull request
+      description: Paste your own Markdown, attach a draft, or link a public pull request. Requests may leave this blank.
+  - type: textarea
+    id: sources-rights
+    attributes:
+      label: Sources and reuse permissions
+      description: |
+        Identify source URLs and applicable licenses, permission, or required notices.
+        For original work, say that you created it. For a request with no material,
+        say "Request only" and list useful sources if known. Do not attach private
+        permission emails. Accepted external sources are credited on Credits.
+    validations:
+      required: true
+  - type: textarea
+    id: testing
+    attributes:
+      label: Tested versions and known limitations
+      description: State the game/tool/plugin versions and what was tested. Clearly mark untested steps, incomplete sections, and required media.
+  - type: checkboxes
+    id: review
+    attributes:
+      label: Submission review
+      options:
+        - label: I understand that source and permission review is required before publication.
+          required: true
+        - label: I have kept private notes, credentials, personal information, and private URLs out of this submission.
+          required: true
